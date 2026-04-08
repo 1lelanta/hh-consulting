@@ -8,10 +8,14 @@ function ProjectsSection({ data, className = "" }) {
     >
       <SectionHeader eyebrow="Featured Projects" title={data.title} />
 
-      <div className="space-y-3 sm:grid sm:grid-cols-2 sm:gap-3 sm:space-y-0 xl:grid-cols-1 xl:gap-4">
+      <div className="space-y-3 sm:grid sm:grid-cols-2 sm:gap-3 sm:space-y-0 lg:grid-cols-1 lg:gap-4">
         {data.items.map((project) => (
           <article key={project.title} className="overflow-hidden rounded-2xl border border-brand-gray200 bg-white">
-            <img src={project.image} alt={project.imageAlt} className="h-[176px] w-full object-cover sm:h-[210px]" />
+            <img
+              src={project.image}
+              alt={project.imageAlt}
+              className="h-[176px] w-full object-cover sm:h-[210px] xl:h-[250px]"
+            />
             <div className="p-3.5 sm:p-4">
               <h3 className="m-0 text-[1.03rem] font-bold text-brand-navy950 sm:text-[1.08rem]">{project.title}</h3>
               <p className="m-0 mt-1 text-[12px] font-bold uppercase tracking-[0.05em] text-brand-gold500">

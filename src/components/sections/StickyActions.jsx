@@ -2,7 +2,7 @@ function StickyActions({ data }) {
   return (
     <nav
       aria-label="Quick contact actions"
-      className="fixed bottom-4 left-1/2 z-40 grid w-[calc(100%-1.5rem)] max-w-[366px] -translate-x-1/2 grid-cols-3 rounded-full bg-brand-navy950/95 p-1.5 shadow-[0_16px_34px_rgba(6,19,36,0.35)] backdrop-blur sm:bottom-5 sm:max-w-[520px] lg:left-auto lg:right-8 lg:w-[420px] lg:translate-x-0"
+      className="fixed bottom-4 left-1/2 z-40 grid w-[calc(100%-1.5rem)] max-w-[366px] -translate-x-1/2 grid-cols-3 rounded-full bg-brand-navy950/95 p-1.5 shadow-[0_16px_34px_rgba(6,19,36,0.35)] backdrop-blur sm:bottom-5 sm:max-w-[520px] lg:left-auto lg:right-8 lg:w-[420px] lg:translate-x-0 2xl:hidden"
     >
       {data.map((action) => {
         const active = action.variant === "active";

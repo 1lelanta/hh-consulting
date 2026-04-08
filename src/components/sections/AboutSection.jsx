@@ -1,8 +1,10 @@
 import SectionHeader from "../ui/SectionHeader";
 
-function AboutSection({ data }) {
+function AboutSection({ data, className = "" }) {
   return (
-    <section className="animate-reveal mt-6 rounded-3xl bg-white/90 p-4 shadow-card backdrop-blur-sm [animation-delay:120ms] sm:p-6 lg:p-7">
+    <section
+      className={`animate-reveal mt-6 rounded-3xl bg-white/90 p-4 shadow-card backdrop-blur-sm [animation-delay:120ms] sm:p-6 lg:p-7 ${className}`}
+    >
       <SectionHeader eyebrow="About" title={data.title} />
       <p className="m-0 text-sm leading-6 text-brand-gray500 sm:max-w-[820px] sm:text-base">
         {data.description}

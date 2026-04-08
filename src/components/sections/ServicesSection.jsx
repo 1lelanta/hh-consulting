@@ -1,8 +1,10 @@
 import SectionHeader from "../ui/SectionHeader";
 
-function ServicesSection({ data }) {
+function ServicesSection({ data, className = "" }) {
   return (
-    <section className="animate-reveal mt-6 rounded-3xl bg-white/90 p-4 shadow-card backdrop-blur-sm [animation-delay:200ms] sm:p-6 lg:p-7">
+    <section
+      className={`animate-reveal mt-6 rounded-3xl bg-white/90 p-4 shadow-card backdrop-blur-sm [animation-delay:200ms] sm:p-6 lg:p-7 ${className}`}
+    >
       <SectionHeader eyebrow="Services" title={data.title} />
 
       <div className="no-scrollbar -mx-0.5 grid snap-x snap-mandatory grid-flow-col auto-cols-[78%] gap-3 overflow-x-auto px-0.5 pb-1.5 sm:mx-0 sm:grid-flow-row sm:auto-cols-auto sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-3">

@@ -1,18 +1,22 @@
-function ClientBadge({ name }) {
-  const initials = name
-    .split(" ")
-    .filter(Boolean)
-    .map((part) => part[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-
+function ClientLogoTile({ item }) {
   return (
-    <div className="flex h-[80px] w-[132px] shrink-0 flex-col items-center justify-center rounded-[16px] border border-brand-gray200 bg-white px-3 text-center shadow-[0_10px_22px_rgba(13,40,74,0.07)]">
-      <div className="grid h-11 w-11 place-items-center rounded-full bg-brand-navy900 text-[0.9rem] font-extrabold tracking-[0.08em] text-white">
-        {initials}
-      </div>
-      <p className="mt-2 line-clamp-2 text-[0.76rem] font-semibold leading-4 text-brand-navy900">{name}</p>
+    <div className="group flex h-[80px] w-[132px] shrink-0 items-center justify-center rounded-[16px] border border-brand-gray200 bg-white px-3 shadow-[0_10px_22px_rgba(13,40,74,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_30px_rgba(13,40,74,0.12)]">
+      {item.logoSrc ? (
+        <img
+          src={item.logoSrc}
+          alt={item.name}
+          className="max-h-[48px] max-w-[108px] object-contain transition duration-300 group-hover:scale-[1.03]"
+        />
+      ) : (
+        <div className="grid h-12 w-12 place-items-center rounded-full bg-[#0D284A] text-white transition duration-300 group-hover:scale-[1.03]">
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+            <rect x="5" y="5" width="14" height="14" rx="3" />
+            <path d="M8 16V9l4-2 4 2v7" />
+            <path d="M8 12h8" />
+          </svg>
+        </div>
+      )}
+      <span className="sr-only">{item.name}</span>
     </div>
   );
 }
@@ -51,6 +55,8 @@ function SectionIcon({ type }) {
 }
 
 function ClientsSection({ data, className = "" }) {
+  const duplicateRow = (row) => [...row.items, ...row.items];
+
   return (
     <section
       id="clients"
@@ -74,15 +80,18 @@ function ClientsSection({ data, className = "" }) {
           </p>
         </div>
 
-        <div className="mt-6 space-y-6">
-          {data.clientGroups.map((group) => (
-            <div key={group.title}>
-              <p className="m-0 mb-3 text-[0.9rem] font-bold uppercase tracking-[0.14em] text-brand-gray500">
-                {group.title}
-              </p>
-              <div className="-mx-3 flex gap-4 overflow-x-auto px-3 pb-2 no-scrollbar">
-                {group.clients.map((client) => (
-                  <ClientBadge key={client} name={client} />
+        <div className="mt-6 space-y-4">
+          {data.logoRows.map((row, index) => (
+            <div key={index} className="overflow-x-auto no-scrollbar lg:overflow-hidden">
+              <div
+                className={[
+                  "flex w-max gap-4 px-1 pb-2",
+                  index % 2 === 0 ? "lg:animate-marquee" : "lg:animate-marquee-reverse",
+                  "hover:[animation-play-state:paused]",
+                ].join(" ")}
+              >
+                {duplicateRow(row).map((item, itemIndex) => (
+                  <ClientLogoTile key={`${item.name}-${itemIndex}`} item={item} />
                 ))}
               </div>
             </div>

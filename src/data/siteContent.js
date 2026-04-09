@@ -205,27 +205,25 @@ export const siteContent = {
     title: "Trusted by Leading Institutions",
     subtitle:
       "Proudly delivering consulting, engineering, and supervision services for public and private institutions across Ethiopia and international markets.",
-    clientGroups: [
+    logoRows: [
       {
-        title: "Main Institutions",
-        clients: [
-          "Ethiopian Airlines Group",
-          "Haramaya University",
-          "Bule Hora University",
-          "Sidama Roads Authority",
-          "Central Ethiopia Regional Government",
-          "Ali Birra Foundation",
+        items: [
+          { name: "Ethiopian Airlines Group", monogram: "EA" },
+          { name: "Haramaya University", logoSrc: "/asset/haramaya university.png" },
+          { name: "Bule Hora University", logoSrc: "/asset/bule hora university.jpeg" },
+          { name: "Sidama Roads Authority", monogram: "SRA" },
+          { name: "Central Ethiopia Regional Government", logoSrc: "/asset/addis ababa city admnistration.png" },
+          { name: "Ali Birra Foundation", monogram: "AB" },
         ],
       },
       {
-        title: "Private / Commercial Clients",
-        clients: [
-          "City Light",
-          "BM Housing Corporation",
-          "Teskaro Behame PLC",
-          "Habesha Steel PLC",
-          "Kebede Chkual",
-          "Greenland Tour & Hotel PLC",
+        items: [
+          { name: "City Light", monogram: "CL" },
+          { name: "BM Housing Corporation", monogram: "BM" },
+          { name: "Teskaro Behame PLC", monogram: "TB" },
+          { name: "Habesha Steel PLC", logoSrc: "/asset/habesha still mills logo.png" },
+          { name: "Kebede Chkual", monogram: "KC" },
+          { name: "Greenland Tour & Hotel PLC", monogram: "GH" },
         ],
       },
     ],

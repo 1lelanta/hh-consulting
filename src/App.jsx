@@ -7,6 +7,7 @@ import ProjectsSection from "./components/sections/ProjectsSection";
 import ClientsSection from "./components/sections/ClientsSection";
 import TeamSection from "./components/sections/TeamSection";
 import ContactSection from "./components/sections/ContactSection";
+import FooterSection from "./components/sections/FooterSection";
 import StickyActions from "./components/sections/StickyActions";
 import HeaderNav from "./layout/HeaderNav";
 import { siteContent } from "./data/siteContent";
@@ -29,6 +30,7 @@ function App() {
         <ClientsSection data={siteContent.clients} className="lg:mt-8" />
         <TeamSection data={siteContent.team} className="lg:mt-8" />
         <ContactSection data={siteContent.contact} className="lg:mt-8" />
+        <FooterSection data={siteContent.footer} className="mt-8" />
       </MobileShell>
 
       <StickyActions data={siteContent.stickyActions} />

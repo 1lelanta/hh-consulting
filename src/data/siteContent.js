@@ -375,13 +375,34 @@ export const siteContent = {
       subtitle: "Connect with our team today.",
       buttonLabel: "Schedule Consultation",
     },
-    footer: {
-      copyright: "© 2026 HH Consulting Architects & Engineers PLC. All rights reserved.",
-      privacyLabel: "Privacy Policy",
-      privacyHref: "#",
-      termsLabel: "Terms of Service",
-      termsHref: "#",
+  },
+  footer: {
+    companyName: "HH CONSULTING ARCHITECTS & ENGINEERS PLC.",
+    quickLinks: [
+      { label: "Home", href: "#home" },
+      { label: "About", href: "#about" },
+      { label: "Services", href: "#services" },
+      { label: "Projects", href: "#projects" },
+      { label: "Contact", href: "#contact" },
+    ],
+    services: [
+      { label: "Architectural Design", href: "#services" },
+      { label: "Structural Engineering", href: "#services" },
+      { label: "Infrastructure Design", href: "#services" },
+      { label: "Feasibility Study", href: "#services" },
+    ],
+    contact: {
+      phone: "+251 911 228 253",
+      email: "hhconsultingarchitectengineers@gmail.com",
+      address: "22 Mazoriya, Efrata Building, 3rd Floor, Addis Ababa, Ethiopia",
+      website: "https://hhconsultinget.com",
     },
+    socials: [
+      { label: "LinkedIn", href: "#linkedin", icon: "linkedin" },
+      { label: "Facebook", href: "#facebook", icon: "facebook" },
+      { label: "Instagram", href: "#instagram", icon: "instagram" },
+    ],
+    copyright: "© 2026 HH Consulting Architects & Engineers PLC. All rights reserved.",
   },
   stickyActions: [
     { label: "Chat Now", href: "#contact", variant: "default" },

@@ -68,7 +68,8 @@ function ServiceIcon({ type }) {
 function ServicesSection({ data, className = "" }) {
   return (
     <section
-      className={`animate-reveal mt-8 -mx-3 bg-[#F3F5F8] px-3 py-14 [animation-delay:200ms] sm:-mx-6 sm:px-6 sm:py-16 lg:-mx-10 lg:px-10 lg:py-20 2xl:-mx-14 2xl:px-14 ${className}`}
+      id="services"
+      className={`animate-reveal mt-8 -mx-3 scroll-mt-28 bg-[#F3F5F8] px-3 py-14 [animation-delay:200ms] sm:-mx-6 sm:px-6 sm:py-16 lg:-mx-10 lg:px-10 lg:py-20 2xl:-mx-14 2xl:px-14 ${className}`}
     >
       <div className="mx-auto w-full max-w-[1320px]">
         <div className="max-w-[700px]">

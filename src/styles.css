@@ -13,6 +13,11 @@ body,
   min-height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
+}
+
 body {
   font-family: "Manrope", sans-serif;
 }

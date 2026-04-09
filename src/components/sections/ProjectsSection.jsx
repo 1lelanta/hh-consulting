@@ -9,7 +9,7 @@ function ProjectsSection({ data, className = "" }) {
   return (
     <section
       id="projects"
-      className={`animate-reveal mt-8 -mx-3 bg-[#F3F5F8] px-3 py-14 [animation-delay:280ms] sm:-mx-6 sm:px-6 sm:py-16 lg:-mx-10 lg:px-10 lg:py-20 2xl:-mx-14 2xl:px-14 ${className}`}
+      className={`animate-reveal mt-8 -mx-3 scroll-mt-28 bg-[#F3F5F8] px-3 py-14 [animation-delay:280ms] sm:-mx-6 sm:px-6 sm:py-16 lg:-mx-10 lg:px-10 lg:py-20 2xl:-mx-14 2xl:px-14 ${className}`}
     >
       <div className="mx-auto w-full max-w-[1320px]">
         <div className="flex items-start justify-between gap-4">
@@ -30,7 +30,7 @@ function ProjectsSection({ data, className = "" }) {
             href={data.viewAllHref}
             className="mt-6 hidden text-[1rem] font-semibold text-[#D5B223] underline-offset-4 hover:underline lg:inline-flex"
           >
-            {data.viewAllLabel} ->
+            {data.viewAllLabel} {'->'}
           </a>
         </div>
 
@@ -60,7 +60,7 @@ function ProjectsSection({ data, className = "" }) {
                 <p className="m-0 mt-3 text-[1.12rem] leading-8 text-brand-gray500">{project.description}</p>
 
                 <a href={project.href} className="mt-4 inline-block text-[1.05rem] font-semibold text-[#D5B223]">
-                  View Details ->
+                  View Details {'->'}
                 </a>
               </div>
             </article>
@@ -68,7 +68,7 @@ function ProjectsSection({ data, className = "" }) {
         </div>
 
         <a href={data.viewAllHref} className="mt-6 inline-flex text-[1rem] font-semibold text-[#D5B223] lg:hidden">
-          {data.viewAllLabel} ->
+          {data.viewAllLabel} {'->'}
         </a>
       </div>
     </section>

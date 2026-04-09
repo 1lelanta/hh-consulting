@@ -1,10 +1,10 @@
 export const siteContent = {
   hero: {
-    company: "APEX",
-    subtitle: "Engineering",
+    company: "HH CONSULTING ARCHITECTS & ENGINEERS PLC.",
+    subtitle: "WORLDWIDE CONSULTING ",
     headline: "Engineered Excellence",
     description:
-      "Transforming visions into reality through innovative design and precision engineering",
+      "For any international projects, we are your dedicated global partner in design and construction supervision",
     ctaLabel: "Explore Projects",
     ctaHref: "#projects",
     image:

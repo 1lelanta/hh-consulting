@@ -1,6 +1,6 @@
 function HeroSection({ data }) {
   return (
-    <section className="animate-reveal -mx-3 overflow-hidden sm:-mx-6 lg:-mx-10 2xl:-mx-14">
+    <section id="home" className="animate-reveal -mx-3 overflow-hidden scroll-mt-28 sm:-mx-6 lg:-mx-10 2xl:-mx-14">
       <div className="relative min-h-[90vh] sm:min-h-screen">
         <img
           src={data.image}

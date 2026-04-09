@@ -96,7 +96,6 @@ function FooterSection({ data, className = "" }) {
               <p className="m-0">{data.contact.address}</p>
               <p className="m-0">{data.contact.phone}</p>
               <p className="m-0 break-words">{data.contact.email}</p>
-              <p className="m-0 break-words">{data.contact.website}</p>
             </div>
           </div>
         </div>

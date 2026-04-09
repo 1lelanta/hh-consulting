@@ -366,11 +366,6 @@ export const siteContent = {
         title: "Office Address",
         lines: ["22 Mazoriya,", "Efrata Building, 3rd Floor,", "Addis Ababa, Ethiopia"],
       },
-      {
-        icon: "website",
-        title: "Website",
-        lines: ["https://hhconsultinget.com"],
-      },
     ],
     cta: {
       title: "Ready to build with confidence?",
@@ -397,7 +392,6 @@ export const siteContent = {
       phone: "+251 911 228 253",
       email: "hhconsultingarchitectengineers@gmail.com",
       address: "22 Mazoriya, Efrata Building, 3rd Floor, Addis Ababa, Ethiopia",
-      website: "https://hhconsultinget.com",
     },
     socials: [
       { label: "LinkedIn", href: "#linkedin", icon: "linkedin" },

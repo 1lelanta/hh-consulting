@@ -1,4 +1,4 @@
-import { animate, useInView, useMotionValue, useMotionValueEvent } from "framer-motion";
+import { animate, motion, useInView, useMotionValue, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 function StatCounter({ value, suffix, label }) {
@@ -38,12 +38,49 @@ function StatCounter({ value, suffix, label }) {
 }
 
 function AboutSection({ data, className = "" }) {
+  const sectionRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const mobileParallaxY = useTransform(scrollYProgress, [0, 1], [34, -38]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 1023px)");
+    const apply = () => setIsMobile(media.matches);
+
+    apply();
+    media.addEventListener("change", apply);
+
+    return () => {
+      media.removeEventListener("change", apply);
+    };
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="about"
       className={`animate-reveal relative mt-8 -mx-3 scroll-mt-28 overflow-hidden bg-[#F3F5F8] px-3 py-14 [animation-delay:120ms] sm:-mx-6 sm:px-6 sm:py-16 lg:-mx-10 lg:px-10 lg:py-20 2xl:-mx-14 2xl:px-14 ${className}`}
     >
-      <div className="mx-auto w-full max-w-[1320px]">
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-[38%] z-0 -translate-y-1/2 select-none text-center sm:top-[42%]"
+        style={{ y: isMobile ? mobileParallaxY : 0 }}
+      >
+        <p
+          className="m-0 whitespace-nowrap text-[92px] font-semibold uppercase leading-none tracking-[0.08em] text-transparent sm:text-[132px] lg:text-[170px]"
+          style={{
+            WebkitTextStroke: "1.2px rgba(8,25,45,0.62)",
+            opacity: 0.085,
+          }}
+        >
+          ARCHITECTS
+        </p>
+      </motion.div>
+
+      <div className="relative z-10 mx-auto w-full max-w-[1320px]">
         <div className="mx-auto grid max-w-[1080px] grid-cols-1 gap-8 px-1 sm:px-2 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 lg:px-4">
           <div className="text-left lg:sticky lg:top-28 lg:self-start">
             <div className="flex items-center gap-3">

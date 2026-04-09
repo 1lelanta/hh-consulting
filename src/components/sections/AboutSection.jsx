@@ -36,6 +36,22 @@ function AboutSection({ data, className = "" }) {
             <p className="m-0 mt-6 text-[1.08rem] leading-8 text-brand-gray500 sm:text-[1.12rem]">
               {data.description}
             </p>
+
+            <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+              {data.stats.map((stat) => (
+                <article
+                  key={stat.label}
+                  className="rounded-2xl border border-brand-gray200/90 bg-white px-4 py-5 shadow-[0_10px_24px_rgba(13,40,74,0.06)]"
+                >
+                  <p className="m-0 text-[1.7rem] font-extrabold leading-none tracking-[-0.02em] text-brand-navy900 sm:text-[1.95rem]">
+                    {stat.value}
+                  </p>
+                  <p className="m-0 mt-2 text-[0.94rem] font-medium leading-6 text-brand-gray500 sm:text-[1rem]">
+                    {stat.label}
+                  </p>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </div>

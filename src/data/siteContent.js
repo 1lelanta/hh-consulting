@@ -18,6 +18,12 @@ export const siteContent = {
       "HH Consulting Architects & Engineers PLC is a multidisciplinary consulting company specializing in architectural design, engineering solutions, infrastructure planning, and construction supervision across Ethiopia and international markets.",
     image: "/asset/hero-modern-building.svg",
     imageAlt: "Modern office and building illustration for HH Consulting",
+    stats: [
+      { value: "10+", label: "Years Experience" },
+      { value: "100+", label: "Projects" },
+      { value: "50+", label: "Experts" },
+      { value: "Global", label: "International Clients" },
+    ],
   },
   services: {
     eyebrow: "Our Services",

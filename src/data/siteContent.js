@@ -273,7 +273,7 @@ export const siteContent = {
         name: "Hailemichael Solomon",
         role: "General Manager",
         description:
-          "Leads strategic direction, project oversight, and executive decision-making across all consulting and engineering operations.",
+          "Driving firm-wide innovation and delivery excellence across complex multidisciplinary projects.",
         image: "/asset/hailemichael.png",
         imageAlt: "Portrait of Hailemichael Solomon",
       },
@@ -281,7 +281,7 @@ export const siteContent = {
         name: "Feven Girma",
         role: "Deputy General Manager",
         description:
-          "Supports company leadership, project coordination, and operational management across departments.",
+          "Strengthening cross-team execution to deliver reliable outcomes and operational precision.",
         image: "/asset/Feven.png",
         imageAlt: "Portrait of Feven Girma",
       },
@@ -291,7 +291,7 @@ export const siteContent = {
         name: "Yitbarek Tekle",
         role: "Human Resource Department",
         description:
-          "Manages talent acquisition, staff development, and human resource operations.",
+          "Building high-performing teams that elevate culture, capability, and long-term growth.",
         image: "/asset/yitbarak.png",
         imageAlt: "Portrait of Yitbarek Tekle",
       },
@@ -299,7 +299,7 @@ export const siteContent = {
         name: "Dibora Mesfin",
         role: "Bid Department Head",
         description:
-          "Oversees tender preparation, proposal documentation, and bidding processes.",
+          "Securing strategic wins through competitive bids and technically rigorous proposals.",
         image: "/asset/dibora.png",
         imageAlt: "Portrait of Dibora Mesfin",
       },
@@ -307,7 +307,7 @@ export const siteContent = {
         name: "Hailegiorgis Solomon",
         role: "IT Department",
         description:
-          "Responsible for technology systems, digital operations, and IT support infrastructure.",
+          "Advancing digital systems that improve coordination, speed, and project reliability.",
         image: "/asset/hailegiorgis.png",
         imageAlt: "Portrait of Hailegiorgis Solomon",
       },

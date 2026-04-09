@@ -6,10 +6,16 @@ function AboutSection({ data, className = "" }) {
     >
       <div className="mx-auto w-full max-w-[1320px]">
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
-          <div className="relative overflow-hidden rounded-[2rem] border border-brand-gray200 bg-white shadow-[0_18px_42px_rgba(13,40,74,0.10)]">
-            <img src={data.image} alt={data.imageAlt} className="h-[320px] w-full object-cover sm:h-[420px] lg:h-[520px]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#08192D]/30 via-transparent to-transparent" />
-            <div className="absolute bottom-4 left-4 rounded-2xl bg-white/92 px-4 py-3 shadow-[0_12px_28px_rgba(6,19,36,0.12)] backdrop-blur">
+          <div className="relative overflow-hidden rounded-[2.5rem] border border-brand-gray200/80 bg-white/95 p-4 shadow-[0_16px_38px_rgba(13,40,74,0.08)] lg:p-5">
+            <div className="overflow-hidden rounded-[2rem]">
+              <img
+                src={data.image}
+                alt={data.imageAlt}
+                className="h-[320px] w-full object-cover object-center sm:h-[420px] lg:h-[520px]"
+              />
+            </div>
+            <div className="pointer-events-none absolute inset-4 rounded-[2rem] bg-gradient-to-t from-[#08192D]/18 via-transparent to-transparent" />
+            <div className="absolute bottom-7 left-7 rounded-2xl bg-white/92 px-4 py-3 shadow-[0_12px_28px_rgba(6,19,36,0.10)] backdrop-blur">
               <p className="m-0 text-[0.82rem] font-bold uppercase tracking-[0.14em] text-[#D5B223]">HH Consulting</p>
               <p className="m-0 mt-1 text-[0.98rem] font-semibold text-brand-navy900">Architecture. Engineering. Supervision.</p>
             </div>

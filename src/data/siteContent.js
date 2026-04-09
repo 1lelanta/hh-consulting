@@ -12,7 +12,7 @@ export const siteContent = {
     imageAlt: "Modern architectural facade hero image",
   },
   about: {
-    eyebrow: "Who We Are",
+    eyebrow: "About Company",
     title: "Who We Are",
     description:
       "HH Consulting Architects & Engineers PLC is a multidisciplinary consulting company specializing in architectural design, engineering solutions, infrastructure planning, and construction supervision across Ethiopia and international markets.",

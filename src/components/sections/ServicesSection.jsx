@@ -77,7 +77,7 @@ function ServicesSection({ data, className = "" }) {
   return (
     <section
       id="services"
-      className={`animate-reveal mt-8 -mx-3 scroll-mt-28 bg-[#F3F5F8] px-3 py-14 [animation-delay:200ms] sm:-mx-6 sm:px-6 sm:py-16 lg:-mx-10 lg:px-10 lg:py-20 2xl:-mx-14 2xl:px-14 ${className}`}
+      className={`animate-reveal mt-8 -mx-3 scroll-mt-28 bg-[#F3F5F8] px-3 py-12 [animation-delay:200ms] sm:-mx-6 sm:px-6 sm:py-16 lg:-mx-10 lg:px-10 lg:py-20 2xl:-mx-14 2xl:px-14 ${className}`}
     >
       <div className="mx-auto w-full max-w-[1320px]">
         <div className="max-w-[700px]">
@@ -88,24 +88,24 @@ function ServicesSection({ data, className = "" }) {
             </p>
           </div>
 
-          <h2 className="m-0 mt-5 text-[2rem] font-extrabold leading-[1.14] tracking-[-0.02em] text-brand-navy900 sm:text-[2.45rem] lg:text-[3.3rem]">
+          <h2 className="m-0 mt-4 text-[1.75rem] font-extrabold leading-[1.14] tracking-[-0.02em] text-brand-navy900 sm:mt-5 sm:text-[2.45rem] lg:text-[3.3rem]">
             {data.title}
           </h2>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-3 sm:mt-10 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
           {data.items.map((service) => (
             <article
               key={service.title}
-              className="group rounded-[1.5rem] border border-brand-gray200 bg-white p-5 text-brand-navy900 shadow-[0_10px_24px_rgba(13,40,74,0.07)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_18px_36px_rgba(13,40,74,0.12)] sm:p-6"
+              className="group rounded-[1.35rem] border border-brand-gray200 bg-white p-4 text-brand-navy900 shadow-[0_10px_24px_rgba(13,40,74,0.07)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_18px_36px_rgba(13,40,74,0.12)] sm:rounded-[1.5rem] sm:p-6"
             >
-              <div className="mb-5 inline-grid h-14 w-14 place-items-center rounded-2xl bg-[#F4EED8] transition-colors duration-300 group-hover:bg-[#D5B223]">
+              <div className="mb-4 inline-grid h-12 w-12 place-items-center rounded-xl bg-[#F4EED8] transition-colors duration-300 group-hover:bg-[#D5B223] sm:mb-5 sm:h-14 sm:w-14 sm:rounded-2xl">
                 <ServiceIcon type={service.icon} />
               </div>
-              <h3 className="m-0 text-[1.2rem] font-extrabold leading-tight tracking-[-0.02em] text-brand-navy900 sm:text-[1.4rem]">
+              <h3 className="m-0 text-[1.08rem] font-extrabold leading-tight tracking-[-0.02em] text-brand-navy900 sm:text-[1.4rem]">
                 {service.title}
               </h3>
-              <p className="m-0 mt-3 text-[0.98rem] leading-7 text-brand-gray500 sm:text-[1.04rem]">
+              <p className="m-0 mt-2.5 text-[0.94rem] leading-6 text-brand-gray500 sm:mt-3 sm:text-[1.04rem] sm:leading-7">
                 {service.description}
               </p>
             </article>

@@ -12,16 +12,12 @@ export const siteContent = {
     imageAlt: "Modern architectural facade hero image",
   },
   about: {
-    eyebrow: "About Us",
-    title: "Building the Future, One Project at a Time",
+    eyebrow: "Who We Are",
+    title: "Who We Are",
     description:
-      "With over two decades of excellence, APEX Engineering combines cutting-edge technology with sustainable practices to deliver world-class infrastructure solutions.",
-    stats: [
-      { value: "250+", label: "Projects Completed", icon: "briefcase" },
-      { value: "85+", label: "Expert Team", icon: "users" },
-      { value: "32", label: "Industry Awards", icon: "award" },
-      { value: "98%", label: "Client Satisfaction", icon: "trend" },
-    ],
+      "HH Consulting Architects & Engineers PLC is a multidisciplinary consulting company specializing in architectural design, engineering solutions, infrastructure planning, and construction supervision across Ethiopia and international markets.",
+    image: "/asset/hero-modern-building.svg",
+    imageAlt: "Modern office and building illustration for HH Consulting",
   },
   services: {
     eyebrow: "Our Services",

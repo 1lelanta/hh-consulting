@@ -1,56 +1,64 @@
 function ServiceIcon({ type }) {
-  const common = "h-6 w-6 text-white";
+  const common = "h-6 w-6 text-[#D5B223] transition-colors duration-300 group-hover:text-white";
 
-  if (type === "infrastructure") {
+  if (type === "architectural-design") {
     return (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={common}>
-        <path d="M4 7h16" />
+        <path d="M4 20h16" />
+        <path d="M7 20V8l5-4 5 4v12" />
+        <path d="M10 20v-6h4v6" />
+      </svg>
+    );
+  }
+
+  if (type === "structural-engineering") {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={common}>
+        <path d="M5 19h14" />
+        <path d="M7 19V8l5-4 5 4v11" />
+        <path d="M9 12h6" />
+        <path d="M9 15h6" />
+      </svg>
+    );
+  }
+
+  if (type === "urban-planning") {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={common}>
+        <path d="M4 5h16v14H4z" />
+        <path d="M8 5v14" />
+        <path d="M4 10h16" />
+        <path d="M13 19v-5" />
+      </svg>
+    );
+  }
+
+  if (type === "infrastructure-design") {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={common}>
         <path d="M4 12h16" />
-        <path d="M4 17h16" />
-        <circle cx="7" cy="7" r="1" fill="currentColor" />
-        <circle cx="12" cy="12" r="1" fill="currentColor" />
-        <circle cx="17" cy="17" r="1" fill="currentColor" />
+        <path d="M6 8h4l2 4 2-4h4" />
+        <path d="M6 16h12" />
       </svg>
     );
   }
 
-  if (type === "road") {
-    return (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={common}>
-        <path d="M3 8h18" />
-        <path d="M6 8l2 10" />
-        <path d="M12 8v10" />
-        <path d="M18 8l-2 10" />
-        <path d="M10 4h4" />
-      </svg>
-    );
-  }
-
-  if (type === "bridge") {
-    return (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={common}>
-        <path d="M3 16h18" />
-        <path d="M5 16c2-5 4-7 7-7s5 2 7 7" />
-        <path d="M8 16v-3" />
-        <path d="M12 16v-4" />
-        <path d="M16 16v-3" />
-      </svg>
-    );
-  }
-
-  if (type === "irrigation") {
+  if (type === "water-engineering") {
     return (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={common}>
         <path d="M12 3s-5 5-5 9a5 5 0 0 0 10 0c0-4-5-9-5-9Z" />
+        <path d="M8 17c1.2.8 2.6 1.2 4 1.2s2.8-.4 4-1.2" />
       </svg>
     );
   }
 
-  if (type === "environment") {
+  if (type === "feasibility-study") {
     return (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={common}>
-        <path d="M12 4c4 3 6 6 6 9a6 6 0 1 1-12 0c0-3 2-6 6-9Z" />
-        <path d="M9 14h6" />
+        <path d="M5 4h9l5 5v11H5z" />
+        <path d="M14 4v5h5" />
+        <path d="M8 14h8" />
+        <path d="M8 17h6" />
       </svg>
     );
   }
@@ -85,17 +93,21 @@ function ServicesSection({ data, className = "" }) {
           </h2>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-3">
           {data.items.map((service) => (
             <article
               key={service.title}
-              className="rounded-2xl bg-gradient-to-br from-[#112B56] to-[#1F3E65] p-6 text-white shadow-[0_8px_18px_rgba(13,40,74,0.2)]"
+              className="group rounded-[1.5rem] border border-brand-gray200 bg-white p-5 text-brand-navy900 shadow-[0_10px_24px_rgba(13,40,74,0.07)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_18px_36px_rgba(13,40,74,0.12)] sm:p-6"
             >
-              <div className="mb-5 inline-grid h-14 w-14 place-items-center rounded-2xl bg-[#D5B223]">
+              <div className="mb-5 inline-grid h-14 w-14 place-items-center rounded-2xl bg-[#F4EED8] transition-colors duration-300 group-hover:bg-[#D5B223]">
                 <ServiceIcon type={service.icon} />
               </div>
-              <h3 className="m-0 text-[2rem] font-extrabold leading-tight sm:text-[1.95rem]">{service.title}</h3>
-              <p className="m-0 mt-3 text-[1.12rem] leading-8 text-white/75">{service.description}</p>
+              <h3 className="m-0 text-[1.2rem] font-extrabold leading-tight tracking-[-0.02em] text-brand-navy900 sm:text-[1.4rem]">
+                {service.title}
+              </h3>
+              <p className="m-0 mt-3 text-[0.98rem] leading-7 text-brand-gray500 sm:text-[1.04rem]">
+                {service.description}
+              </p>
             </article>
           ))}
         </div>

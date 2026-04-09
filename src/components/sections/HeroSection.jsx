@@ -12,13 +12,8 @@ function HeroSection({ data }) {
 
         <div className="relative z-10 mx-auto flex min-h-[90vh] w-full max-w-[1320px] flex-col px-6 py-10 text-white sm:min-h-screen sm:px-10 sm:py-14 lg:px-14 lg:py-16">
           <div className="flex items-center gap-4">
-            <div className="inline-grid h-16 w-16 place-items-center rounded-2xl bg-[#D5B223] text-white">
-              <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="1.8">
-                <rect x="5" y="3" width="14" height="18" rx="2" />
-                <path d="M9 7h6" />
-                <path d="M9 11h6" />
-                <path d="M9 15h3" />
-              </svg>
+            <div className="inline-grid h-16 w-16 place-items-center overflow-hidden rounded-2xl bg-white/95 p-1 text-white shadow-[0_10px_24px_rgba(6,19,36,0.18)]">
+              <img src="/asset/hhlogo.jpeg" alt="HH Consulting logo" className="h-full w-full object-cover" />
             </div>
             <div className="leading-tight">
               <p className="m-0 text-[2rem] font-extrabold tracking-[0.01em] text-white">{data.company}</p>

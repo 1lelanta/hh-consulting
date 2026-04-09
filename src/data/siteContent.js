@@ -156,7 +156,7 @@ export const siteContent = {
         href: "#",
       },
       {
-        title: "ROAD CONSTRUCTION B",
+        title: "ROAD CONSTRUCTION",
         location: "Ethiopia",
         category: "Infrastructure / Road",
         filterCategory: "Infrastructure",
@@ -243,6 +243,7 @@ export const siteContent = {
           { name: "Bule Hora University", logoSrc: "/asset/bule hora university.jpeg" },
           { name: "Central Ethiopia Regional Government", logoSrc: "/asset/addis ababa city admnistration.png" },
           { name: "Habesha Steel PLC", logoSrc: "/asset/habesha still mills logo.png" },
+          { name: "Ethiopian Airlines", logoSrc: "/asset/ethiopian air line logo.jpg" },
         ],
       },
     ],

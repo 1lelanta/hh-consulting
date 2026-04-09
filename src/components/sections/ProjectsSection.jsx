@@ -2,6 +2,9 @@ import { useState } from "react";
 
 function ProjectsSection({ data, className = "" }) {
   const [activeProject, setActiveProject] = useState(null);
+  const [showAllProjects, setShowAllProjects] = useState(false);
+
+  const visibleProjects = showAllProjects ? data.items : (data.items || []).slice(0, 3);
 
   const getProjectYear = (project) => {
     const yearMeta = (project.meta || []).find((item) => item.label?.toLowerCase() === "year");
@@ -24,22 +27,28 @@ function ProjectsSection({ data, className = "" }) {
 
         <div
           className={[
-            "absolute inset-0 flex flex-col justify-end bg-black/60 p-4 text-white transition-all duration-300",
+            "absolute inset-0 overflow-hidden p-4 text-white transition-all duration-300",
             isActive
               ? "translate-y-0 opacity-100"
               : "translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100",
           ].join(" ")}
         >
-          <p className="m-0 text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-white/80">
-            {getProjectYear(project)} • {project.location}
-          </p>
-          <p className="m-0 mt-2 text-[0.9rem] leading-6 text-white/92 sm:text-[0.96rem] sm:leading-7">
-            {project.description}
-          </p>
+          <div className="pointer-events-none absolute inset-0 bg-[#041A33]/34" />
+          <div className="pointer-events-none absolute inset-0 water-overlay-layer animate-water-drift opacity-45" />
+          <div className="pointer-events-none absolute inset-0 water-overlay-layer animate-water-ripple opacity-35" />
+
+          <div className="relative z-10 mt-auto rounded-[10px] bg-[#031428]/32 px-3 py-2.5 backdrop-blur-[1px]">
+            <p className="m-0 text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-white/82">
+              {getProjectYear(project)} • {project.location}
+            </p>
+            <p className="m-0 mt-2 text-[0.9rem] leading-6 text-white/95 sm:text-[0.96rem] sm:leading-7">
+              {project.description}
+            </p>
+          </div>
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 bg-[#E7EBF1]/88 px-3 py-2 backdrop-blur-sm sm:px-4 sm:py-2.5">
-          <p className="m-0 text-[0.86rem] font-semibold uppercase tracking-[0.08em] text-brand-navy900 sm:text-[0.92rem]">
+        <div className="absolute inset-x-0 bottom-0 z-20 border-t border-white/20 bg-[#041A33]/88 px-3 py-2 backdrop-blur-sm sm:px-4 sm:py-2.5">
+          <p className="m-0 text-[0.86rem] font-extrabold uppercase tracking-[0.08em] text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] sm:text-[0.92rem]">
             {project.title}
           </p>
         </div>
@@ -74,8 +83,7 @@ function ProjectsSection({ data, className = "" }) {
       className={`animate-reveal mt-8 -mx-3 scroll-mt-28 bg-[#F3F5F8] px-3 py-12 [animation-delay:280ms] sm:-mx-6 sm:px-6 sm:py-16 lg:-mx-10 lg:px-10 lg:py-20 2xl:-mx-14 2xl:px-14 ${className}`}
     >
       <div className="mx-auto w-full max-w-[1320px]">
-        <div className="flex items-start justify-between gap-4">
-          <div className="max-w-[700px]">
+        <div className="max-w-[820px]">
             <div className="flex items-center gap-3">
               <span className="h-[2px] w-14 bg-[#D5B223]" />
               <p className="m-0 text-[0.95rem] font-extrabold uppercase tracking-[0.14em] text-[#D5B223]">
@@ -83,22 +91,26 @@ function ProjectsSection({ data, className = "" }) {
               </p>
             </div>
 
-            <h2 className="m-0 mt-4 text-[1.75rem] font-extrabold leading-[1.14] tracking-[-0.02em] text-brand-navy900 sm:mt-5 sm:text-[2.45rem] lg:text-[3.3rem]">
-              {data.title}
+            <h2 className="m-0 mt-4 text-[1.65rem] font-black uppercase leading-[1.08] tracking-[0.08em] text-brand-navy900 sm:mt-5 sm:text-[2.35rem] lg:text-[3.1rem]">
+              SOME OF OUR <span className="text-orange-600">PROJECTS</span>
             </h2>
-          </div>
-
-          <a
-            href={data.viewAllHref}
-            className="mt-6 hidden text-[1rem] font-semibold text-[#D5B223] underline-offset-4 hover:underline lg:inline-flex"
-          >
-            {data.viewAllLabel} {'->'}
-          </a>
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:gap-5 lg:grid-cols-3">
-          {data.items.map((project) => renderProjectItem(project))}
+          {visibleProjects.map((project) => renderProjectItem(project))}
         </div>
+
+        {data.items.length > 3 ? (
+          <div className="mt-12 flex justify-center">
+            <button
+              type="button"
+              onClick={() => setShowAllProjects((current) => !current)}
+              className="bg-orange-600 px-8 py-3 text-[0.86rem] font-extrabold uppercase tracking-[0.1em] text-white transition-colors duration-300 hover:bg-orange-700"
+            >
+              {showAllProjects ? "SHOW LESS PROJECTS" : "SEE ALL PROJECTS"}
+            </button>
+          </div>
+        ) : null}
 
         {data.items.length === 0 ? (
           <div className="mt-10 rounded-[1.5rem] border border-dashed border-brand-gray300 bg-white px-6 py-10 text-center text-brand-gray500">

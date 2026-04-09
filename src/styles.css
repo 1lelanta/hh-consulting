@@ -40,6 +40,13 @@ body {
   opacity: 0.95;
 }
 
+.water-overlay-layer {
+  background:
+    radial-gradient(120% 65% at 15% 60%, rgba(64, 152, 208, 0.12) 0%, rgba(64, 152, 208, 0) 65%),
+    radial-gradient(95% 55% at 80% 75%, rgba(87, 173, 224, 0.1) 0%, rgba(87, 173, 224, 0) 68%),
+    linear-gradient(180deg, rgba(15, 68, 111, 0.22) 0%, rgba(5, 34, 61, 0.34) 100%);
+}
+
 @layer utilities {
   @keyframes ken-burns-slow {
     0% {
@@ -58,6 +65,45 @@ body {
   .animate-ken-burns-slow {
     animation: ken-burns-slow 20s ease-in-out forwards;
     transform-origin: center center;
+  }
+
+  @keyframes water-drift {
+    0% {
+      transform: translateX(-4%) translateY(2%) scale(1.02);
+    }
+
+    50% {
+      transform: translateX(2%) translateY(-2%) scale(1.05);
+    }
+
+    100% {
+      transform: translateX(-3%) translateY(1%) scale(1.03);
+    }
+  }
+
+  @keyframes water-ripple {
+    0% {
+      transform: translateX(0%) scaleY(1);
+      opacity: 0.58;
+    }
+
+    50% {
+      transform: translateX(-3%) scaleY(1.08);
+      opacity: 0.78;
+    }
+
+    100% {
+      transform: translateX(2%) scaleY(1);
+      opacity: 0.6;
+    }
+  }
+
+  .animate-water-drift {
+    animation: water-drift 6.4s ease-in-out infinite;
+  }
+
+  .animate-water-ripple {
+    animation: water-ripple 4.2s ease-in-out infinite;
   }
 
   @keyframes marquee {

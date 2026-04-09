@@ -1,10 +1,12 @@
 import { useState } from "react";
 
 function ProjectsSection({ data, className = "" }) {
-  const [activeProject, setActiveProject] = useState(null);
-  const [showAllProjects, setShowAllProjects] = useState(false);
+  const totalProjects = Array.isArray(data?.items) ? data.items.length : 0;
+  const initialVisibleCount = Math.min(3, totalProjects);
+  const [visibleCount, setVisibleCount] = useState(initialVisibleCount);
 
-  const visibleProjects = showAllProjects ? data.items : (data.items || []).slice(0, 3);
+  const visibleProjects = (data.items || []).slice(0, visibleCount);
+  const hasHiddenProjects = totalProjects > visibleCount;
 
   const getProjectYear = (project) => {
     const yearMeta = (project.meta || []).find((item) => item.label?.toLowerCase() === "year");
@@ -12,45 +14,35 @@ function ProjectsSection({ data, className = "" }) {
   };
 
   const renderProjectItem = (project) => {
-    const isActive = activeProject === project.title;
-
     const content = (
-      <div className="group relative cursor-pointer" onClick={() => setActiveProject((current) => (current === project.title ? null : project.title))}>
-        <img
-          src={project.image}
-          alt={project.imageAlt}
-          className={[
-            "aspect-[4/3] w-full object-cover object-center transition-transform duration-300",
-            isActive ? "scale-105" : "group-hover:scale-105",
-          ].join(" ")}
-        />
+      <div className="block">
+        <div className="group relative overflow-hidden">
+          <img
+            src={project.image}
+            alt={project.imageAlt}
+            className="aspect-[4/3] w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+          />
 
-        <div
-          className={[
-            "absolute inset-0 overflow-hidden p-4 text-white transition-all duration-300",
-            isActive
-              ? "translate-y-0 opacity-100"
-              : "translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100",
-          ].join(" ")}
-        >
-          <div className="pointer-events-none absolute inset-0 bg-[#041A33]/34" />
-          <div className="pointer-events-none absolute inset-0 water-overlay-layer animate-water-drift opacity-45" />
-          <div className="pointer-events-none absolute inset-0 water-overlay-layer animate-water-ripple opacity-35" />
+          <div className="absolute inset-0 overflow-hidden p-4 text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+            <div className="pointer-events-none absolute inset-0 bg-[#041A33]/34" />
+            <div className="pointer-events-none absolute inset-0 water-overlay-layer animate-water-drift opacity-45" />
+            <div className="pointer-events-none absolute inset-0 water-overlay-layer animate-water-ripple opacity-35" />
 
-          <div className="relative z-10 mt-auto rounded-[10px] bg-[#031428]/32 px-3 py-2.5 backdrop-blur-[1px]">
-            <p className="m-0 text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-white/82">
-              {getProjectYear(project)} • {project.location}
-            </p>
-            <p className="m-0 mt-2 text-[0.9rem] leading-6 text-white/95 sm:text-[0.96rem] sm:leading-7">
-              {project.description}
+            <div className="relative z-10 mt-auto rounded-[10px] bg-[#031428]/32 px-3 py-2.5 backdrop-blur-[1px]">
+              <p className="m-0 text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-white/82">
+                {getProjectYear(project)} • {project.location}
+              </p>
+              <p className="m-0 mt-2 text-[0.9rem] leading-6 text-white/95 sm:text-[0.96rem] sm:leading-7">
+                {project.description}
+              </p>
+            </div>
+          </div>
+
+          <div className="absolute inset-x-0 bottom-0 z-20 border-t border-white/20 bg-[#041A33]/88 px-3 py-2 backdrop-blur-sm sm:px-4 sm:py-2.5">
+            <p className="m-0 text-[0.86rem] font-extrabold uppercase tracking-[0.08em] text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] sm:text-[0.92rem]">
+              {project.title}
             </p>
           </div>
-        </div>
-
-        <div className="absolute inset-x-0 bottom-0 z-20 border-t border-white/20 bg-[#041A33]/88 px-3 py-2 backdrop-blur-sm sm:px-4 sm:py-2.5">
-          <p className="m-0 text-[0.86rem] font-extrabold uppercase tracking-[0.08em] text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] sm:text-[0.92rem]">
-            {project.title}
-          </p>
         </div>
       </div>
     );
@@ -100,19 +92,20 @@ function ProjectsSection({ data, className = "" }) {
           {visibleProjects.map((project) => renderProjectItem(project))}
         </div>
 
-        {data.items.length > 3 ? (
-          <div className="mt-12 flex justify-center">
+        {totalProjects > 3 ? (
+          <div className="relative z-30 mt-12 flex justify-center pointer-events-auto">
             <button
               type="button"
-              onClick={() => setShowAllProjects((current) => !current)}
-              className="bg-orange-600 px-8 py-3 text-[0.86rem] font-extrabold uppercase tracking-[0.1em] text-white transition-colors duration-300 hover:bg-orange-700"
+              onClick={() => setVisibleCount((current) => (current >= totalProjects ? initialVisibleCount : totalProjects))}
+              aria-expanded={!hasHiddenProjects}
+              className="cursor-pointer bg-orange-600 px-8 py-3 text-[0.86rem] font-extrabold uppercase tracking-[0.1em] text-white transition-colors duration-300 hover:bg-orange-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-700 focus-visible:ring-offset-2"
             >
-              {showAllProjects ? "SHOW LESS PROJECTS" : "SEE ALL PROJECTS"}
+              {hasHiddenProjects ? "SEE ALL PROJECTS" : "SHOW LESS PROJECTS"}
             </button>
           </div>
         ) : null}
 
-        {data.items.length === 0 ? (
+        {totalProjects === 0 ? (
           <div className="mt-10 rounded-[1.5rem] border border-dashed border-brand-gray300 bg-white px-6 py-10 text-center text-brand-gray500">
             No projects available in this section yet.
           </div>

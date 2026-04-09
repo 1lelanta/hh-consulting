@@ -168,50 +168,79 @@ export const siteContent = {
     ],
   },
   team: {
-    eyebrow: "Our Team",
-    title: "Expert Professionals Driving Innovation",
-    members: [
+    eyebrow: "Leadership & Core Team",
+    title: "Leadership & Core Team",
+    subtitle:
+      "Meet the professionals leading our architectural, engineering, and project delivery excellence.",
+    leadership: [
       {
-        name: "Michael Chen",
-        role: "Chief Engineer",
-        specialty: "Structural Engineering",
-        image:
-          "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&w=1000&q=80",
-        imageAlt: "Portrait of Michael Chen",
-        linkedinHref: "#",
-        emailHref: "mailto:michael@hh-consulting.com",
+        name: "Hailemichael Solomon",
+        role: "General Manager",
+        description:
+          "Leads strategic direction, project oversight, and executive decision-making across all consulting and engineering operations.",
+        image: "/asset/team-01.svg",
+        imageAlt: "Portrait of Hailemichael Solomon",
       },
       {
-        name: "Sarah Williams",
-        role: "Lead Architect",
-        specialty: "Sustainable Design",
-        image:
-          "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1000&q=80",
-        imageAlt: "Portrait of Sarah Williams",
-        linkedinHref: "#",
-        emailHref: "mailto:sarah@hh-consulting.com",
-      },
-      {
-        name: "David Anderson",
-        role: "Project Director",
-        specialty: "Infrastructure Planning",
-        image:
-          "https://images.unsplash.com/photo-1581092160607-ee22731f1f9f?auto=format&fit=crop&w=1000&q=80",
-        imageAlt: "Portrait of David Anderson",
-        linkedinHref: "#",
-        emailHref: "mailto:david@hh-consulting.com",
-      },
-      {
-        name: "Emily Rodriguez",
-        role: "Environmental Lead",
-        specialty: "Sustainability Consulting",
-        image:
-          "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1000&q=80",
-        imageAlt: "Portrait of Emily Rodriguez",
-        linkedinHref: "#",
-        emailHref: "mailto:emily@hh-consulting.com",
+        name: "Feven Girma",
+        role: "Deputy General Manager",
+        description:
+          "Supports company leadership, project coordination, and operational management across departments.",
+        image: "/asset/team-02.svg",
+        imageAlt: "Portrait of Feven Girma",
       },
     ],
+    departmentLeads: [
+      {
+        name: "Yitbarek Tekle",
+        role: "Human Resource Department",
+        description:
+          "Manages talent acquisition, staff development, and human resource operations.",
+        image: "/asset/team-03.svg",
+        imageAlt: "Portrait of Yitbarek Tekle",
+      },
+      {
+        name: "Dibora Mesfin",
+        role: "Bid Department Head",
+        description:
+          "Oversees tender preparation, proposal documentation, and bidding processes.",
+        image: "/asset/team-01.svg",
+        imageAlt: "Portrait of Dibora Mesfin",
+      },
+      {
+        name: "Hailegiorgis Solomon",
+        role: "IT Department",
+        description:
+          "Responsible for technology systems, digital operations, and IT support infrastructure.",
+        image: "/asset/team-02.svg",
+        imageAlt: "Portrait of Hailegiorgis Solomon",
+      },
+      {
+        name: "SCAD Team",
+        role: "Supervision & Contract Administration",
+        description:
+          "Ensures project quality control, supervision, compliance, and contract management.",
+        image: "/asset/team-03.svg",
+        imageAlt: "SCAD team visual",
+        isServiceCard: true,
+      },
+    ],
+    supportTitle: "Administrative Support",
+    supportTeam: [
+      {
+        name: "Helen",
+        role: "Receptionist",
+        image: "/asset/team-01.svg",
+        imageAlt: "Portrait of Helen",
+      },
+      {
+        name: "Mekdes Gebru",
+        role: "Receptionist",
+        image: "/asset/team-02.svg",
+        imageAlt: "Portrait of Mekdes Gebru",
+      },
+    ],
+    highlights: ["Design Department", "Payment Department", "Staff Recognition"],
   },
   contact: {
     eyebrow: "Get in Touch",

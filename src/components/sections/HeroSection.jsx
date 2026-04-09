@@ -18,7 +18,7 @@ function HeroSection({ data }) {
 
     const timer = window.setInterval(() => {
       setActiveIndex((currentIndex) => (currentIndex + 1) % backgrounds.length);
-    }, 5200);
+    }, 7600);
 
     return () => window.clearInterval(timer);
   }, [backgrounds.length]);
@@ -32,8 +32,8 @@ function HeroSection({ data }) {
             src={background.src}
             alt={background.alt}
             className={[
-              "absolute inset-0 h-full w-full object-cover transition-all duration-1000 ease-in-out",
-              index === activeIndex ? "scale-105 opacity-100" : "scale-110 opacity-0",
+              "absolute inset-0 h-full w-full object-cover will-change-[opacity,transform] transition-[opacity,transform] duration-[3200ms] ease-in-out",
+              index === activeIndex ? "scale-100 opacity-100" : "scale-105 opacity-0",
             ].join(" ")}
           />
         ))}

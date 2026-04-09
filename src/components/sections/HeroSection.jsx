@@ -1,14 +1,45 @@
+import { useEffect, useMemo, useState } from "react";
+
 function HeroSection({ data }) {
+  const backgrounds = useMemo(() => {
+    if (Array.isArray(data.backgroundImages) && data.backgroundImages.length > 0) {
+      return data.backgroundImages;
+    }
+
+    return data.image ? [{ src: data.image, alt: data.imageAlt || "Hero background" }] : [];
+  }, [data.backgroundImages, data.image, data.imageAlt]);
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    if (backgrounds.length <= 1) {
+      return undefined;
+    }
+
+    const timer = window.setInterval(() => {
+      setActiveIndex((currentIndex) => (currentIndex + 1) % backgrounds.length);
+    }, 5200);
+
+    return () => window.clearInterval(timer);
+  }, [backgrounds.length]);
+
   return (
     <section id="home" className="animate-reveal -mx-3 overflow-hidden scroll-mt-28 sm:-mx-6 lg:-mx-10 2xl:-mx-14">
       <div className="relative min-h-[90vh] sm:min-h-screen">
-        <img
-          src={data.image}
-          alt={data.imageAlt}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-[#0E2A55]/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A234A]/65 via-[#0A234A]/45 to-[#0A234A]/30" />
+        {backgrounds.map((background, index) => (
+          <img
+            key={`${background.src}-${index}`}
+            src={background.src}
+            alt={background.alt}
+            className={[
+              "absolute inset-0 h-full w-full object-cover transition-all duration-1000 ease-in-out",
+              index === activeIndex ? "scale-105 opacity-100" : "scale-110 opacity-0",
+            ].join(" ")}
+          />
+        ))}
+        <div className="absolute inset-0 bg-[#0E2A55]/72" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A234A]/70 via-[#0A234A]/50 to-[#0A234A]/34" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(213,178,35,0.14),transparent_34%),radial-gradient(circle_at_80%_30%,rgba(255,255,255,0.08),transparent_34%)]" />
 
         <div className="relative z-10 mx-auto flex min-h-[90vh] w-full max-w-[1320px] flex-col px-6 py-10 text-white sm:min-h-screen sm:px-10 sm:py-14 lg:px-14 lg:py-16">
           <div className="flex items-center gap-4">

@@ -7,9 +7,24 @@ export const siteContent = {
       "For any international projects, we are your dedicated global partner in design and construction supervision",
     ctaLabel: "Explore Projects",
     ctaHref: "#projects",
-    image:
-      "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1800&q=80",
-    imageAlt: "Modern architectural facade hero image",
+    backgroundImages: [
+      {
+        src: "/asset/hero-modern-building.svg",
+        alt: "Modern architectural building exterior",
+      },
+      {
+        src: "/asset/project-bridge.svg",
+        alt: "Engineering bridge project illustration",
+      },
+      {
+        src: "/asset/project-towers.svg",
+        alt: "High-rise tower project illustration",
+      },
+      {
+        src: "/asset/ali%20Bira%20hospital.png",
+        alt: "Hospital project visual",
+      },
+    ],
   },
   about: {
     eyebrow: "About Our Company",
@@ -95,7 +110,6 @@ export const siteContent = {
     ],
   },
   projects: {
-    eyebrow: "Portfolio",
     title: "Featured Projects",
     viewAllLabel: "View All",
     viewAllHref: "#projects",
@@ -111,8 +125,7 @@ export const siteContent = {
         ],
         description:
           "Complete architectural and engineering design, bid documentation, contract administration, and supervision services.",
-        image:
-          "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1300&q=80",
+        image: "/asset/ali Bira hospital.png",
         imageAlt: "Modern hospital and healthcare building",
         href: "#",
       },
@@ -127,8 +140,7 @@ export const siteContent = {
         ],
         description:
           "Full building design package including architectural, structural, sanitary, electrical, and supervision services.",
-        image:
-          "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1300&q=80",
+        image: "/asset/churchil hotel.png",
         imageAlt: "Premium hotel skyscraper and hospitality building",
         href: "#",
       },
@@ -144,8 +156,7 @@ export const siteContent = {
         ],
         description:
           "Design-build of airport airfield, terminal, and facility building maintenance project.",
-        image:
-          "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1300&q=80",
+        image: "/asset/national intelligence.jpg",
         imageAlt: "Airport terminal and aviation infrastructure",
         href: "#",
       },
@@ -161,8 +172,7 @@ export const siteContent = {
         ],
         description:
           "Architectural and engineering design for a large-capacity university stadium complex.",
-        image:
-          "https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=1300&q=80",
+        image: "/asset/bule hora .png",
         imageAlt: "Large stadium rendering and sports venue",
         href: "#",
       },
@@ -177,8 +187,7 @@ export const siteContent = {
         ],
         description:
           "Complete mixed-use high-rise building design and supervision services.",
-        image:
-          "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1300&q=80",
+        image: "/asset/bm housing.png",
         imageAlt: "Tall mixed-use tower and high-rise building",
         href: "#",
       },
@@ -193,8 +202,7 @@ export const siteContent = {
         ],
         description:
           "Tourism development project including architectural, landscape, and engineering design.",
-        image:
-          "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1300&q=80",
+        image: "/asset/tsehay.png",
         imageAlt: "Heritage park and cultural landscape design",
         href: "#",
       },
@@ -208,47 +216,12 @@ export const siteContent = {
     logoRows: [
       {
         items: [
-          { name: "Ethiopian Airlines Group", monogram: "EA" },
           { name: "Haramaya University", logoSrc: "/asset/haramaya university.png" },
           { name: "Bule Hora University", logoSrc: "/asset/bule hora university.jpeg" },
-          { name: "Sidama Roads Authority", monogram: "SRA" },
           { name: "Central Ethiopia Regional Government", logoSrc: "/asset/addis ababa city admnistration.png" },
-          { name: "Ali Birra Foundation", monogram: "AB" },
-        ],
-      },
-      {
-        items: [
-          { name: "City Light", monogram: "CL" },
-          { name: "BM Housing Corporation", monogram: "BM" },
-          { name: "Teskaro Behame PLC", monogram: "TB" },
           { name: "Habesha Steel PLC", logoSrc: "/asset/habesha still mills logo.png" },
-          { name: "Kebede Chkual", monogram: "KC" },
-          { name: "Greenland Tour & Hotel PLC", monogram: "GH" },
         ],
       },
-    ],
-    certifications: [
-      {
-        icon: "award",
-        title: "Certified Engineering Excellence",
-        description: "Professional architectural and engineering consulting credentials.",
-      },
-      {
-        icon: "document",
-        title: "Bid & Contract Administration Expertise",
-        description: "Experienced in supervision, tendering, and compliance documentation.",
-      },
-      {
-        icon: "global",
-        title: "International Project Capability",
-        description: "Proven delivery experience in Ethiopia and Djibouti.",
-      },
-    ],
-    metrics: [
-      { value: "100+", label: "Projects" },
-      { value: "50+", label: "Experts" },
-      { value: "10+", label: "Years" },
-      { value: "2", label: "Countries" },
     ],
   },
   team: {

@@ -2,6 +2,7 @@ import MobileShell from "./layout/MobileShell";
 import HeroSection from "./components/sections/HeroSection";
 import AboutSection from "./components/sections/AboutSection";
 import ServicesSection from "./components/sections/ServicesSection";
+import WhyChooseUsSection from "./components/sections/WhyChooseUsSection";
 import ProjectsSection from "./components/sections/ProjectsSection";
 import ClientsSection from "./components/sections/ClientsSection";
 import TeamSection from "./components/sections/TeamSection";
@@ -23,6 +24,7 @@ function App() {
         </section>
         <AboutSection data={siteContent.about} className="lg:mt-8" />
         <ServicesSection data={siteContent.services} className="lg:mt-8" />
+        <WhyChooseUsSection data={siteContent.whyChooseUs} className="lg:mt-8" />
         <ProjectsSection data={siteContent.projects} className="lg:mt-8" />
         <ClientsSection data={siteContent.clients} className="lg:mt-8" />
         <TeamSection data={siteContent.team} className="lg:mt-8" />

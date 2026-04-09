@@ -61,6 +61,38 @@ export const siteContent = {
       },
     ],
   },
+  whyChooseUs: {
+    eyebrow: "Why Choose Us",
+    title: "Why Choose Us",
+    subtitle:
+      "Delivering innovative architectural and engineering solutions with excellence, reliability, and impact.",
+    items: [
+      {
+        icon: "globe",
+        title: "Global Expertise",
+        description:
+          "Delivering multidisciplinary consulting services for national and international projects across Ethiopia and beyond.",
+      },
+      {
+        icon: "leaf",
+        title: "Sustainable Design",
+        description:
+          "We integrate environmental responsibility, cultural context, and long-term resilience into every design solution.",
+      },
+      {
+        icon: "shield",
+        title: "Quality Assurance",
+        description:
+          "From concept design to supervision and contract administration, we ensure precision, compliance, and project excellence.",
+      },
+      {
+        icon: "clock",
+        title: "Timely Delivery",
+        description:
+          "Efficient planning, expert coordination, and disciplined execution ensure projects are delivered on schedule.",
+      },
+    ],
+  },
   projects: {
     eyebrow: "Portfolio",
     title: "Featured Projects",

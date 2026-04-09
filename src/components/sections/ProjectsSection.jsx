@@ -98,7 +98,7 @@ function ProjectsSection({ data, className = "" }) {
                     </h3>
 
                     <div className="mt-4 grid grid-cols-2 gap-3">
-                      {(project.meta || []).map((item) => (
+                      {(project.meta || []).filter((item) => item.label !== "Budget").map((item) => (
                         <div key={`${project.title}-${item.label}`} className="rounded-2xl border border-brand-gray200 bg-[#F8FAFD] px-4 py-3">
                           <p className="m-0 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-[#D5B223]">
                             {item.label}
@@ -114,12 +114,6 @@ function ProjectsSection({ data, className = "" }) {
                       {project.description}
                     </p>
 
-                    <a
-                      href={project.href}
-                      className="mt-6 inline-flex items-center gap-2 text-[1rem] font-semibold text-[#D5B223] underline-offset-4 transition-all duration-300 hover:gap-3 hover:underline"
-                    >
-                      View Details <span aria-hidden="true">→</span>
-                    </a>
                   </div>
                 </article>
               ))}

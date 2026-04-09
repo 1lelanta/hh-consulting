@@ -14,7 +14,7 @@ import { siteContent } from "./data/siteContent";
 
 function App() {
   return (
-    <div className="relative min-h-screen bg-brand-gray050 px-0 pb-24 text-brand-navy950 lg:pb-20">
+    <div className="relative min-h-screen bg-[linear-gradient(180deg,#FFFFFF_0%,#F7F9FC_28%,#F3F5F8_52%,#F7F9FC_76%,#FFFFFF_100%)] px-0 pb-24 text-brand-navy950 lg:pb-20">
       <HeaderNav />
       <div className="pointer-events-none fixed inset-0 opacity-40 [background:radial-gradient(circle_at_100%_0%,rgba(190,154,90,0.20),transparent_35%),radial-gradient(circle_at_0%_10%,rgba(22,59,99,0.14),transparent_30%)]" />
 

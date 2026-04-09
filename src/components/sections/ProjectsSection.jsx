@@ -1,3 +1,5 @@
+import { useMemo, useState } from "react";
+
 function ProjectsSection({ data, className = "" }) {
   const locationIcon = (
     <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -5,6 +7,17 @@ function ProjectsSection({ data, className = "" }) {
       <circle cx="12" cy="10" r="2.5" />
     </svg>
   );
+
+  const filterTabs = ["All", "Buildings", "Infrastructure", "Airport", "Roads", "Bridges", "Irrigation"];
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const visibleProjects = useMemo(() => {
+    if (activeFilter === "All") {
+      return data.items;
+    }
+
+    return data.items.filter((project) => project.filterCategory === activeFilter);
+  }, [activeFilter, data.items]);
 
   return (
     <section
@@ -34,76 +47,89 @@ function ProjectsSection({ data, className = "" }) {
           </a>
         </div>
 
+        <div className="mt-8 flex gap-3 overflow-x-auto pb-1 no-scrollbar">
+          {filterTabs.map((tab) => {
+            const active = tab === activeFilter;
+
+            return (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => setActiveFilter(tab)}
+                className={[
+                  "whitespace-nowrap rounded-full border px-4 py-2 text-[0.94rem] font-semibold transition-all duration-300",
+                  active
+                    ? "border-[#D5B223] bg-[#D5B223] text-white shadow-[0_10px_20px_rgba(190,154,90,0.20)]"
+                    : "border-brand-gray200 bg-white text-brand-gray500 hover:-translate-y-0.5 hover:border-[#D5B223] hover:text-[#D5B223]",
+                ].join(" ")}
+              >
+                {tab}
+              </button>
+            );
+          })}
+        </div>
+
         <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {data.items.map((project, index) => (
+          {visibleProjects.map((project) => (
             <article
               key={project.title}
-              className={`group overflow-hidden rounded-[1.75rem] border border-brand-gray200 bg-white shadow-[0_10px_24px_rgba(13,40,74,0.07)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(13,40,74,0.12)] ${
-                index === 0 ? "xl:col-span-2" : ""
-              }`}
+              className="group overflow-hidden rounded-[1.75rem] border border-brand-gray200 bg-white shadow-[0_10px_24px_rgba(13,40,74,0.07)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(13,40,74,0.12)]"
             >
-              <div className={index === 0 ? "xl:grid xl:grid-cols-[1.1fr_0.9fr] xl:items-stretch" : ""}>
-                <div className="relative">
-                  <img
-                    src={project.image}
-                    alt={project.imageAlt}
-                    className={`h-[250px] w-full object-cover object-center transition duration-500 group-hover:scale-105 sm:h-[280px] ${
-                      index === 0 ? "xl:h-full xl:min-h-[360px]" : ""
-                    }`}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#08192D]/30 via-transparent to-transparent" />
-                  <span className="absolute left-4 top-4 rounded-full bg-[#08192D]/60 px-3 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur">
-                    {project.category}
-                  </span>
-                  {index === 0 ? (
-                    <span className="absolute right-4 top-4 rounded-full bg-[#D5B223] px-3 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-white">
-                      Featured Project
-                    </span>
-                  ) : null}
+              <div className="relative">
+                <img
+                  src={project.image}
+                  alt={project.imageAlt}
+                  className="h-[250px] w-full object-cover object-center transition duration-500 group-hover:scale-105 sm:h-[280px]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#08192D]/35 via-transparent to-transparent" />
+                <span className="absolute left-4 top-4 rounded-full bg-[#08192D]/65 px-3 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur">
+                  {project.category}
+                </span>
+              </div>
+
+              <div className="flex h-full flex-col p-6 sm:p-7">
+                <p className="m-0 inline-flex items-center gap-2 rounded-full bg-[#F4F6FA] px-3 py-2 text-[0.92rem] font-semibold text-brand-navy900">
+                  <span className="text-[#D5B223]">{locationIcon}</span>
+                  {project.location}
+                </p>
+
+                <h3 className="m-0 mt-4 text-[1.45rem] font-extrabold leading-tight tracking-[-0.02em] text-brand-navy900 sm:text-[1.8rem]">
+                  {project.title}
+                </h3>
+
+                <div className="mt-4 grid grid-cols-2 gap-3">
+                  {(project.meta || []).map((item) => (
+                    <div key={`${project.title}-${item.label}`} className="rounded-2xl border border-brand-gray200 bg-[#F8FAFD] px-4 py-3">
+                      <p className="m-0 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-[#D5B223]">
+                        {item.label}
+                      </p>
+                      <p className="m-0 mt-1 text-[0.95rem] font-semibold leading-6 text-brand-navy900">
+                        {item.value}
+                      </p>
+                    </div>
+                  ))}
                 </div>
 
-                <div className={`flex h-full flex-col p-6 sm:p-7 ${index === 0 ? "xl:p-8" : ""}`}>
-                  <p className="m-0 inline-flex items-center gap-2 rounded-full bg-[#F4F6FA] px-3 py-2 text-[0.92rem] font-semibold text-brand-navy900">
-                    <span className="text-[#D5B223]">{locationIcon}</span>
-                    {project.location}
-                  </p>
+                <p className="m-0 mt-5 text-[1rem] leading-7 text-brand-gray500 sm:text-[1.05rem]">
+                  {project.description}
+                </p>
 
-                  <h3 className="m-0 mt-4 text-[1.45rem] font-extrabold leading-tight tracking-[-0.02em] text-brand-navy900 sm:text-[1.8rem]">
-                    {project.title}
-                  </h3>
-
-                  <div className="mt-4 grid grid-cols-2 gap-3">
-                    {(project.meta || []).map((item) => (
-                      <div key={`${project.title}-${item.label}`} className="rounded-2xl border border-brand-gray200 bg-[#F8FAFD] px-4 py-3">
-                        <p className="m-0 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-[#D5B223]">
-                          {item.label}
-                        </p>
-                        <p className="m-0 mt-1 text-[0.95rem] font-semibold leading-6 text-brand-navy900">
-                          {item.value}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-
-                  <p className="m-0 mt-5 text-[1rem] leading-7 text-brand-gray500 sm:text-[1.05rem]">
-                    {project.description}
-                  </p>
-
-                  <a
-                    href={project.href}
-                    className="mt-6 inline-flex items-center gap-2 text-[1rem] font-semibold text-[#D5B223] underline-offset-4 transition-all duration-300 hover:gap-3 hover:underline"
-                  >
-                    View Details <span aria-hidden="true">→</span>
-                  </a>
-                </div>
+                <a
+                  href={project.href}
+                  className="mt-6 inline-flex items-center gap-2 text-[1rem] font-semibold text-[#D5B223] underline-offset-4 transition-all duration-300 hover:gap-3 hover:underline"
+                >
+                  View Details <span aria-hidden="true">→</span>
+                </a>
               </div>
             </article>
           ))}
         </div>
 
-        <a href={data.viewAllHref} className="mt-6 inline-flex text-[1rem] font-semibold text-[#D5B223] lg:hidden">
-          {data.viewAllLabel} {'->'}
-        </a>
+        {visibleProjects.length === 0 ? (
+          <div className="mt-10 rounded-[1.5rem] border border-dashed border-brand-gray300 bg-white px-6 py-10 text-center text-brand-gray500">
+            No projects available in this category yet.
+          </div>
+        ) : null}
       </div>
     </section>
   );

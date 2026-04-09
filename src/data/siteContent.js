@@ -71,6 +71,7 @@ export const siteContent = {
         title: "Dr. Ali Birra General Hospital",
         location: "Haramaya, Ethiopia",
         category: "Healthcare",
+        filterCategory: "Buildings",
         meta: [
           { label: "Year", value: "2025" },
           { label: "Budget", value: "2,829,723,466 ETB" },
@@ -86,6 +87,7 @@ export const siteContent = {
         title: "Churchill Hotel",
         location: "Addis Ababa",
         category: "Hospitality",
+        filterCategory: "Buildings",
         meta: [
           { label: "Year", value: "June 2025" },
           { label: "Budget", value: "1,302,723,466 ETB" },
@@ -101,6 +103,7 @@ export const siteContent = {
         title: "Axum International Airport",
         location: "Axum, Tigray",
         category: "Aviation / Terminal Design",
+        filterCategory: "Airport",
         meta: [
           { label: "Year", value: "2025" },
           { label: "Duration", value: "5 months" },
@@ -117,6 +120,7 @@ export const siteContent = {
         title: "Bule Hora University International Stadium",
         location: "Oromia, Bule Hora",
         category: "Institutional / Sports",
+        filterCategory: "Buildings",
         meta: [
           { label: "Year", value: "2025" },
           { label: "Capacity", value: "60,000 seats" },
@@ -133,6 +137,7 @@ export const siteContent = {
         title: "Kebede Mixed Use G+34",
         location: "Addis Ababa",
         category: "Mixed Use / Commercial",
+        filterCategory: "Buildings",
         meta: [
           { label: "Year", value: "August 2025" },
           { label: "Budget", value: "6,600,000,000 ETB" },
@@ -148,6 +153,7 @@ export const siteContent = {
         title: "Tiya-Suten Heritage Park",
         location: "Tiya Town",
         category: "Heritage / Tourism",
+        filterCategory: "Infrastructure",
         meta: [
           { label: "Year", value: "2025" },
           { label: "Budget", value: "Not listed in PDF" },

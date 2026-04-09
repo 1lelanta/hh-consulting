@@ -62,39 +62,101 @@ export const siteContent = {
     ],
   },
   projects: {
-    eyebrow: "Featured Work",
-    title: "Recent Projects",
+    eyebrow: "Portfolio",
+    title: "Featured Projects",
     viewAllLabel: "View All",
     viewAllHref: "#projects",
     items: [
       {
-        title: "Skyline Residences",
-        location: "Manhattan, New York",
-        category: "Residential",
-        description: "Luxury residential tower featuring sustainable design and smart building technology",
+        title: "Dr. Ali Birra General Hospital",
+        location: "Haramaya, Ethiopia",
+        category: "Healthcare",
+        meta: [
+          { label: "Year", value: "2025" },
+          { label: "Budget", value: "2,829,723,466 ETB" },
+        ],
+        description:
+          "Complete architectural and engineering design, bid documentation, contract administration, and supervision services.",
         image:
-          "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1300&q=80",
-        imageAlt: "Modern residential building project",
+          "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1300&q=80",
+        imageAlt: "Modern hospital and healthcare building",
         href: "#",
       },
       {
-        title: "Harbor Bridge Extension",
-        location: "San Francisco, CA",
-        category: "Infrastructure",
-        description: "State-of-the-art bridge infrastructure connecting key metropolitan areas",
+        title: "Churchill Hotel",
+        location: "Addis Ababa",
+        category: "Hospitality",
+        meta: [
+          { label: "Year", value: "June 2025" },
+          { label: "Budget", value: "1,302,723,466 ETB" },
+        ],
+        description:
+          "Full building design package including architectural, structural, sanitary, electrical, and supervision services.",
         image:
-          "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1f?auto=format&fit=crop&w=1300&q=80",
-        imageAlt: "Bridge infrastructure project",
+          "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1300&q=80",
+        imageAlt: "Premium hotel skyscraper and hospitality building",
         href: "#",
       },
       {
-        title: "Tech Innovation Hub",
-        location: "Seattle, WA",
-        category: "Commercial",
-        description: "Modern corporate campus designed for collaboration and innovation",
+        title: "Axum International Airport",
+        location: "Axum, Tigray",
+        category: "Aviation / Terminal Design",
+        meta: [
+          { label: "Year", value: "2025" },
+          { label: "Duration", value: "5 months" },
+          { label: "Budget", value: "290,000,000 ETB" },
+        ],
+        description:
+          "Design-build of airport airfield, terminal, and facility building maintenance project.",
         image:
-          "https://images.unsplash.com/photo-1481026469463-66327c86e544?auto=format&fit=crop&w=1300&q=80",
-        imageAlt: "Commercial innovation hub project",
+          "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1300&q=80",
+        imageAlt: "Airport terminal and aviation infrastructure",
+        href: "#",
+      },
+      {
+        title: "Bule Hora University International Stadium",
+        location: "Oromia, Bule Hora",
+        category: "Institutional / Sports",
+        meta: [
+          { label: "Year", value: "2025" },
+          { label: "Capacity", value: "60,000 seats" },
+          { label: "Budget", value: "4 Billion ETB" },
+        ],
+        description:
+          "Architectural and engineering design for a large-capacity university stadium complex.",
+        image:
+          "https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=1300&q=80",
+        imageAlt: "Large stadium rendering and sports venue",
+        href: "#",
+      },
+      {
+        title: "Kebede Mixed Use G+34",
+        location: "Addis Ababa",
+        category: "Mixed Use / Commercial",
+        meta: [
+          { label: "Year", value: "August 2025" },
+          { label: "Budget", value: "6,600,000,000 ETB" },
+        ],
+        description:
+          "Complete mixed-use high-rise building design and supervision services.",
+        image:
+          "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1300&q=80",
+        imageAlt: "Tall mixed-use tower and high-rise building",
+        href: "#",
+      },
+      {
+        title: "Tiya-Suten Heritage Park",
+        location: "Tiya Town",
+        category: "Heritage / Tourism",
+        meta: [
+          { label: "Year", value: "2025" },
+          { label: "Budget", value: "Not listed in PDF" },
+        ],
+        description:
+          "Tourism development project including architectural, landscape, and engineering design.",
+        image:
+          "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1300&q=80",
+        imageAlt: "Heritage park and cultural landscape design",
         href: "#",
       },
     ],

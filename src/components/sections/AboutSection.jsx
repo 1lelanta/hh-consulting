@@ -6,7 +6,10 @@ function AboutSection({ data, className = "" }) {
     >
       <div className="mx-auto w-full max-w-[1320px]">
         <div className="mx-auto max-w-[980px] px-1 sm:px-2 lg:px-4">
-          <p className="m-0 text-[0.88rem] font-extrabold uppercase tracking-[0.14em] text-[#B18428]">{data.eyebrow}</p>
+          <div className="flex items-center gap-3">
+            <span className="h-[2px] w-14 bg-[#D5B223]" />
+            <p className="m-0 text-[0.88rem] font-extrabold uppercase tracking-[0.14em] text-[#B18428]">{data.eyebrow}</p>
+          </div>
 
           <h2 className="m-0 mt-4 text-balance text-[1.85rem] font-extrabold leading-[1.15] tracking-[-0.02em] text-brand-navy900 sm:text-[2.35rem] lg:text-[2.8rem]">
             {data.title}

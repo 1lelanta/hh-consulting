@@ -167,6 +167,59 @@ export const siteContent = {
       },
     ],
   },
+  clients: {
+    eyebrow: "Trusted By",
+    title: "Trusted by Leading Institutions",
+    subtitle:
+      "Proudly delivering consulting, engineering, and supervision services for public and private institutions across Ethiopia and international markets.",
+    clientGroups: [
+      {
+        title: "Main Institutions",
+        clients: [
+          "Ethiopian Airlines Group",
+          "Haramaya University",
+          "Bule Hora University",
+          "Sidama Roads Authority",
+          "Central Ethiopia Regional Government",
+          "Ali Birra Foundation",
+        ],
+      },
+      {
+        title: "Private / Commercial Clients",
+        clients: [
+          "City Light",
+          "BM Housing Corporation",
+          "Teskaro Behame PLC",
+          "Habesha Steel PLC",
+          "Kebede Chkual",
+          "Greenland Tour & Hotel PLC",
+        ],
+      },
+    ],
+    certifications: [
+      {
+        icon: "award",
+        title: "Certified Engineering Excellence",
+        description: "Professional architectural and engineering consulting credentials.",
+      },
+      {
+        icon: "document",
+        title: "Bid & Contract Administration Expertise",
+        description: "Experienced in supervision, tendering, and compliance documentation.",
+      },
+      {
+        icon: "global",
+        title: "International Project Capability",
+        description: "Proven delivery experience in Ethiopia and Djibouti.",
+      },
+    ],
+    metrics: [
+      { value: "100+", label: "Projects" },
+      { value: "50+", label: "Experts" },
+      { value: "10+", label: "Years" },
+      { value: "2", label: "Countries" },
+    ],
+  },
   team: {
     eyebrow: "Leadership & Core Team",
     title: "Leadership & Core Team",

@@ -3,6 +3,7 @@ import HeroSection from "./components/sections/HeroSection";
 import AboutSection from "./components/sections/AboutSection";
 import ServicesSection from "./components/sections/ServicesSection";
 import ProjectsSection from "./components/sections/ProjectsSection";
+import ClientsSection from "./components/sections/ClientsSection";
 import TeamSection from "./components/sections/TeamSection";
 import ContactSection from "./components/sections/ContactSection";
 import StickyActions from "./components/sections/StickyActions";
@@ -23,6 +24,7 @@ function App() {
         <AboutSection data={siteContent.about} className="lg:mt-8" />
         <ServicesSection data={siteContent.services} className="lg:mt-8" />
         <ProjectsSection data={siteContent.projects} className="lg:mt-8" />
+        <ClientsSection data={siteContent.clients} className="lg:mt-8" />
         <TeamSection data={siteContent.team} className="lg:mt-8" />
         <ContactSection data={siteContent.contact} className="lg:mt-8" />
       </MobileShell>

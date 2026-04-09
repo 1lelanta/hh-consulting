@@ -36,12 +36,12 @@ function ClientsSection({ data, className = "" }) {
 
         <div className="mt-8 space-y-4 lg:mt-10">
           {data.logoRows.map((row, index) => (
-            <div key={index} className="overflow-x-auto no-scrollbar lg:overflow-hidden">
+            <div key={index} className="overflow-hidden">
               <div
                 className={[
                   "flex w-max gap-4 px-1 pb-2 lg:gap-5",
-                  index % 2 === 0 ? "lg:animate-marquee" : "lg:animate-marquee-reverse",
-                  "hover:[animation-play-state:paused]",
+                  index % 2 === 0 ? "animate-marquee" : "animate-marquee-reverse",
+                  "[animation-duration:34s] hover:[animation-play-state:paused]",
                 ].join(" ")}
               >
                 {duplicateRow(row).map((item, itemIndex) => (

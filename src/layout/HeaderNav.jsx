@@ -35,7 +35,7 @@ function HeaderNav() {
           </span>
         </button>
 
-        <div className="no-scrollbar hidden min-w-0 flex-1 items-center justify-center gap-3 overflow-x-auto md:flex">
+        <div className="no-scrollbar hidden min-w-0 flex-1 items-center justify-end gap-3 overflow-x-auto md:flex">
           {navItems.map((item) => (
             <a
               key={item.label}

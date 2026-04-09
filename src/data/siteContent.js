@@ -107,7 +107,7 @@ export const siteContent = {
   projects: {
     eyebrow: "Our Portfolio",
     title: "Featured Projects",
-    viewAllLabel: "View All",
+    viewAllLabel: "Projects",
     viewAllHref: "#projects",
     items: [
       {
@@ -222,7 +222,7 @@ export const siteContent = {
         ],
         description:
           "Complete mixed-use high-rise building design and supervision services.",
-        image: "/asset/bm housing.png",
+        image: "/asset/kebede.png",
         imageAlt: "Tall mixed-use tower and high-rise building",
         href: "#",
       },
@@ -256,6 +256,9 @@ export const siteContent = {
           { name: "Central Ethiopia Regional Government", logoSrc: "/asset/addis ababa city admnistration.png" },
           { name: "Habesha Steel PLC", logoSrc: "/asset/habesha still mills logo.png" },
           { name: "Ethiopian Airlines", logoSrc: "/asset/ethiopian air line logo.jpg" },
+          {name: "Central Regional Government", logoSrc: "/asset/central regional.png"},
+          {name: "City Lights ", logoSrc: "/asset/city.png"},
+          {name: "Experience", logoSrc: "/asset/experience.png"},
         ],
       },
     ],

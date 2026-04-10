@@ -117,12 +117,32 @@ function HeroSection({ data }) {
                   >
                     {data.ctaLabel}
                   </a>
-                  <a
-                    href="#contact"
-                    className="inline-flex w-full items-center justify-center rounded-[12px] border border-white/30 bg-white/10 px-6 py-3.5 text-center text-[0.9rem] font-bold uppercase tracking-[0.12em] text-white backdrop-blur transition duration-300 hover:border-white/60 hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto sm:min-w-[190px]"
-                  >
-                    Contact Us
-                  </a>
+
+                  <div className="relative inline-flex w-full sm:w-auto sm:min-w-[190px]">
+                    <span
+                      className="pointer-events-none absolute -left-1.5 -top-1.5 h-3 w-3 border-l border-t border-[#D5B223]/90"
+                      aria-hidden="true"
+                    />
+                    <span
+                      className="pointer-events-none absolute -right-1.5 -top-1.5 h-3 w-3 border-r border-t border-[#D5B223]/90"
+                      aria-hidden="true"
+                    />
+                    <span
+                      className="pointer-events-none absolute -left-1.5 -bottom-1.5 h-3 w-3 border-l border-b border-[#D5B223]/90"
+                      aria-hidden="true"
+                    />
+                    <span
+                      className="pointer-events-none absolute -bottom-1.5 -right-1.5 h-3 w-3 border-r border-b border-[#D5B223]/90"
+                      aria-hidden="true"
+                    />
+
+                    <a
+                      href="#get-in-touch"
+                      className="inline-flex w-full items-center justify-center rounded-none border border-white/30 bg-white/10 px-6 py-3.5 text-center text-[0.9rem] font-bold uppercase tracking-[0.12em] text-white backdrop-blur transition duration-300 hover:border-white/60 hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                    >
+                      Contact Us
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             </motion.div>

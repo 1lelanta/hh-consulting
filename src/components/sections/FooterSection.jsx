@@ -52,7 +52,7 @@ function FooterSection({ data, className = "" }) {
                 <p className="m-0 text-[0.74rem] font-bold uppercase tracking-[0.14em] text-[#D5B223] sm:text-[0.85rem]">
                   {data.companyName}
                 </p>
-                <p className="m-0 mt-2 text-[0.92rem] leading-6 text-white/74 sm:text-[1.02rem] sm:leading-7">
+                <p className="m-0 mt-2 hidden text-[0.92rem] leading-6 text-white/74 sm:block sm:text-[1.02rem] sm:leading-7">
                   Integrated architecture and engineering solutions for public and private projects.
                 </p>
               </div>
@@ -72,9 +72,9 @@ function FooterSection({ data, className = "" }) {
             </div>
           </div>
 
-          <div>
+          <div className="pt-1 sm:pt-0">
             <p className="m-0 text-[0.82rem] font-bold uppercase tracking-[0.14em] text-[#D5B223] sm:text-[0.9rem]">Quick Links</p>
-            <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-1">
+            <ul className="mt-5 grid grid-cols-1 gap-y-4 sm:mt-4 sm:grid-cols-1 sm:gap-y-3">
               {data.quickLinks.map((link) => (
                 <li key={link.label}>
                   <a href={link.href} className="text-[0.98rem] text-white/78 transition-colors hover:text-white">
@@ -85,9 +85,9 @@ function FooterSection({ data, className = "" }) {
             </ul>
           </div>
 
-          <div>
+          <div className="pt-1 sm:pt-0">
             <p className="m-0 text-[0.82rem] font-bold uppercase tracking-[0.14em] text-[#D5B223] sm:text-[0.9rem]">Services</p>
-            <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-1">
+            <ul className="mt-5 grid grid-cols-1 gap-y-4 sm:mt-4 sm:grid-cols-1 sm:gap-y-3">
               {data.services.map((service) => (
                 <li key={service.label}>
                   <a href={service.href} className="text-[0.98rem] text-white/78 transition-colors hover:text-white">

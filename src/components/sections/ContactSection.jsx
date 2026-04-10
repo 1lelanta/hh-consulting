@@ -73,10 +73,10 @@ function ContactSection({ data, className = "" }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.17, 0.67, 0.83, 0.67] }}
       viewport={{ once: true, amount: 0.2 }}
-      className={`animate-reveal relative mt-8 -mx-3 scroll-mt-28 overflow-hidden bg-[#0F172A] px-3 py-16 [animation-delay:430ms] sm:-mx-6 sm:px-6 sm:py-20 lg:-mx-10 lg:px-10 lg:py-24 2xl:-mx-14 2xl:px-14 ${className}`}
+      className={`animate-reveal relative mt-8 -mx-3 scroll-mt-28 overflow-hidden bg-[#1E1E1E] px-3 py-16 [animation-delay:430ms] sm:-mx-6 sm:px-6 sm:py-20 lg:-mx-10 lg:px-10 lg:py-24 2xl:-mx-14 2xl:px-14 ${className}`}
     >
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-[linear-gradient(180deg,rgba(239,243,248,0.92)_0%,rgba(15,23,42,0)_100%)]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-[linear-gradient(180deg,rgba(34,34,34,0.95)_0%,rgba(30,30,30,0)_100%)]"
         aria-hidden="true"
       />
       <div
@@ -112,13 +112,12 @@ function ContactSection({ data, className = "" }) {
               ))}
             </div>
 
-            <div className="relative overflow-hidden rounded-[24px] border border-[#D5B223]/35 bg-gradient-to-br from-[#1A3960] via-[#143257] to-[#0F2743] px-6 py-7 text-white shadow-[0_18px_38px_rgba(7,28,52,0.4)] sm:px-7">
-              <div className="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full bg-[#D5B223]/20 blur-2xl" aria-hidden="true" />
+            <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-[#2B2B2B] px-6 py-7 text-white shadow-[0_18px_38px_rgba(0,0,0,0.28)] sm:px-7">
               <p className="relative z-10 m-0 text-[1.42rem] font-black leading-tight sm:text-[1.62rem]">{data.cta.title}</p>
               <p className="relative z-10 m-0 mt-2 text-[1.02rem] leading-7 text-white/85">{data.cta.subtitle}</p>
               <a
                 href="#contact"
-                className="relative z-10 mt-6 inline-flex items-center rounded-2xl bg-[#FF5B1A] px-8 py-3 text-[0.85rem] font-extrabold uppercase tracking-[0.13em] text-white shadow-[0_14px_26px_rgba(255,91,26,0.35)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#ff6c32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FFD39E]"
+                className="relative z-10 mt-6 inline-flex items-center rounded-2xl bg-[#2B2B2B] px-8 py-3 text-[0.85rem] font-extrabold uppercase tracking-[0.13em] text-white shadow-[0_14px_26px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#333333] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D5B223]"
               >
                 {data.cta.buttonLabel}
               </a>

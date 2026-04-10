@@ -5,6 +5,19 @@ function formatGhostNumber(index) {
   return String(index + 1).padStart(2, "0");
 }
 
+function getShortDefinition(service) {
+  const shortByIcon = {
+    "architectural-design": "Designing clear, functional, and elegant buildings.",
+    "structural-engineering": "Engineering safe and durable structural systems.",
+    "urban-planning": "Planning organized and future-ready urban spaces.",
+    "infrastructure-design": "Creating efficient systems for daily operations.",
+    "water-engineering": "Delivering reliable and sustainable water solutions.",
+    "feasibility-study": "Testing project viability before execution.",
+  };
+
+  return shortByIcon[service.icon] || service.description;
+}
+
 function ServiceIcon({ type }) {
   const common = "h-7 w-7 text-[#D5B223] sm:h-8 sm:w-8";
 
@@ -96,32 +109,31 @@ function ExpertiseItem({ service, index, staggerClass, scrollYProgress, isDeskto
     <motion.article
       variants={itemVariants}
       className={[
-        "relative flex min-h-[152px] w-full flex-col items-center text-center lg:min-h-[220px]",
-        "lg:max-w-[240px]",
+        "relative flex min-h-[108px] w-full items-start gap-4 border-b border-[#D9E1EC] py-4 text-left",
         staggerClass,
       ].join(" ")}
     >
       <motion.span
-        className="pointer-events-none absolute left-1/2 top-[-22px] z-0 -translate-x-1/2 text-[108px] font-black leading-none text-transparent sm:text-[132px] lg:text-[144px]"
+        className="pointer-events-none absolute left-[-8px] top-[-16px] z-0 text-[84px] font-black leading-none text-transparent opacity-55 sm:text-[100px]"
         style={{ WebkitTextStroke: "1px #e2e8f0", y: parallaxEnabled ? ghostY : 0 }}
         aria-hidden="true"
       >
         {formatGhostNumber(index)}
       </motion.span>
 
-      <div className="relative z-10 flex w-full flex-col items-center">
-        <div className="inline-flex h-11 w-11 items-center justify-center sm:h-14 sm:w-14">
-          <ServiceIcon type={service.icon} />
-        </div>
+      <div className="relative z-10 mt-1 inline-flex h-11 w-11 shrink-0 items-center justify-center sm:h-12 sm:w-12">
+        <ServiceIcon type={service.icon} />
+      </div>
 
-        <span className="mt-3 block h-[1px] w-[50px] bg-[#D5B223]" aria-hidden="true" />
+      <div className="relative z-10 flex min-w-0 flex-1 flex-col">
+        <span className="mt-1 block h-[1px] w-[42px] bg-[#D5B223]" aria-hidden="true" />
 
-        <h3 className="m-0 mt-3 text-[0.84rem] font-extrabold uppercase leading-[1.35] tracking-[0.18em] text-brand-navy900 sm:text-[0.92rem]">
+        <h3 className="m-0 mt-3 text-[0.88rem] font-extrabold uppercase leading-[1.35] tracking-[0.18em] text-brand-navy900 sm:text-[0.94rem]">
           {service.title}
         </h3>
 
-        <p className="m-0 mt-2 max-w-[230px] text-[0.74rem] leading-5 text-brand-gray500 sm:max-w-[250px] sm:text-[0.84rem] sm:leading-6">
-          {service.description}
+        <p className="m-0 mt-1.5 max-w-[420px] text-[0.8rem] leading-6 text-brand-gray500 sm:text-[0.9rem]">
+          {getShortDefinition(service)}
         </p>
       </div>
     </motion.article>
@@ -136,6 +148,9 @@ function ServicesSection({ data, className = "" }) {
     offset: ["start end", "end start"],
   });
   const [isDesktop, setIsDesktop] = useState(false);
+  const imageY = useTransform(scrollYProgress, [0, 1], [32, -28]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [0.96, 1.04]);
+  const imageRotate = useTransform(scrollYProgress, [0, 1], [-1.5, 1.5]);
 
   useEffect(() => {
     const media = window.matchMedia("(min-width: 1024px)");
@@ -172,40 +187,61 @@ function ServicesSection({ data, className = "" }) {
       className={`animate-reveal mt-8 -mx-3 scroll-mt-28 bg-transparent px-3 py-12 [animation-delay:200ms] sm:-mx-6 sm:px-6 sm:py-16 lg:-mx-10 lg:px-10 lg:py-20 2xl:-mx-14 2xl:px-14 ${className}`}
     >
       <div className="relative mx-auto w-full max-w-[1320px]">
-        <div className="max-w-[700px]">
-          <div className="flex items-center gap-3">
-            <span className="h-[2px] w-14 bg-[#D5B223]" />
-            <p className="section-eyebrow text-[#D5B223]">
-              {data.eyebrow}
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:gap-12">
+          <div className="max-w-[760px]">
+            <div className="flex items-center gap-3">
+              <span className="h-[2px] w-14 bg-[#D5B223]" />
+              <p className="section-eyebrow text-[#D5B223]">{data.eyebrow}</p>
+            </div>
+
+            <h2 className="m-0 mt-4 text-[1.75rem] font-extrabold leading-[1.14] tracking-[-0.02em] text-brand-navy900 sm:mt-5 sm:text-[2.45rem] lg:text-[3.3rem]">
+              {data.title}
+            </h2>
+
+            <p className="m-0 mt-4 max-w-[62ch] text-[1rem] leading-7 text-brand-gray500 sm:text-[1.05rem] lg:text-[1.08rem]">
+              {data.subtitle || "Thoughtful architecture and engineering solutions tailored to build lasting value."}
             </p>
+
+            <motion.div
+              className="relative z-10 mt-8 grid grid-cols-1 gap-4"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
+              {data.items.map((service, index) => (
+                <ExpertiseItem
+                  key={service.title}
+                  service={service}
+                  index={index}
+                  staggerClass=""
+                  scrollYProgress={scrollYProgress}
+                  isDesktop={isDesktop}
+                  reduceMotion={reduceMotion}
+                />
+              ))}
+            </motion.div>
           </div>
 
-          <h2 className="m-0 mt-4 text-[1.75rem] font-extrabold leading-[1.14] tracking-[-0.02em] text-brand-navy900 sm:mt-5 sm:text-[2.45rem] lg:text-[3.3rem]">
-            {data.title}
-          </h2>
-        </div>
-
-        <motion.div
-          className="relative z-10 mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3 lg:items-stretch lg:gap-x-12 lg:gap-y-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {data.items.map((service, index) => {
-            return (
-              <ExpertiseItem
-                key={service.title}
-                service={service}
-                index={index}
-                staggerClass=""
-                scrollYProgress={scrollYProgress}
-                isDesktop={isDesktop}
-                reduceMotion={reduceMotion}
+          {data.image ? (
+            <motion.figure
+              className="relative m-0 overflow-hidden rounded-[22px] border border-white/60 bg-white shadow-[0_18px_44px_rgba(13,40,74,0.16)] lg:sticky lg:top-24"
+              style={reduceMotion ? undefined : { y: imageY, scale: imageScale, rotate: imageRotate }}
+            >
+              <motion.img
+                src={data.image}
+                alt={data.imageAlt || "Architecture image"}
+                className="block h-[320px] w-full object-cover sm:h-[380px] lg:h-[760px]"
+                initial={{ opacity: 0.9 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true, amount: 0.3 }}
               />
-            );
-          })}
-        </motion.div>
+              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(9,17,30,0.08)_0%,rgba(9,17,30,0.18)_100%)]" aria-hidden="true" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-[linear-gradient(180deg,rgba(9,17,30,0)_0%,rgba(9,17,30,0.42)_100%)]" aria-hidden="true" />
+            </motion.figure>
+          ) : null}
+        </div>
       </div>
     </motion.section>
   );

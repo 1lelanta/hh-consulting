@@ -41,6 +41,7 @@ export const siteContent = {
   services: {
     eyebrow: "Expertise",
     title: "",
+    subtitle: "Crafting thoughtful architecture and engineering solutions that stand the test of time.",
     image: "/asset/churchil hotel.png",
     imageAlt: "Modern architectural hotel and building concept",
     items: [

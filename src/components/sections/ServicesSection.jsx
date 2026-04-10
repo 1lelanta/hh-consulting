@@ -201,8 +201,17 @@ function ServicesSection({ data, className = "" }) {
               </h2>
             ) : null}
 
-            <p className={`m-0 max-w-[62ch] text-[1rem] leading-7 text-brand-gray500 sm:text-[1.05rem] lg:text-[1.08rem] ${data.title ? "mt-4" : "mt-2"}`}>
-              {data.subtitle || "Thoughtful architecture and engineering solutions tailored to build lasting value."}
+            <p
+              className={`m-0 ${data.title ? "mt-4" : "mt-2"}`}
+              style={{
+                fontSize: "1rem",
+                lineHeight: "1.8",
+                letterSpacing: "0.3px",
+                color: "#b8b8b8",
+                maxWidth: "420px",
+              }}
+            >
+              {data.subtitle || "Crafting thoughtful architecture and engineering solutions that stand the test of time."}
             </p>
 
             <motion.div

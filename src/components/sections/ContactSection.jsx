@@ -73,21 +73,12 @@ function ContactSection({ data, className = "" }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.17, 0.67, 0.83, 0.67] }}
       viewport={{ once: true, amount: 0.2 }}
-      className={`animate-reveal relative mt-8 -mx-3 scroll-mt-28 overflow-hidden bg-[#1E1E1E] px-3 py-16 [animation-delay:430ms] sm:-mx-6 sm:px-6 sm:py-20 lg:-mx-10 lg:px-10 lg:py-24 2xl:-mx-14 2xl:px-14 ${className}`}
+      className={`animate-reveal relative mt-8 -mx-3 scroll-mt-28 overflow-hidden bg-[#F8F9FA] px-3 py-16 [animation-delay:430ms] sm:-mx-6 sm:px-6 sm:py-20 lg:-mx-10 lg:px-10 lg:py-24 2xl:-mx-14 2xl:px-14 ${className}`}
     >
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-[linear-gradient(180deg,rgba(34,34,34,0.95)_0%,rgba(30,30,30,0)_100%)]"
         aria-hidden="true"
       />
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(0deg, rgba(255,255,255,1) 0, rgba(255,255,255,1) 1px, transparent 1px, transparent 56px), repeating-linear-gradient(90deg, rgba(255,255,255,1) 0, rgba(255,255,255,1) 1px, transparent 1px, transparent 56px)",
-        }}
-        aria-hidden="true"
-      />
-
       <div className="relative z-10 mx-auto w-full max-w-[1320px]">
         <div className="max-w-[860px]">
           <div className="flex items-center gap-3">

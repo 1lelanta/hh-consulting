@@ -22,7 +22,7 @@ function ContactSection({ data, className = "" }) {
   };
 
   const fieldBase =
-    "peer w-full border-0 border-b-[0.5px] border-white/20 bg-transparent px-0 pb-2 pt-7 text-[1rem] text-slate-100 outline-none transition-all duration-300 placeholder:text-slate-500 focus:border-[#FACC15] focus:outline-none focus:[text-shadow:0_0_8px_rgba(250,204,21,0.22)] [&:not(:placeholder-shown)]:border-[#FACC15] [&:not(:placeholder-shown)]:[text-shadow:0_0_8px_rgba(250,204,21,0.14)]";
+    "peer w-full border-0 border-b-[0.5px] border-white/20 bg-transparent px-0 pb-2 pt-7 text-[1rem] text-slate-100 outline-none transition-all duration-300 placeholder:text-slate-500 focus:border-orange-500 focus:outline-none focus:[box-shadow:0_1px_0_0_rgba(249,115,22,0.55)] focus:[text-shadow:0_0_6px_rgba(249,115,22,0.24)] [&:not(:placeholder-shown)]:border-orange-500 [&:not(:placeholder-shown)]:[box-shadow:0_1px_0_0_rgba(249,115,22,0.4)]";
 
   function ContactCard({ card }) {
     return (
@@ -89,6 +89,11 @@ function ContactSection({ data, className = "" }) {
             </span>
 
             <article id="contact-form" className="relative z-20 rounded-[24px] border border-white/10 bg-transparent p-5 sm:p-6">
+              <span className="pointer-events-none absolute -left-2 -top-2 text-[12px] font-bold leading-none text-white/55" aria-hidden="true">+</span>
+              <span className="pointer-events-none absolute -right-2 -top-2 text-[12px] font-bold leading-none text-white/55" aria-hidden="true">+</span>
+              <span className="pointer-events-none absolute -bottom-2 -left-2 text-[12px] font-bold leading-none text-white/55" aria-hidden="true">+</span>
+              <span className="pointer-events-none absolute -bottom-2 -right-2 text-[12px] font-bold leading-none text-white/55" aria-hidden="true">+</span>
+
               <h3 className="relative z-20 m-0 text-[1.45rem] font-extrabold tracking-[-0.02em] text-white sm:text-[1.8rem]">
                 {data.form.title}
               </h3>
@@ -106,7 +111,7 @@ function ContactSection({ data, className = "" }) {
                           className={`${fieldBase} resize-none`}
                         />
                         <label
-                          className="pointer-events-none absolute left-0 top-5 text-[0.92rem] font-semibold text-slate-300 transition-all duration-300 peer-focus:top-0 peer-focus:text-[0.72rem] peer-focus:text-[#FACC15] peer-focus:[text-shadow:0_0_8px_rgba(250,204,21,0.28)] peer-[&:not(:placeholder-shown)]:top-0 peer-[&:not(:placeholder-shown)]:text-[0.72rem] peer-[&:not(:placeholder-shown)]:text-[#FACC15]"
+                          className="pointer-events-none absolute left-0 top-5 text-[0.92rem] font-semibold text-slate-300 transition-all duration-300 peer-focus:top-0 peer-focus:text-[0.72rem] peer-focus:text-orange-500 peer-focus:[text-shadow:0_0_6px_rgba(249,115,22,0.26)] peer-[&:not(:placeholder-shown)]:top-0 peer-[&:not(:placeholder-shown)]:text-[0.72rem] peer-[&:not(:placeholder-shown)]:text-orange-500"
                           htmlFor={field.name}
                         >
                           {field.label}
@@ -116,7 +121,7 @@ function ContactSection({ data, className = "" }) {
                       <>
                         <input id={field.name} name={field.name} type={field.type} placeholder={field.placeholder} className={fieldBase} />
                         <label
-                          className="pointer-events-none absolute left-0 top-5 text-[0.92rem] font-semibold text-slate-300 transition-all duration-300 peer-focus:top-0 peer-focus:text-[0.72rem] peer-focus:text-[#FACC15] peer-focus:[text-shadow:0_0_8px_rgba(250,204,21,0.28)] peer-[&:not(:placeholder-shown)]:top-0 peer-[&:not(:placeholder-shown)]:text-[0.72rem] peer-[&:not(:placeholder-shown)]:text-[#FACC15]"
+                          className="pointer-events-none absolute left-0 top-5 text-[0.92rem] font-semibold text-slate-300 transition-all duration-300 peer-focus:top-0 peer-focus:text-[0.72rem] peer-focus:text-orange-500 peer-focus:[text-shadow:0_0_6px_rgba(249,115,22,0.26)] peer-[&:not(:placeholder-shown)]:top-0 peer-[&:not(:placeholder-shown)]:text-[0.72rem] peer-[&:not(:placeholder-shown)]:text-orange-500"
                           htmlFor={field.name}
                         >
                           {field.label}

@@ -163,20 +163,23 @@ function HeroSection({ data }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
           >
-            <div className="flex items-start gap-3 sm:items-center sm:gap-4">
-              <div className="inline-grid h-11 w-11 place-items-center overflow-hidden rounded-xl border border-white/20 bg-white/10 p-1.5 text-white shadow-[0_10px_24px_rgba(6,19,36,0.2)] backdrop-blur-[12px] sm:h-16 sm:w-16 sm:rounded-2xl sm:p-1">
+            <div className="flex items-start gap-3.5 sm:items-start sm:gap-4">
+              <div className="inline-grid h-12 w-12 place-items-center overflow-hidden rounded-xl border border-white/35 bg-white/15 p-1.5 text-white shadow-[0_10px_24px_rgba(6,19,36,0.28)] backdrop-blur-[12px] sm:h-[74px] sm:w-[74px] sm:rounded-2xl sm:p-1.5">
                 <img src="/asset/hhlogo.jpeg" alt="HH Consulting logo" className="h-full w-full object-contain" />
               </div>
-              <div className="min-w-0 rounded-2xl border border-white/20 bg-white/10 px-3 py-2 leading-tight backdrop-blur-[12px] sm:px-4 sm:py-3">
-                <p className="m-0 text-[1.08rem] font-extrabold leading-[1.2] tracking-[0.01em] text-white sm:text-[2rem] sm:leading-tight">
+              <div className="min-w-0 rounded-2xl border border-white/30 bg-black/22 px-3.5 py-2.5 leading-tight shadow-[0_12px_24px_rgba(5,16,33,0.24)] backdrop-blur-[14px] sm:px-5 sm:py-4">
+                <p className="m-0 text-[0.64rem] font-bold uppercase tracking-[0.22em] text-white/78 sm:text-[0.7rem]">
+                  HH Consulting Logo
+                </p>
+                <p className="m-0 mt-1.5 text-[0.94rem] font-black leading-[1.28] tracking-[0.025em] text-white sm:text-[1.34rem] sm:leading-[1.26]">
                   {data.company}
                 </p>
                 {data.companyAmharic ? (
-                  <p className="m-0 mt-1 text-[0.86rem] font-black leading-[1.25] tracking-[0.01em] text-white sm:text-[1.06rem] sm:tracking-[0.02em]">
+                  <p className="m-0 mt-2 text-[0.74rem] font-semibold leading-[1.35] tracking-[0.01em] text-white/90 sm:text-[0.96rem] sm:leading-[1.38]">
                     {data.companyAmharic}
                   </p>
                 ) : null}
-                <p className="m-0 mt-1 text-[0.8rem] font-bold uppercase tracking-[0.1em] text-[#D5B223] sm:text-[1.05rem] sm:tracking-[0.12em]">
+                <p className="m-0 mt-2.5 border-t border-white/22 pt-2 text-[0.72rem] font-extrabold uppercase tracking-[0.16em] text-[#D5B223] sm:text-[0.9rem] sm:tracking-[0.19em]">
                   {data.subtitle}
                 </p>
               </div>

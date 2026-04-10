@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 const navItems = [
@@ -13,6 +14,24 @@ function HeaderNav() {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isNavVisible, setIsNavVisible] = useState(true);
   const lastScrollYRef = useRef(0);
+
+  useEffect(() => {
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    const prevOverflow = document.body.style.overflow;
+    const prevTouchAction = document.body.style.touchAction;
+
+    if (isMenuOpen) {
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+    }
+
+    return () => {
+      document.documentElement.style.overflow = prevHtmlOverflow;
+      document.body.style.overflow = prevOverflow;
+      document.body.style.touchAction = prevTouchAction;
+    };
+  }, [isMenuOpen]);
 
   useEffect(() => {
     function handleScroll() {
@@ -47,10 +66,10 @@ function HeaderNav() {
 
   return (
     <header
-      className={`fixed left-0 right-0 top-0 z-50 px-2 [transition-property:transform,opacity,clip-path,filter,padding] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-4 ${
+      className={`fixed left-0 right-0 top-0 z-50 px-2 [transition-property:transform,opacity,filter,padding] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-4 ${
         isNavVisible
-          ? "translate-y-0 opacity-100 [clip-path:circle(150%_at_50%_0%)] scale-100 blur-0"
-          : "-translate-y-4 opacity-0 [clip-path:circle(10%_at_50%_-35%)] scale-[0.96] blur-[2px] pointer-events-none"
+          ? "translate-y-0 opacity-100 scale-100 blur-0"
+          : "-translate-y-4 opacity-0 scale-[0.96] blur-[2px] pointer-events-none"
       } ${
         hasScrolled ? "pt-1.5 sm:pt-2" : "pt-2.5 sm:pt-3.5"
       }`}
@@ -84,11 +103,15 @@ function HeaderNav() {
             onClick={() => setIsMenuOpen((prev) => !prev)}
             className="inline-grid h-11 w-11 place-items-center rounded-xl border border-white/20 bg-white/10 text-[#F5F5F5] shadow-[0_8px_18px_rgba(8,7,4,0.3)] transition duration-300 hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E5D39B] md:hidden"
           >
-            <span className="flex flex-col items-center gap-1.5" aria-hidden="true">
-              <span className="block h-0.5 w-5 bg-current" />
-              <span className="block h-0.5 w-5 bg-current" />
-              <span className="block h-0.5 w-5 bg-current" />
-            </span>
+            {isMenuOpen ? (
+              <span aria-hidden="true" className="text-[1.35rem] leading-none">x</span>
+            ) : (
+              <span className="flex flex-col items-center gap-1.5" aria-hidden="true">
+                <span className="block h-0.5 w-5 bg-current" />
+                <span className="block h-0.5 w-5 bg-current" />
+                <span className="block h-0.5 w-5 bg-current" />
+              </span>
+            )}
           </button>
 
           <div className="no-scrollbar hidden min-w-0 flex-1 items-center justify-end gap-1 overflow-x-auto md:flex">
@@ -111,30 +134,40 @@ function HeaderNav() {
             </a>
           </div>
 
-          {isMenuOpen ? (
-            <div className="absolute left-2 right-2 top-[calc(100%+0.55rem)] rounded-[18px] border border-[#8E7A4A]/45 bg-[linear-gradient(170deg,rgba(63,54,34,0.98)_0%,rgba(46,40,27,0.98)_100%)] p-3 shadow-[0_18px_34px_rgba(10,9,7,0.42)] md:hidden sm:left-3 sm:right-3 sm:top-[calc(100%+0.75rem)]">
-              <div className="space-y-1">
-                {navItems.map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="flex items-center justify-between rounded-md px-2 py-2.5 text-[1rem] font-semibold uppercase tracking-[0.14em] text-[#F5F5F5] transition duration-300 hover:bg-white/5 hover:text-[#F4E4A0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F4E4A0] sm:text-[1.03rem]"
-                  >
-                    <span>{item.label}</span>
-                    <span className="text-[#F5F5F5]/70">↗</span>
-                  </a>
-                ))}
+          <AnimatePresence>
+            {isMenuOpen ? (
+              <motion.div
+                initial={{ opacity: 0, y: -14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-x-0 top-full z-[80] overflow-hidden rounded-b-md border-x border-b border-[#8E7A4A]/45 bg-[linear-gradient(180deg,#14140f_0%,#12120e_100%)] text-[#F5F5F5] shadow-[0_22px_44px_rgba(7,6,4,0.48)] md:hidden"
+              >
+                <div className="px-7 py-8">
+                  <div className="space-y-5">
+                    {navItems.map((item) => (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block font-['Georgia',serif] text-[2.1rem] leading-[1.05] tracking-[-0.01em] text-[#F5F5F5] transition duration-300 hover:translate-x-1 hover:text-[#EAD9A3] focus-visible:rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F4E4A0]"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
 
-                <a
-                  href="#contact"
-                  className="mt-2 inline-flex w-full items-center justify-center border-t border-white/15 px-2 pt-3 pb-2 text-[0.9rem] font-extrabold uppercase tracking-[0.18em] text-[#F5F5F5] transition duration-300 hover:text-[#FFE9A8] focus-visible:rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F4E4A0] sm:text-[0.94rem]"
-                >
-                  Get Started
-                </a>
-              </div>
-            </div>
-          ) : null}
+                    <a
+                      href="#contact"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block font-['Georgia',serif] text-[2.1rem] leading-[1.05] tracking-[-0.01em] text-[#F5F5F5] transition duration-300 hover:translate-x-1 hover:text-[#EAD9A3] focus-visible:rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F4E4A0]"
+                    >
+                      Contact
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
         </div>
       </nav>
     </header>

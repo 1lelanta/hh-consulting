@@ -47,7 +47,7 @@ function HeroSection({ data }) {
       viewport={{ once: true, amount: 0.2 }}
       className="animate-reveal relative -mx-3 overflow-hidden scroll-mt-28 sm:-mx-6 lg:-mx-10 2xl:-mx-14"
     >
-      <div className="relative isolate min-h-[78svh] overflow-hidden sm:min-h-[82svh] lg:min-h-[86svh]">
+      <div className="relative isolate min-h-[86svh] overflow-hidden sm:min-h-[92svh] lg:min-h-[98svh]">
         {backgrounds.map((background, index) => (
           <motion.img
             key={`${background.src}-${index}`}
@@ -63,13 +63,13 @@ function HeroSection({ data }) {
           />
         ))}
 
-        <div className="absolute inset-0 bg-[#1F180A]/58 lg:bg-[#1F180A]/44" />
-        <div className="absolute inset-0 bg-[linear-gradient(112deg,rgba(55,45,20,0.84)_8%,rgba(55,45,20,0.62)_44%,rgba(55,45,20,0.26)_100%)] lg:bg-[linear-gradient(112deg,rgba(55,45,20,0.74)_8%,rgba(55,45,20,0.48)_44%,rgba(55,45,20,0.18)_100%)]" />
+        <div className="absolute inset-0 bg-[#1F180A]/45 lg:bg-[#1F180A]/32" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,20,35,0.82)_0%,rgba(10,20,35,0.65)_40%,rgba(10,20,35,0.35)_100%)]" />
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.05]"
+          className="pointer-events-none absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage:
-              "repeating-linear-gradient(0deg, rgba(255,255,255,1) 0, rgba(255,255,255,1) 1px, transparent 1px, transparent 34px), repeating-linear-gradient(90deg, rgba(255,255,255,1) 0, rgba(255,255,255,1) 1px, transparent 1px, transparent 34px)",
+              "repeating-linear-gradient(0deg, rgba(255,255,255,0.5) 0, rgba(255,255,255,0.5) 1px, transparent 1px, transparent 46px), repeating-linear-gradient(90deg, rgba(255,255,255,0.5) 0, rgba(255,255,255,0.5) 1px, transparent 1px, transparent 46px)",
           }}
           aria-hidden="true"
         />
@@ -96,7 +96,7 @@ function HeroSection({ data }) {
                   {data.subtitle}
                 </p>
 
-                <h1 className="m-0 text-[2.35rem] font-black leading-[1.04] tracking-[-0.02em] text-white [text-shadow:0_10px_28px_rgba(2,6,23,0.42)] sm:text-[3.15rem] lg:text-[4.9rem]">
+                <h1 className="m-0 text-[2.35rem] font-black leading-[1.05] tracking-[-0.02em] text-white [text-shadow:0_10px_28px_rgba(2,6,23,0.42)] sm:text-[3.15rem] lg:text-[4.9rem]">
                   {leadingHeadline}
                   {highlightedWord ? (
                     <>

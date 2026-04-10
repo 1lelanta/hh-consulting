@@ -334,19 +334,19 @@ export const siteContent = {
   contact: {
     eyebrow: "Let’s Connect",
     title: "Get in Touch",
-    subtitle: "Let’s discuss your next architectural, engineering, or infrastructure project.",
+    subtitle: "Discuss your next architecture or engineering project with our multidisciplinary team.",
     image: "/asset/hero-modern-building.svg",
     imageAlt: "Consulting office and modern building visual",
     form: {
       title: "Send us a message",
       fields: [
         { name: "fullName", label: "Full Name", placeholder: "Enter your full name", type: "text" },
-        { name: "email", label: "Email Address", placeholder: "Enter your email", type: "email" },
+        { name: "email", label: "Email Address", placeholder: "Enter your email address", type: "email" },
         { name: "phone", label: "Phone Number", placeholder: "Enter your phone number", type: "tel" },
         {
           name: "message",
           label: "Project Inquiry / Message",
-          placeholder: "Tell us about your project requirements",
+          placeholder: "Tell us about your project scope, timeline, and requirements",
           type: "textarea",
         },
       ],
@@ -370,8 +370,8 @@ export const siteContent = {
       },
     ],
     cta: {
-      title: "Ready to build with confidence?",
-      subtitle: "Connect with our team today.",
+      title: "Ready to move your project forward?",
+      subtitle: "Book a consultation to review your goals, scope, and next steps.",
       buttonLabel: "Schedule Consultation",
     },
   },

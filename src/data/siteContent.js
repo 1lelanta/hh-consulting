@@ -40,7 +40,7 @@ export const siteContent = {
   },
   services: {
     eyebrow: "Expertise",
-    title: "Our Expertise",
+    title: "",
     image: "/asset/churchil hotel.png",
     imageAlt: "Modern architectural hotel and building concept",
     items: [

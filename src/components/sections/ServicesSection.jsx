@@ -194,11 +194,13 @@ function ServicesSection({ data, className = "" }) {
               <p className="section-eyebrow text-[#D5B223]">{data.eyebrow}</p>
             </div>
 
-            <h2 className="m-0 mt-4 text-[1.75rem] font-extrabold leading-[1.14] tracking-[-0.02em] text-brand-navy900 sm:mt-5 sm:text-[2.45rem] lg:text-[3.3rem]">
-              {data.title}
-            </h2>
+            {data.title ? (
+              <h2 className="m-0 mt-4 text-[1.75rem] font-extrabold leading-[1.14] tracking-[-0.02em] text-brand-navy900 sm:mt-5 sm:text-[2.45rem] lg:text-[3.3rem]">
+                {data.title}
+              </h2>
+            ) : null}
 
-            <p className="m-0 mt-4 max-w-[62ch] text-[1rem] leading-7 text-brand-gray500 sm:text-[1.05rem] lg:text-[1.08rem]">
+            <p className={`m-0 max-w-[62ch] text-[1rem] leading-7 text-brand-gray500 sm:text-[1.05rem] lg:text-[1.08rem] ${data.title ? "mt-4" : "mt-2"}`}>
               {data.subtitle || "Thoughtful architecture and engineering solutions tailored to build lasting value."}
             </p>
 

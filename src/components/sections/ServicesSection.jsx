@@ -152,6 +152,22 @@ function ServicesSection({ data, className = "" }) {
   const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.94, 1, 1.06]);
   const imageRotate = useTransform(scrollYProgress, [0, 0.5, 1], [-2.5, 0, 2.5]);
   const imageOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.7, 1, 1, 0.88]);
+  const leftRevealVariants = {
+    hidden: { opacity: 0, x: -48 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+  const rightRevealVariants = {
+    hidden: { opacity: 0, x: 48 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut", delay: 0.2 },
+    },
+  };
 
   useEffect(() => {
     const media = window.matchMedia("(min-width: 1024px)");
@@ -181,15 +197,18 @@ function ServicesSection({ data, className = "" }) {
     <motion.section
       ref={sectionRef}
       id="services"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: [0.17, 0.67, 0.83, 0.67] }}
       viewport={{ once: true, amount: 0.2 }}
       className={`animate-reveal mt-8 -mx-3 scroll-mt-28 bg-transparent px-3 py-12 [animation-delay:200ms] sm:-mx-6 sm:px-6 sm:py-16 lg:-mx-10 lg:px-10 lg:py-20 2xl:-mx-14 2xl:px-14 ${className}`}
     >
       <div className="relative mx-auto w-full max-w-[1320px]">
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:gap-12">
-          <div className="max-w-[760px] lg:-ml-3">
+          <motion.div
+            className="max-w-[760px] lg:-ml-3"
+            variants={leftRevealVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.25 }}
+          >
             <div className="flex items-center gap-3">
               <span className="h-[2px] w-14 bg-[#D5B223]" />
               <p className="section-eyebrow text-[#D5B223]">{data.eyebrow}</p>
@@ -200,7 +219,6 @@ function ServicesSection({ data, className = "" }) {
                 {data.title}
               </h2>
             ) : null}
-
             <p
               className={`m-0 ${data.title ? "mt-4" : "mt-2"}`}
               style={{
@@ -233,7 +251,7 @@ function ServicesSection({ data, className = "" }) {
                 />
               ))}
             </motion.div>
-          </div>
+          </motion.div>
 
           {data.image ? (
             <motion.figure

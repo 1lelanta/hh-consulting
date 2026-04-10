@@ -16,20 +16,37 @@ function HeaderNav() {
   const lastScrollYRef = useRef(0);
 
   useEffect(() => {
+    const scrollY = window.scrollY;
     const prevHtmlOverflow = document.documentElement.style.overflow;
+    const prevHtmlOverscrollBehavior = document.documentElement.style.overscrollBehavior;
     const prevOverflow = document.body.style.overflow;
     const prevTouchAction = document.body.style.touchAction;
+    const prevBodyPosition = document.body.style.position;
+    const prevBodyTop = document.body.style.top;
+    const prevBodyWidth = document.body.style.width;
 
     if (isMenuOpen) {
       document.documentElement.style.overflow = "hidden";
+      document.documentElement.style.overscrollBehavior = "none";
       document.body.style.overflow = "hidden";
       document.body.style.touchAction = "none";
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
     }
 
     return () => {
       document.documentElement.style.overflow = prevHtmlOverflow;
+      document.documentElement.style.overscrollBehavior = prevHtmlOverscrollBehavior;
       document.body.style.overflow = prevOverflow;
       document.body.style.touchAction = prevTouchAction;
+      document.body.style.position = prevBodyPosition;
+      document.body.style.top = prevBodyTop;
+      document.body.style.width = prevBodyWidth;
+
+      if (isMenuOpen) {
+        window.scrollTo(0, scrollY);
+      }
     };
   }, [isMenuOpen]);
 
@@ -141,9 +158,9 @@ function HeaderNav() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute inset-x-0 top-full z-[80] overflow-hidden rounded-b-md border-x border-b border-[#8E7A4A]/45 bg-[linear-gradient(180deg,#14140f_0%,#12120e_100%)] text-[#F5F5F5] shadow-[0_22px_44px_rgba(7,6,4,0.48)] md:hidden"
+                className="absolute inset-x-0 top-[calc(100%-1px)] z-[80] flex h-[calc(100dvh-5.8rem)] flex-col overflow-hidden rounded-b-2xl border-x border-b border-[#8E7A4A]/45 bg-[#372D14] text-[#F5F5F5] shadow-[0_22px_44px_rgba(7,6,4,0.48)] md:hidden"
               >
-                <div className="px-7 py-8">
+                <div className="flex-1 overflow-y-auto px-7 py-8">
                   <div className="space-y-5">
                     {navItems.map((item) => (
                       <a
@@ -163,6 +180,22 @@ function HeaderNav() {
                     >
                       Contact
                     </a>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-6 border-t border-[#8E7A4A]/30 bg-[#372D14] px-7 py-5">
+                  <div>
+                    <p className="m-0 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[#D6B84F]">Contact</p>
+                    <p className="m-0 mt-2 text-[0.95rem] leading-7 text-[#F5F5F5]/90">Addis Ababa, Ethiopia</p>
+                    <p className="m-0 text-[0.95rem] leading-7 text-[#F5F5F5]/90">+251 91 359 2121</p>
+                  </div>
+                  <div>
+                    <p className="m-0 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[#D6B84F]">Follow Us</p>
+                    <div className="mt-2 flex items-center gap-3 text-[#F5F5F5]/88">
+                      <span className="inline-grid h-7 w-7 place-items-center rounded-full border border-[#8E7A4A]/45 text-[0.64rem] font-semibold">IG</span>
+                      <span className="inline-grid h-7 w-7 place-items-center rounded-full border border-[#8E7A4A]/45 text-[0.64rem] font-semibold">FB</span>
+                      <span className="inline-grid h-7 w-7 place-items-center rounded-full border border-[#8E7A4A]/45 text-[0.64rem] font-semibold">IN</span>
+                    </div>
                   </div>
                 </div>
               </motion.div>

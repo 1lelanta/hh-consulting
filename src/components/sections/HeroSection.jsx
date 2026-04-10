@@ -1,8 +1,7 @@
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useMemo, useState } from "react";
 
 function HeroSection({ data }) {
-  const heroRef = useRef(null);
   const backgrounds = useMemo(() => {
     if (Array.isArray(data.backgroundImages) && data.backgroundImages.length > 0) {
       return data.backgroundImages;
@@ -12,43 +11,6 @@ function HeroSection({ data }) {
   }, [data.backgroundImages, data.image, data.imageAlt]);
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isMobileTouch, setIsMobileTouch] = useState(false);
-  const [hasTouchStarted, setHasTouchStarted] = useState(false);
-  const [hasTouchScrolled, setHasTouchScrolled] = useState(false);
-  const headlineWords = useMemo(() => (data.headline ? data.headline.split(" ") : []), [data.headline]);
-
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const blueprintFadeRaw = useTransform(scrollYProgress, [0, 0.32], [1, 0]);
-  const blueprintFade = useSpring(blueprintFadeRaw, { stiffness: 95, damping: 22, mass: 0.35 });
-
-  const headlineVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.11,
-        delayChildren: 0.04,
-      },
-    },
-  };
-
-  const wordVariants = {
-    hidden: { opacity: 0, scale: 0.92, y: 12 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: {
-        duration: 0.55,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-  };
-
-  const shouldRevealByTouch = isMobileTouch && hasTouchScrolled;
 
   useEffect(() => {
     if (backgrounds.length <= 1) {
@@ -57,65 +19,21 @@ function HeroSection({ data }) {
 
     const timer = window.setInterval(() => {
       setActiveIndex((currentIndex) => (currentIndex + 1) % backgrounds.length);
-    }, 20000);
+    }, 12000);
 
     return () => window.clearInterval(timer);
   }, [backgrounds.length]);
 
-  useEffect(() => {
-    const media = window.matchMedia("(max-width: 1023px) and (pointer: coarse)");
-
-    const apply = () => {
-      setIsMobileTouch(media.matches);
-      if (!media.matches) {
-        setHasTouchStarted(false);
-        setHasTouchScrolled(false);
-      }
-    };
-
-    apply();
-    media.addEventListener("change", apply);
-
-    return () => {
-      media.removeEventListener("change", apply);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!isMobileTouch || !hasTouchStarted || hasTouchScrolled) {
-      return undefined;
-    }
-
-    const onScroll = () => {
-      if (window.scrollY > 4) {
-        setHasTouchScrolled(true);
-      }
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, [isMobileTouch, hasTouchStarted, hasTouchScrolled]);
-
   return (
     <motion.section
       id="home"
-      ref={heroRef}
-      onTouchStart={() => {
-        if (isMobileTouch) {
-          setHasTouchStarted(true);
-        }
-      }}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.17, 0.67, 0.83, 0.67] }}
       viewport={{ once: true, amount: 0.2 }}
-      className="hero-grid-paper animate-reveal relative -mx-3 overflow-hidden scroll-mt-28 sm:-mx-6 lg:-mx-10 2xl:-mx-14"
+      className="animate-reveal relative -mx-3 overflow-hidden scroll-mt-28 sm:-mx-6 lg:-mx-10 2xl:-mx-14"
     >
-      <div className="relative min-h-[100svh] lg:min-h-screen">
+      <div className="relative isolate min-h-[78svh] overflow-hidden sm:min-h-[82svh] lg:min-h-[86svh]">
         {backgrounds.map((background, index) => (
           <motion.img
             key={`${background.src}-${index}`}
@@ -131,123 +49,90 @@ function HeroSection({ data }) {
           />
         ))}
 
-        <motion.div
-          className="pointer-events-none absolute inset-0 z-[2]"
-          style={{ opacity: isMobileTouch ? (shouldRevealByTouch ? blueprintFade : 1) : 0 }}
+        <div className="absolute inset-0 bg-slate-950/62" />
+        <div className="absolute inset-0 bg-[linear-gradient(112deg,rgba(2,6,23,0.86)_10%,rgba(2,6,23,0.65)_45%,rgba(2,6,23,0.25)_100%)]" />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(0deg, rgba(255,255,255,1) 0, rgba(255,255,255,1) 1px, transparent 1px, transparent 34px), repeating-linear-gradient(90deg, rgba(255,255,255,1) 0, rgba(255,255,255,1) 1px, transparent 1px, transparent 34px)",
+          }}
           aria-hidden="true"
-        >
-          {backgrounds.map((background, index) => (
-            <motion.img
-              key={`blueprint-${background.src}-${index}`}
-              src={background.src}
-              alt=""
-              className={[
-                "hero-blueprint absolute inset-0 h-full w-full object-cover will-change-[opacity,transform]",
-                index === activeIndex ? "animate-ken-burns-slow" : "",
-              ].join(" ")}
-              initial={false}
-              animate={index === activeIndex ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ opacity: { duration: 1.4, ease: "easeOut" } }}
-            />
-          ))}
-        </motion.div>
+        />
 
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(213,178,35,0.14),transparent_34%),radial-gradient(circle_at_80%_30%,rgba(255,255,255,0.08),transparent_34%)]" />
+        <div className="relative z-10 mx-auto w-full max-w-[1200px] px-5 py-10 text-white sm:px-8 sm:py-12 lg:px-10 lg:py-20">
+          <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(330px,0.85fr)] lg:gap-10">
+            <motion.div
+              className="max-w-[640px] space-y-5"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+              viewport={{ once: true, amount: 0.25 }}
+            >
+              <p className="m-0 inline-flex w-fit items-center rounded-full border border-white/30 bg-white/10 px-4 py-2 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-[#E7CB74] backdrop-blur">
+                {data.subtitle}
+              </p>
 
-        <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-[1320px] flex-col-reverse px-6 py-8 text-white sm:px-10 sm:py-10 lg:grid lg:min-h-screen lg:grid-cols-[0.72fr_1.28fr] lg:px-14 lg:py-16">
-          <motion.div
-            className="flex min-h-[36svh] max-w-[620px] flex-col justify-end pb-3 text-left sm:min-h-[38svh] sm:pb-5 lg:min-h-0 lg:max-w-[540px] lg:justify-center lg:pb-0 xl:max-w-[560px]"
-            initial={{ opacity: 0, y: 42 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-          >
-            <div className="flex items-start gap-3.5 sm:items-start sm:gap-4">
-              <div className="inline-grid h-12 w-12 place-items-center overflow-hidden rounded-xl border border-white/35 bg-white/15 p-1.5 text-white shadow-[0_10px_24px_rgba(6,19,36,0.28)] backdrop-blur-[12px] sm:h-[74px] sm:w-[74px] sm:rounded-2xl sm:p-1.5">
-                <img src="/asset/hhlogo.jpeg" alt="HH Consulting logo" className="h-full w-full object-contain" />
-              </div>
-              <div className="min-w-0 rounded-2xl border border-white/30 bg-black/22 px-3.5 py-2.5 leading-tight shadow-[0_12px_24px_rgba(5,16,33,0.24)] backdrop-blur-[14px] sm:px-5 sm:py-4">
-                <p className="m-0 text-[0.64rem] font-bold uppercase tracking-[0.22em] text-white/78 sm:text-[0.7rem]">
-                  HH Consulting Logo
-                </p>
-                <p className="m-0 mt-1.5 text-[0.94rem] font-black leading-[1.28] tracking-[0.025em] text-white sm:text-[1.34rem] sm:leading-[1.26]">
-                  {data.company}
-                </p>
-                {data.companyAmharic ? (
-                  <p className="m-0 mt-2 text-[0.74rem] font-semibold leading-[1.35] tracking-[0.01em] text-white/90 sm:text-[0.96rem] sm:leading-[1.38]">
-                    {data.companyAmharic}
-                  </p>
-                ) : null}
-                <p className="m-0 mt-2.5 border-t border-white/22 pt-2 text-[0.72rem] font-extrabold uppercase tracking-[0.16em] text-[#D5B223] sm:text-[0.9rem] sm:tracking-[0.19em]">
-                  {data.subtitle}
-                </p>
-              </div>
-            </div>
+              <h1 className="m-0 text-[2rem] font-black leading-[1.08] tracking-[-0.02em] text-white sm:text-[2.7rem] lg:text-[4rem]">
+                {data.headline}
+              </h1>
 
-            <div className="mt-8 sm:mt-10 lg:mt-12">
-              <motion.h1
-                className="max-w-[620px] text-5xl leading-[0.98] tracking-[-0.02em] text-white lg:max-w-[560px] lg:text-8xl"
-                variants={headlineVariants}
-                initial={isMobileTouch ? "hidden" : "visible"}
-                animate={isMobileTouch ? (shouldRevealByTouch ? "visible" : "hidden") : "visible"}
-              >
-                {headlineWords.map((word, index) => {
-                  const normalizedWord = word.toLowerCase().replace(/[^a-z]/g, "");
-                  const isExcellence = normalizedWord === "excellence";
-                  const isEngineered = normalizedWord === "engineered";
-
-                  return (
-                    <motion.span
-                      key={`${word}-${index}`}
-                      variants={wordVariants}
-                      className={[
-                        "mr-[0.25em] inline-block",
-                        isEngineered ? "font-black" : "",
-                        isExcellence
-                          ? "bg-gradient-to-r from-[#FFF7E5] via-[#F6EAD0] to-[#DFC7A0] bg-clip-text font-['Playfair_Display',serif] font-light italic text-transparent [filter:drop-shadow(0_1px_10px_rgba(255,236,196,0.22))]"
-                          : "",
-                      ].join(" ")}
-                    >
-                      {word}
-                    </motion.span>
-                  );
-                })}
-              </motion.h1>
-              <p className="mt-6 max-w-[600px] text-[1.05rem] leading-8 text-white/70 sm:text-[1.25rem] sm:leading-9">
+              <p className="m-0 max-w-[58ch] text-[1rem] font-medium leading-[1.65] text-slate-100/90 sm:text-[1.08rem]">
                 {data.description}
               </p>
-              <a
-                href={data.ctaHref}
-                className="group relative mt-8 inline-flex items-center gap-2.5 overflow-visible px-8 py-3.5 text-[1rem] font-extrabold tracking-[0.02em] text-white transition-colors duration-500 sm:px-10 sm:py-4 sm:text-[1.12rem]"
-              >
-                <span className="pointer-events-none absolute inset-0 border border-white/75" aria-hidden="true" />
-                <span className="pointer-events-none absolute -left-2 -top-2 h-3 w-5 border-l border-t border-white/75" aria-hidden="true" />
-                <span className="pointer-events-none absolute -right-2 -top-2 h-3 w-5 border-r border-t border-white/75" aria-hidden="true" />
-                <span className="pointer-events-none absolute -bottom-2 -left-2 h-3 w-5 border-b border-l border-white/75" aria-hidden="true" />
-                <span className="pointer-events-none absolute -bottom-2 -right-2 h-3 w-5 border-b border-r border-white/75" aria-hidden="true" />
 
-                <span
-                  className="pointer-events-none absolute inset-0 origin-left scale-x-0 bg-[#F8FBFF]/24 transition-transform duration-700 ease-[cubic-bezier(0.2,0.9,0.24,1)] group-hover:scale-x-100"
-                  aria-hidden="true"
-                />
+              <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+                <a
+                  href={data.ctaHref}
+                  className="inline-flex w-full items-center justify-center rounded-[12px] bg-[#D5B223] px-6 py-3.5 text-center text-[0.9rem] font-extrabold uppercase tracking-[0.12em] text-[#0B1730] shadow-[0_12px_26px_rgba(213,178,35,0.35)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#E2C241] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F8E8B3] sm:w-auto sm:min-w-[190px]"
+                >
+                  {data.ctaLabel}
+                </a>
+                <a
+                  href="#contact"
+                  className="inline-flex w-full items-center justify-center rounded-[12px] border border-white/30 bg-white/10 px-6 py-3.5 text-center text-[0.9rem] font-bold uppercase tracking-[0.12em] text-white backdrop-blur transition duration-300 hover:border-white/60 hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-auto sm:min-w-[190px]"
+                >
+                  Contact Us
+                </a>
+              </div>
+            </motion.div>
 
-                <span className="relative z-10">{data.ctaLabel}</span>
-                <span className="relative z-10 inline-grid w-0 -translate-x-1 opacity-0 transition-all duration-500 group-hover:w-5 group-hover:translate-x-0 group-hover:opacity-100" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5 text-[#E8EEF7]">
-                    <path d="M4 20h16" />
-                    <path d="M4 6h4v4H4z" />
-                    <path d="M16 12h4v4h-4z" />
-                    <path d="M8 8 16 12" />
-                    <circle cx="8" cy="8" r="1" fill="currentColor" />
-                    <circle cx="16" cy="12" r="1" fill="currentColor" />
-                  </svg>
-                </span>
-              </a>
-            </div>
-          </motion.div>
+            <motion.aside
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+              viewport={{ once: true, amount: 0.3 }}
+              className="rounded-[16px] border border-white/20 bg-[#0A1526]/70 p-5 shadow-[0_18px_38px_rgba(2,6,23,0.36)] backdrop-blur-md sm:p-6"
+            >
+              <div className="flex items-start gap-4">
+                <div className="inline-grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-xl border border-white/25 bg-white/10 p-1.5">
+                  <img src="/asset/hhlogo.jpeg" alt="HH Consulting logo" className="h-full w-full max-w-full object-contain" />
+                </div>
 
-          <div className="h-[58svh] lg:h-auto" aria-hidden="true" />
+                <div className="min-w-0">
+                  <p className="m-0 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-[#E7CB74]">Engineering and Architecture</p>
+                  <p className="m-0 mt-1.5 text-[1rem] font-bold leading-6 text-white sm:text-[1.08rem]">{data.company}</p>
+                </div>
+              </div>
+
+              {data.companyAmharic ? (
+                <p className="m-0 mt-4 border-t border-white/15 pt-4 text-[0.86rem] leading-[1.65] text-slate-200 sm:text-[0.93rem]">
+                  {data.companyAmharic}
+                </p>
+              ) : null}
+
+              <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <article className="h-full rounded-xl border border-white/15 bg-white/5 p-4 transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_18px_rgba(2,6,23,0.28)]">
+                  <p className="m-0 text-[0.7rem] font-bold uppercase tracking-[0.13em] text-slate-300">Disciplines</p>
+                  <p className="m-0 mt-1.5 text-[0.95rem] font-semibold leading-6 text-white">Architecture + Engineering</p>
+                </article>
+                <article className="h-full rounded-xl border border-white/15 bg-white/5 p-4 transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_18px_rgba(2,6,23,0.28)]">
+                  <p className="m-0 text-[0.7rem] font-bold uppercase tracking-[0.13em] text-slate-300">Coverage</p>
+                  <p className="m-0 mt-1.5 text-[0.95rem] font-semibold leading-6 text-white">Local and International</p>
+                </article>
+              </div>
+            </motion.aside>
+          </div>
         </div>
       </div>
     </motion.section>

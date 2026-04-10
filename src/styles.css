@@ -36,16 +36,10 @@ body {
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: 0.035;
   background-image:
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.9) 0, rgba(255, 255, 255, 0.9) 1px, transparent 1px, transparent 10px),
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.9) 0, rgba(255, 255, 255, 0.9) 1px, transparent 1px, transparent 10px);
-}
-
-.hero-blueprint {
-  filter: grayscale(1) contrast(1.35) brightness(0.78) sepia(0.65) hue-rotate(148deg) saturate(1.8);
-  mix-blend-mode: screen;
-  opacity: 0.95;
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.85) 0, rgba(255, 255, 255, 0.85) 1px, transparent 1px, transparent 26px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.85) 0, rgba(255, 255, 255, 0.85) 1px, transparent 1px, transparent 26px);
 }
 
 .water-overlay-layer {

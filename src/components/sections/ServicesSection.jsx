@@ -169,7 +169,7 @@ function ServicesSection({ data, className = "" }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.17, 0.67, 0.83, 0.67] }}
       viewport={{ once: true, amount: 0.2 }}
-      className={`animate-reveal mt-8 -mx-3 scroll-mt-28 bg-[#F3F5F8] px-3 py-12 [animation-delay:200ms] sm:-mx-6 sm:px-6 sm:py-16 lg:-mx-10 lg:px-10 lg:py-20 2xl:-mx-14 2xl:px-14 ${className}`}
+      className={`animate-reveal mt-8 -mx-3 scroll-mt-28 bg-transparent px-3 py-12 [animation-delay:200ms] sm:-mx-6 sm:px-6 sm:py-16 lg:-mx-10 lg:px-10 lg:py-20 2xl:-mx-14 2xl:px-14 ${className}`}
     >
       <div className="relative mx-auto w-full max-w-[1320px]">
         <div className="max-w-[700px]">

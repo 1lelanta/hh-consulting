@@ -2,10 +2,10 @@ export const siteContent = {
   hero: {
     company: "HH CONSULTING ARCHITECTS & ENGINEERS PLC.",
     companyAmharic: "ኤች ኤች ኮንሰልቲንግ አርክቴክቶች እና መሀንዲሶች ሃ/የተ/የግል/ማህበር",
-    subtitle: "WORLDWIDE CONSULTING ",
+    subtitle: "Worldwide Consulting",
     headline: "Engineered Excellence",
     description:
-      "For any international projects, we are your dedicated global partner in design and construction supervision",
+      "For local and international projects, we deliver integrated architecture, engineering design, and construction supervision with precision.",
     ctaLabel: "Explore Projects",
     ctaHref: "#projects",
     backgroundImages: [
@@ -34,7 +34,7 @@ export const siteContent = {
     imageAlt: "Architectural high-rise concept by HH Consulting",
     description:
       "A multidisciplinary firm based in Ethiopia, dedicated to providing innovative, sustainable, and integrated solutions in architecture and engineering. We combine visionary design with technical excellence to deliver impactful and resilient projects across Ethiopia and beyond.",
-    approachTitle: "OUR APPROACH",
+    approachTitle: "Our Approach",
     approachDescription:
       "We are committed to excellence, sustainability, and innovation. Our designs balance aesthetics, function, and environmental responsibility. We work closely with clients, stakeholders, and communities to ensure every project meets technical, regulatory, and social expectations.",
   },

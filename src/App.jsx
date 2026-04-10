@@ -13,7 +13,7 @@ import { siteContent } from "./data/siteContent";
 
 function App() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-[linear-gradient(180deg,#F2F4F7_0%,#EAEFF5_28%,#E3EAF2_52%,#EAEFF5_76%,#F2F4F7_100%)] px-0 pb-0 text-brand-navy950">
+    <div className="relative min-h-screen overflow-x-hidden bg-[linear-gradient(180deg,#F4F6FA_0%,#EEF2F8_100%)] px-0 pb-0 text-brand-navy950">
       <HeaderNav />
       <div className="pointer-events-none fixed inset-0 opacity-40 [background:radial-gradient(circle_at_100%_0%,rgba(190,154,90,0.20),transparent_35%),radial-gradient(circle_at_0%_10%,rgba(22,59,99,0.14),transparent_30%)]" />
 

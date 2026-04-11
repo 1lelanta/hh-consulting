@@ -14,6 +14,7 @@ function HeaderNav() {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isNavVisible, setIsNavVisible] = useState(true);
   const lastScrollYRef = useRef(0);
+  const revealLockUntilRef = useRef(0);
   const navSurfaceClass = "bg-[#0A0A0ACC]";
   const navMotionVariants = {
     visible: {
@@ -92,14 +93,18 @@ function HeaderNav() {
   useEffect(() => {
     let rafId = 0;
     lastScrollYRef.current = window.scrollY;
+    revealLockUntilRef.current = 0;
 
     const tick = () => {
       const currentY = window.scrollY;
       const deltaY = currentY - lastScrollYRef.current;
+      const now = performance.now();
 
       setHasScrolled(currentY > 24);
 
       if (isMenuOpen) {
+        setIsNavVisible(true);
+      } else if (now < revealLockUntilRef.current) {
         setIsNavVisible(true);
       } else if (currentY <= 72) {
         setIsNavVisible(true);
@@ -107,6 +112,7 @@ function HeaderNav() {
         setIsNavVisible(false);
       } else if (deltaY < -0.2) {
         setIsNavVisible(true);
+        revealLockUntilRef.current = now + 360;
       }
 
       lastScrollYRef.current = currentY;

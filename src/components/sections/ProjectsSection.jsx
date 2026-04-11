@@ -5,7 +5,11 @@ function ProjectsSection({ data, className = "" }) {
   const [isMobile, setIsMobile] = useState(() => window.matchMedia("(max-width: 639px)").matches);
   const totalProjects = Array.isArray(data?.items) ? data.items.length : 0;
   const maxVisibleProjects = isMobile ? 2 : 3;
-  const visibleProjects = (data.items || []).slice(0, Math.min(maxVisibleProjects, totalProjects));
+  const projects = data.items || [];
+  const tiyaProject = projects.find((project) => project.title === "Tiya-Suten Heritage Park");
+  const visibleProjects = isMobile
+    ? [projects[0], tiyaProject].filter(Boolean).slice(0, Math.min(maxVisibleProjects, totalProjects))
+    : projects.slice(0, Math.min(maxVisibleProjects, totalProjects));
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 639px)");

@@ -81,7 +81,7 @@ function HeroSection({ data }) {
       className="animate-reveal relative -mx-3 overflow-hidden scroll-mt-28 sm:-mx-6 lg:-mx-10 2xl:-mx-14"
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-px bg-[#D5B223]/85" aria-hidden="true" />
-      <div className="relative isolate min-h-[86svh] overflow-hidden sm:min-h-[92svh] lg:min-h-[98svh]">
+      <div className="relative isolate min-h-[100svh] overflow-hidden lg:min-h-[100vh]">
         {backgrounds.map((background, index) => (
           <motion.img
             key={`${background.src}-${index}`}
@@ -108,10 +108,10 @@ function HeroSection({ data }) {
           aria-hidden="true"
         />
 
-        <div className="relative z-10 mx-auto w-full max-w-[1200px] px-5 py-10 text-white sm:px-8 sm:py-12 lg:px-10 lg:py-18">
+        <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-[1200px] px-5 py-12 text-white sm:px-8 sm:py-14 lg:min-h-[100vh] lg:px-10 lg:py-18">
           <div className="grid grid-cols-1 items-end gap-8 lg:gap-10">
             <motion.div
-              className="max-w-[820px] pt-16 sm:pt-20 lg:pt-28"
+              className="max-w-[820px] pt-12 sm:pt-16 lg:pt-24"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}

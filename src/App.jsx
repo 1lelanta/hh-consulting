@@ -17,6 +17,49 @@ function App() {
   const [isProjectsArchive, setIsProjectsArchive] = useState(() => window.location.hash === "#all-projects");
   const [isAboutPage, setIsAboutPage] = useState(() => window.location.hash === "#about-us");
   const [isContactPage, setIsContactPage] = useState(() => window.location.hash === "#get-in-touch");
+  const [isLoading, setIsLoading] = useState(true);
+  const [showPreloader, setShowPreloader] = useState(true);
+
+  useEffect(() => {
+    let hasCompleted = false;
+    const startAt = performance.now();
+    const minDisplayMs = 950;
+
+    const completeLoading = () => {
+      if (hasCompleted) return;
+      hasCompleted = true;
+
+      const elapsed = performance.now() - startAt;
+      const remaining = Math.max(0, minDisplayMs - elapsed);
+
+      window.setTimeout(() => {
+        setIsLoading(false);
+      }, remaining);
+    };
+
+    if (document.readyState === "complete") {
+      completeLoading();
+    } else {
+      window.addEventListener("load", completeLoading, { once: true });
+    }
+
+    const fallback = window.setTimeout(completeLoading, 1600);
+
+    return () => {
+      window.clearTimeout(fallback);
+      window.removeEventListener("load", completeLoading);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isLoading) return undefined;
+
+    const hideTimer = window.setTimeout(() => {
+      setShowPreloader(false);
+    }, 420);
+
+    return () => window.clearTimeout(hideTimer);
+  }, [isLoading]);
 
   useEffect(() => {
     const updateRoute = () => {
@@ -33,6 +76,32 @@ function App() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-[linear-gradient(180deg,#F4F6FA_0%,#EEF2F8_100%)] px-0 pb-0 text-brand-navy950">
+      {showPreloader ? (
+        <div
+          className={`preloader fixed inset-0 z-[120] flex items-center justify-center px-6 transition-opacity duration-500 ${isLoading ? "opacity-100" : "pointer-events-none opacity-0"}`}
+          aria-live="polite"
+          aria-busy={isLoading}
+        >
+          <div className="preloader-glow" aria-hidden="true" />
+          <div className="relative z-10 w-full max-w-[420px] rounded-[20px] border border-white/15 bg-white/[0.05] px-7 py-8 text-center shadow-[0_24px_56px_rgba(2,6,23,0.5)] backdrop-blur-lg sm:px-9 sm:py-9">
+            <img
+              src="/asset/hhlogo.jpeg"
+              alt="HH Consulting logo"
+              className="mx-auto h-[78px] w-[78px] rounded-xl border border-[#D5B223]/45 object-cover shadow-[0_0_0_8px_rgba(213,178,35,0.11)]"
+            />
+            <p className="m-0 mt-4 font-['Poppins','Inter',sans-serif] text-[1rem] font-semibold tracking-[0.08em] text-white sm:text-[1.06rem]">
+              HH CONSULTING
+            </p>
+            <p className="m-0 mt-1.5 text-[0.82rem] uppercase tracking-[0.14em] text-[#D5B223]">Preparing your experience</p>
+
+            <div className="mt-6 h-[3px] w-full overflow-hidden rounded-full bg-white/20">
+              <span className={`preloader-progress ${isLoading ? "is-animating" : "is-complete"}`} />
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      <div className={`transition-all duration-700 ease-out ${showPreloader ? "translate-y-2 opacity-0" : "translate-y-0 opacity-100"}`}>
       <HeaderNav />
       <div className="pointer-events-none fixed inset-0 opacity-40 [background:radial-gradient(circle_at_100%_0%,rgba(190,154,90,0.20),transparent_35%),radial-gradient(circle_at_0%_10%,rgba(22,59,99,0.14),transparent_30%)]" />
 
@@ -58,6 +127,7 @@ function App() {
       </MobileShell>
 
       <StickyActions data={siteContent.stickyActions} />
+      </div>
     </div>
   );
 }

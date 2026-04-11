@@ -148,9 +148,8 @@ function ServicesSection({ data, className = "" }) {
     offset: ["start end", "end start"],
   });
   const [isDesktop, setIsDesktop] = useState(false);
-  const imageY = useTransform(scrollYProgress, [0, 0.5, 1], [56, 0, -48]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.94, 1, 1.06]);
-  const imageRotate = useTransform(scrollYProgress, [0, 0.5, 1], [-2.5, 0, 2.5]);
+  const imageY = useTransform(scrollYProgress, [0, 0.5, 1], [120, 0, -120]);
+  const imageX = useTransform(scrollYProgress, [0, 0.5, 1], [-22, 0, 22]);
 
   useEffect(() => {
     const media = window.matchMedia("(min-width: 1024px)");
@@ -238,21 +237,13 @@ function ServicesSection({ data, className = "" }) {
 
           {data.image ? (
             <motion.figure
-              className="relative m-0 overflow-hidden rounded-[22px] border border-white/60 bg-white shadow-[0_18px_44px_rgba(13,40,74,0.16)] transition-all duration-500 hover:scale-105 hover:shadow-2xl lg:sticky lg:top-24"
-              initial={{ opacity: 0, x: 60 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              viewport={{ once: true }}
-              style={reduceMotion ? undefined : { y: imageY, scale: imageScale, rotate: imageRotate }}
+              className="relative m-0 overflow-hidden rounded-none border border-white/60 bg-white shadow-[0_18px_44px_rgba(13,40,74,0.16)] lg:sticky lg:top-24"
+              style={reduceMotion ? undefined : { y: imageY, x: imageX }}
             >
-              <motion.img
+              <img
                 src={data.image}
                 alt={data.imageAlt || "Architecture image"}
                 className="block h-[320px] w-full object-cover sm:h-[380px] lg:h-[760px]"
-                initial={{ opacity: 0.88, scale: 1.03 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-                viewport={{ once: true, amount: 0.25 }}
               />
               <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(9,17,30,0.08)_0%,rgba(9,17,30,0.18)_100%)]" aria-hidden="true" />
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-[linear-gradient(180deg,rgba(9,17,30,0)_0%,rgba(9,17,30,0.42)_100%)]" aria-hidden="true" />

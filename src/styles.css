@@ -22,6 +22,35 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+.preloader {
+  background:
+    radial-gradient(75% 80% at 18% 12%, rgba(213, 178, 35, 0.2) 0%, rgba(213, 178, 35, 0) 68%),
+    radial-gradient(75% 85% at 84% 90%, rgba(38, 77, 124, 0.26) 0%, rgba(38, 77, 124, 0) 72%),
+    linear-gradient(142deg, #081223 0%, #0f172a 56%, #111827 100%);
+}
+
+.preloader-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(50% 45% at 50% 50%, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0) 72%);
+}
+
+.preloader-progress {
+  display: block;
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #d5b223 0%, #f2d573 40%, #d5b223 100%);
+  box-shadow: 0 0 16px rgba(213, 178, 35, 0.4);
+}
+
+.preloader-progress.is-animating {
+  animation: preloader-progress-fill 1.25s ease-out forwards;
+}
+
+.preloader-progress.is-complete {
+  width: 100%;
+}
+
 .section-eyebrow {
   margin: 0;
   font-size: 0.95rem;
@@ -143,5 +172,22 @@ body {
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  @keyframes preloader-progress-fill {
+    0% {
+      width: 0%;
+      opacity: 0.8;
+    }
+
+    70% {
+      width: 82%;
+      opacity: 1;
+    }
+
+    100% {
+      width: 100%;
+      opacity: 1;
+    }
   }
 }

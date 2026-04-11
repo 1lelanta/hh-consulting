@@ -201,9 +201,9 @@ function HeroSection({ data, contact }) {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 px-4 sm:bottom-0 sm:px-6 lg:bottom-1 lg:px-10" aria-hidden="true">
-          <div className="overflow-hidden rounded-[8px] border border-[#F3D36B]/45 bg-[#D5B223] shadow-[0_14px_30px_rgba(213,178,35,0.28)]">
-            <div className="flex w-max items-center gap-4 py-3 text-[#0B1730] sm:gap-6 sm:py-3.5">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 w-full sm:bottom-0 lg:bottom-1" aria-hidden="true">
+          <div className="overflow-hidden border-y border-[#F3D36B]/45 bg-[#D5B223] shadow-[0_14px_30px_rgba(213,178,35,0.28)]">
+            <div className="flex w-full items-center gap-4 py-3 text-[#0B1730] sm:gap-6 sm:py-3.5">
               <div className="animate-marquee flex w-max items-center gap-4 sm:gap-6 [animation-duration:42s] [animation-timing-function:linear] [animation-iteration-count:infinite]">
                 {tickerContent.map((item, index) => (
                   <div key={`${item.label}-${index}`} className="flex items-center gap-4 whitespace-nowrap px-4 text-[0.78rem] font-bold uppercase tracking-[0.14em] sm:gap-6 sm:px-6 sm:text-[0.84rem] lg:text-[0.88rem]">

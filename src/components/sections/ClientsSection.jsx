@@ -1,59 +1,41 @@
-import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
 
-function ClientLogoTile({ item, offsetIndex }) {
-  const [magnetic, setMagnetic] = useState({ x: 0, y: 0 });
-
-  const baseOffsetY = useMemo(() => {
-    const pattern = [0, -8, 6, -5, 10, -7, 4, -4];
-    return pattern[offsetIndex % pattern.length];
-  }, [offsetIndex]);
-
-  const handleMouseMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const deltaX = event.clientX - centerX;
-    const deltaY = event.clientY - centerY;
-
-    setMagnetic({
-      x: deltaX * 0.16,
-      y: deltaY * 0.14,
-    });
-  };
-
-  const handleMouseLeave = () => {
-    setMagnetic({ x: 0, y: 0 });
-  };
-
+function ClientLogoTile({ item, index }) {
   return (
-    <div
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="group relative z-10 flex h-[84px] w-[144px] shrink-0 items-center justify-center bg-transparent px-2 transition-transform duration-300 lg:h-[96px] lg:w-[176px]"
-      style={{
-        transform: `translate3d(${magnetic.x}px, ${baseOffsetY + magnetic.y}px, 0)`,
-      }}
+    <motion.article
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.5, ease: [0.22, 0.61, 0.36, 1], delay: index * 0.04 }}
+      className="group flex min-h-[126px] items-center justify-center rounded-2xl border border-[#E5E7EB] bg-white px-5 py-5 shadow-[0_12px_28px_rgba(15,23,42,0.08)] transition duration-300 hover:scale-[1.05] hover:border-[#D5B223]/40 hover:shadow-[0_20px_36px_rgba(15,23,42,0.14)]"
     >
       <img
         src={item.logoSrc}
         alt={item.name}
-        className="max-h-[48px] max-w-[120px] object-contain transition duration-500 group-hover:scale-[1.03] lg:max-h-[56px] lg:max-w-[144px]"
+        className="h-[56px] w-auto max-w-full object-contain transition duration-300 group-hover:saturate-110"
       />
       <span className="sr-only">{item.name}</span>
-    </div>
+    </motion.article>
   );
 }
 
 function ClientsSection({ data, className = "" }) {
-  const duplicateRow = (row) => [...row.items, ...row.items];
+  const logos = (data.logoRows || []).flatMap((row) => row.items || []);
 
   return (
-    <section
+    <motion.section
       id="clients"
-      className={`animate-reveal mt-8 -mx-3 scroll-mt-28 bg-transparent px-3 py-16 [animation-delay:520ms] sm:-mx-6 sm:px-6 sm:py-20 lg:-mx-10 lg:px-10 lg:py-24 2xl:-mx-14 2xl:px-14 ${className}`}
+      initial={{ opacity: 0, y: 36 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: [0.22, 0.61, 0.36, 1] }}
+      viewport={{ once: true, amount: 0.2 }}
+      className={`animate-reveal relative mt-8 -mx-3 scroll-mt-28 overflow-hidden px-3 py-20 [animation-delay:520ms] sm:-mx-6 sm:px-6 sm:py-24 lg:-mx-10 lg:px-10 lg:py-28 2xl:-mx-14 2xl:px-14 ${className}`}
     >
-      <div className="mx-auto w-full max-w-[1320px]">
-        <div className="max-w-[860px]">
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,#F8FAFC_0%,#F2F5F9_100%)]" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_85%_at_14%_0%,rgba(213,178,35,0.09)_0%,rgba(213,178,35,0)_70%)]" aria-hidden="true" />
+
+      <div className="relative z-10 mx-auto w-full max-w-[1240px]">
+        <div className="max-w-[900px]">
           <div className="flex items-center gap-3">
             <span className="h-[2px] w-14 bg-[#D5B223]" />
             <p className="section-eyebrow text-[#D5B223]">
@@ -61,37 +43,27 @@ function ClientsSection({ data, className = "" }) {
             </p>
           </div>
 
-          <h2 className="m-0 mt-5 text-[2rem] font-extrabold leading-[1.12] tracking-[-0.02em] text-brand-navy900 sm:text-[2.5rem] lg:text-[3.6rem]">
+          <h2 className="m-0 mt-5 font-['Poppins','Inter',sans-serif] text-[2rem] font-bold leading-[1.1] tracking-[-0.02em] text-brand-navy900 sm:text-[2.45rem] lg:text-[3.3rem]">
             {data.title}
           </h2>
 
+          <p className="m-0 mt-4 text-[1rem] font-medium leading-7 text-[#4B5563] sm:text-[1.05rem]">
+            We collaborate with government, private, and industrial leaders.
+          </p>
+
+          <p className="m-0 mt-2 max-w-[820px] text-[0.97rem] leading-7 text-[#6B7280] sm:text-[1rem]">
+            {data.subtitle}
+          </p>
         </div>
 
-        <div className="mt-8 space-y-4 lg:mt-10">
-          {data.logoRows.map((row, index) => (
-            <div key={index} className="relative overflow-hidden py-2">
-              <span
-                className="pointer-events-none absolute inset-x-0 top-1/2 z-0 -translate-y-1/2 border-t-[0.5px] border-dashed border-[#98ABC4]/75"
-                aria-hidden="true"
-              />
-
-              <div
-                className={[
-                  "flex w-max gap-4 px-1 pb-2 lg:gap-5",
-                  index % 2 === 0 ? "animate-marquee" : "animate-marquee-reverse",
-                  "[animation-duration:40s] [animation-timing-function:linear]",
-                ].join(" ")}
-              >
-                {duplicateRow(row).map((item, itemIndex) => (
-                  <ClientLogoTile key={`${item.name}-${itemIndex}`} item={item} offsetIndex={itemIndex} />
-                ))}
-              </div>
-            </div>
+        <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3 sm:gap-8 md:grid-cols-4 lg:mt-12 lg:grid-cols-5 lg:gap-10 xl:grid-cols-6">
+          {logos.map((item, index) => (
+            <ClientLogoTile key={`${item.name}-${index}`} item={item} index={index} />
           ))}
         </div>
 
       </div>
-    </section>
+    </motion.section>
   );
 }
 

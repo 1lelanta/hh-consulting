@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 function ProjectsSection({ data, className = "" }) {
   const [isMobile, setIsMobile] = useState(() => window.matchMedia("(max-width: 639px)").matches);
   const totalProjects = Array.isArray(data?.items) ? data.items.length : 0;
-  const maxVisibleProjects = isMobile ? 1 : 3;
+  const maxVisibleProjects = isMobile ? 2 : 3;
   const visibleProjects = (data.items || []).slice(0, Math.min(maxVisibleProjects, totalProjects));
 
   useEffect(() => {

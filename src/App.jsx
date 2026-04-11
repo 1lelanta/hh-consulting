@@ -22,6 +22,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [showPreloader, setShowPreloader] = useState(true);
   const isHomePage = !isProjectsArchive && !isAboutPage && !isTeamPage && !isContactPage;
+  const useFlushTopLayout = isHomePage || isContactPage;
 
   useEffect(() => {
     let hasCompleted = false;
@@ -109,7 +110,7 @@ function App() {
       <HeaderNav />
       <div className="pointer-events-none fixed inset-0 opacity-40 [background:radial-gradient(circle_at_100%_0%,rgba(190,154,90,0.20),transparent_35%),radial-gradient(circle_at_0%_10%,rgba(22,59,99,0.14),transparent_30%)]" />
 
-      <MobileShell className={isHomePage ? "pt-0" : "pt-[88px]"}>
+      <MobileShell className={useFlushTopLayout ? "pt-0" : "pt-[88px]"}>
         {isProjectsArchive ? (
           <ProjectsArchivePage data={siteContent.projects} />
         ) : isAboutPage ? (
@@ -117,7 +118,7 @@ function App() {
         ) : isTeamPage ? (
           <TeamSection data={siteContent.team} className="lg:mt-8" />
         ) : isContactPage ? (
-          <ContactSection data={siteContent.contact} className="lg:mt-8" />
+          <ContactSection data={siteContent.contact} className="mt-0 lg:mt-0" />
         ) : (
           <>
             <section>

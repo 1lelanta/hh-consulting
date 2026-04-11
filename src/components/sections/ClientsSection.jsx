@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 function ClientLogoTile({ item, index }) {
   return (
@@ -20,17 +21,28 @@ function ClientLogoTile({ item, index }) {
 }
 
 function ClientsSection({ data, className = "" }) {
+  const sectionRef = useRef(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
   const logos = (data.logoRows || []).flatMap((row) => row.items || []);
   const marqueeLogos = [...logos, ...logos];
+  const sectionY = useTransform(scrollYProgress, [0, 0.5, 1], [30, 0, -30]);
+  const sectionOpacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.88, 1, 1, 0.94]);
+  const trackY = useTransform(scrollYProgress, [0, 0.5, 1], [12, 0, -12]);
 
   return (
     <motion.section
+      ref={sectionRef}
       id="clients"
       initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: [0.22, 0.61, 0.36, 1] }}
       viewport={{ once: true, amount: 0.2 }}
       className={`animate-reveal relative mt-8 -mx-3 scroll-mt-28 overflow-hidden px-3 py-20 [animation-delay:520ms] sm:-mx-6 sm:px-6 sm:py-24 lg:-mx-10 lg:px-10 lg:py-28 2xl:-mx-14 2xl:px-14 ${className}`}
+      style={reduceMotion ? undefined : { opacity: sectionOpacity, y: sectionY }}
     >
       <div className="absolute inset-0 bg-[linear-gradient(180deg,#F8FAFC_0%,#F2F5F9_100%)]" aria-hidden="true" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_85%_at_14%_0%,rgba(213,178,35,0.09)_0%,rgba(213,178,35,0)_70%)]" aria-hidden="true" />
@@ -58,11 +70,14 @@ function ClientsSection({ data, className = "" }) {
           <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 bg-gradient-to-r from-[#F6F9FC] to-transparent sm:w-24" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 bg-gradient-to-l from-[#F2F5F9] to-transparent sm:w-24" aria-hidden="true" />
 
-          <div className="animate-marquee flex w-max gap-7 [animation-duration:30s] [animation-timing-function:linear] [animation-iteration-count:infinite] sm:gap-8 lg:gap-10">
+          <motion.div
+            className="animate-marquee flex w-max gap-7 [animation-duration:30s] [animation-timing-function:linear] [animation-iteration-count:infinite] sm:gap-8 lg:gap-10"
+            style={reduceMotion ? undefined : { y: trackY }}
+          >
             {marqueeLogos.map((item, index) => (
               <ClientLogoTile key={`${item.name}-${index}`} item={item} index={index} />
             ))}
-          </div>
+          </motion.div>
         </div>
 
       </div>

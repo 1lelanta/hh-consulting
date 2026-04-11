@@ -4,7 +4,9 @@ function ContactSection({ data, className = "" }) {
   const officeAddressCard = Array.isArray(data?.contactCards)
     ? data.contactCards.find((card) => card.icon === "address")
     : null;
-  const contactCards = Array.isArray(data?.contactCards) ? data.contactCards : [];
+  const contactCards = Array.isArray(data?.contactCards)
+    ? data.contactCards.filter((card) => card.icon !== "address")
+    : [];
   const officeAddress = officeAddressCard ? officeAddressCard.lines.join(" ") : "";
   const mapSrc = officeAddress
     ? `https://www.google.com/maps?q=${encodeURIComponent(officeAddress)}&output=embed`

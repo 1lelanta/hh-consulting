@@ -24,15 +24,15 @@ body {
 
 .preloader {
   background:
-    radial-gradient(75% 80% at 18% 12%, rgba(213, 178, 35, 0.2) 0%, rgba(213, 178, 35, 0) 68%),
-    radial-gradient(75% 85% at 84% 90%, rgba(38, 77, 124, 0.26) 0%, rgba(38, 77, 124, 0) 72%),
-    linear-gradient(142deg, #081223 0%, #0f172a 56%, #111827 100%);
+    radial-gradient(75% 80% at 18% 12%, rgba(213, 178, 35, 0.26) 0%, rgba(213, 178, 35, 0) 68%),
+    radial-gradient(75% 85% at 84% 90%, rgba(38, 77, 124, 0.34) 0%, rgba(38, 77, 124, 0) 72%),
+    linear-gradient(142deg, #050b16 0%, #0a1324 56%, #0f172a 100%);
 }
 
 .preloader-glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(50% 45% at 50% 50%, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0) 72%);
+  background: radial-gradient(50% 45% at 50% 50%, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 72%);
 }
 
 .preloader-progress {

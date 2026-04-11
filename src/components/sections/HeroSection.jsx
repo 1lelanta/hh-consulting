@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 
 function HeroSection({ data }) {
@@ -11,32 +11,65 @@ function HeroSection({ data }) {
   }, [data.backgroundImages, data.image, data.imageAlt]);
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isTextVisible, setIsTextVisible] = useState(true);
-  const headlineWords = String(data.headline || "").trim().split(/\s+/).filter(Boolean);
-  const highlightedWord = headlineWords.length > 1 ? headlineWords[headlineWords.length - 1] : "";
-  const leadingHeadline = highlightedWord ? headlineWords.slice(0, -1).join(" ") : data.headline;
+
+  const heroSlides = useMemo(
+    () => [
+      {
+        key: "mission",
+        badge: "Core Direction",
+        title: "MISSION",
+        description:
+          "To provide integrated architectural and engineering solutions driven by innovation, efficiency, and intelligent project management-delivering quality, value, and precision in every project.",
+      },
+      {
+        key: "vision",
+        badge: "Future Direction",
+        title: "VISION",
+        description:
+          "To redefine standards in the construction industry by leading with innovation, strong partnerships, and excellence in project delivery and supervision.",
+      },
+      {
+        key: "default",
+        badge: data.subtitle,
+        title: data.headline,
+        description: data.description,
+      },
+    ],
+    [data.description, data.headline, data.subtitle]
+  );
+
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+  const currentSlide = heroSlides[activeHeroSlide];
+  const currentTitleWords = String(currentSlide?.title || "").trim().split(/\s+/).filter(Boolean);
+  const shouldHighlightLastWord = currentSlide?.key === "default" && currentTitleWords.length > 1;
+  const highlightedWord = shouldHighlightLastWord ? currentTitleWords[currentTitleWords.length - 1] : "";
+  const leadingHeadline = shouldHighlightLastWord
+    ? currentTitleWords.slice(0, -1).join(" ")
+    : currentSlide?.title;
 
   useEffect(() => {
     if (backgrounds.length <= 1) {
       return undefined;
     }
 
-    const fadeOutLeadMs = 1400;
-    let fadeTimerId;
     const timer = window.setInterval(() => {
-      setIsTextVisible(false);
-
-      fadeTimerId = window.setTimeout(() => {
-        setActiveIndex((currentIndex) => (currentIndex + 1) % backgrounds.length);
-        setIsTextVisible(true);
-      }, fadeOutLeadMs);
+      setActiveIndex((currentIndex) => (currentIndex + 1) % backgrounds.length);
     }, 14000);
 
     return () => {
       window.clearInterval(timer);
-      window.clearTimeout(fadeTimerId);
     };
   }, [backgrounds.length]);
+
+  useEffect(() => {
+    const slideTimer = window.setInterval(() => {
+      setActiveHeroSlide((currentIndex) => (currentIndex + 1) % heroSlides.length);
+    }, 5000);
+
+    return () => {
+      window.clearInterval(slideTimer);
+    };
+  }, [heroSlides.length]);
 
   return (
     <motion.section
@@ -78,38 +111,43 @@ function HeroSection({ data }) {
         <div className="relative z-10 mx-auto w-full max-w-[1200px] px-5 py-10 text-white sm:px-8 sm:py-12 lg:px-10 lg:py-18">
           <div className="grid grid-cols-1 items-end gap-8 lg:gap-10">
             <motion.div
-              className="max-w-[820px] pt-12 sm:pt-16 lg:pt-24"
+              className="max-w-[820px] pt-16 sm:pt-20 lg:pt-28"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
               viewport={{ once: true, amount: 0.25 }}
             >
-              <motion.div
-                className="space-y-5"
-                animate={
-                  isTextVisible
-                    ? { x: -12, y: -2, opacity: 1, scale: 1, filter: "blur(0px)" }
-                    : { x: -28, y: -5, opacity: 0, scale: 0.985, filter: "blur(2px)" }
-                }
-                transition={{ duration: 1.35, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <p className="m-0 inline-flex w-fit items-center rounded-full border border-white/30 bg-white/10 px-4 py-2 text-[0.8rem] font-bold uppercase tracking-[0.16em] text-[#E7CB74] backdrop-blur sm:text-[0.86rem]">
-                  {data.subtitle}
-                </p>
+              <div className="space-y-5">
+                <div className="min-h-[230px] sm:min-h-[250px] lg:min-h-[290px]">
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.div
+                      key={currentSlide.key}
+                      initial={{ opacity: 0, y: 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -14 }}
+                      transition={{ duration: 0.65, ease: [0.22, 0.61, 0.36, 1] }}
+                      className="space-y-5"
+                    >
+                      <p className="m-0 inline-flex w-fit items-center rounded-full border border-white/30 bg-white/10 px-4 py-2 text-[0.8rem] font-bold uppercase tracking-[0.16em] text-[#E7CB74] backdrop-blur sm:text-[0.86rem]">
+                        {currentSlide.badge}
+                      </p>
 
-                <h1 className="m-0 text-[2.35rem] font-black leading-[1.05] tracking-[-0.02em] text-white [text-shadow:0_10px_28px_rgba(2,6,23,0.42)] sm:text-[3.15rem] lg:text-[4.9rem]">
-                  {leadingHeadline}
-                  {highlightedWord ? (
-                    <>
-                      {" "}
-                      <span className="text-[#F7D26A] [text-shadow:0_8px_24px_rgba(247,210,106,0.35)]">{highlightedWord}</span>
-                    </>
-                  ) : null}
-                </h1>
+                      <h1 className="m-0 text-[2.35rem] font-black leading-[1.05] tracking-[-0.02em] text-white [text-shadow:0_10px_28px_rgba(2,6,23,0.42)] sm:text-[3.15rem] lg:text-[4.9rem]">
+                        {leadingHeadline}
+                        {highlightedWord ? (
+                          <>
+                            {" "}
+                            <span className="text-[#F7D26A] [text-shadow:0_8px_24px_rgba(247,210,106,0.35)]">{highlightedWord}</span>
+                          </>
+                        ) : null}
+                      </h1>
 
-                <p className="m-0 max-w-[56ch] text-[1.08rem] font-medium leading-[1.65] text-slate-100/92 sm:text-[1.18rem] lg:text-[1.28rem]">
-                  {data.description}
-                </p>
+                      <p className="m-0 max-w-[56ch] text-[1.08rem] font-medium leading-[1.65] text-slate-100/92 sm:text-[1.18rem] lg:text-[1.28rem]">
+                        {currentSlide.description}
+                      </p>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
 
                 <div className="flex flex-col gap-3 pt-2 sm:flex-row">
                   <a
@@ -145,7 +183,7 @@ function HeroSection({ data }) {
                     </a>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
           </div>
         </div>

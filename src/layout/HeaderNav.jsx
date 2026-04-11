@@ -15,6 +15,22 @@ function HeaderNav() {
   const [isNavVisible, setIsNavVisible] = useState(true);
   const lastScrollYRef = useRef(0);
   const navSurfaceClass = "bg-[#0A0A0ACC]";
+  const navMotionVariants = {
+    visible: {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      filter: "blur(0px)",
+      transition: { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
+    },
+    hidden: {
+      y: -18,
+      opacity: 0,
+      scale: 0.98,
+      filter: "blur(2px)",
+      transition: { duration: 0.26, ease: [0.4, 0, 1, 1] },
+    },
+  };
 
   useEffect(() => {
     function handleResize() {
@@ -74,45 +90,42 @@ function HeaderNav() {
   }, [isMenuOpen]);
 
   useEffect(() => {
-    function handleScroll() {
+    let rafId = 0;
+    lastScrollYRef.current = window.scrollY;
+
+    const tick = () => {
       const currentY = window.scrollY;
+      const deltaY = currentY - lastScrollYRef.current;
+
       setHasScrolled(currentY > 24);
 
       if (isMenuOpen) {
         setIsNavVisible(true);
-        lastScrollYRef.current = currentY;
-        return;
-      }
-
-      if (currentY <= 16) {
+      } else if (currentY <= 72) {
         setIsNavVisible(true);
-      } else if (currentY > lastScrollYRef.current + 4) {
+      } else if (deltaY > 0.8) {
         setIsNavVisible(false);
-      } else if (currentY < lastScrollYRef.current - 4) {
+      } else if (deltaY < -0.8) {
         setIsNavVisible(true);
       }
 
       lastScrollYRef.current = currentY;
-    }
+      rafId = window.requestAnimationFrame(tick);
+    };
 
-    lastScrollYRef.current = window.scrollY;
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    rafId = window.requestAnimationFrame(tick);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.cancelAnimationFrame(rafId);
     };
   }, [isMenuOpen]);
 
   return (
-    <header
-      className={`fixed left-0 right-0 top-0 z-50 px-0 [transition-property:transform,opacity,filter,padding] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-4 ${
-        isNavVisible
-          ? "translate-y-0 opacity-100 scale-100 blur-0"
-          : "-translate-y-4 opacity-0 scale-[0.96] blur-[2px] pointer-events-none"
-      } ${
-        hasScrolled ? "pt-1.5 sm:pt-2" : "pt-2.5 sm:pt-3.5"
-      }`}
+    <motion.header
+      initial={false}
+      animate={isNavVisible ? "visible" : "hidden"}
+      variants={navMotionVariants}
+      className={`fixed left-0 right-0 top-0 z-50 px-0 pt-0 will-change-transform sm:px-4 ${isNavVisible ? "" : "pointer-events-none"}`}
     >
       <nav
         className={`mx-auto w-full max-w-[1400px] rounded-none border-x border-x-[#7A6940]/35 border-b border-b-[rgba(212,175,55,0.18)] ${navSurfaceClass} backdrop-blur-[12px] transition-all duration-500 sm:rounded-md ${
@@ -227,7 +240,7 @@ function HeaderNav() {
           </AnimatePresence>
         </div>
       </nav>
-    </header>
+    </motion.header>
   );
 }
 

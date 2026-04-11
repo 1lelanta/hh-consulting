@@ -150,6 +150,9 @@ function ServicesSection({ data, className = "" }) {
   const [isDesktop, setIsDesktop] = useState(false);
   const imageY = useTransform(scrollYProgress, [0, 0.5, 1], [120, 0, -120]);
   const imageX = useTransform(scrollYProgress, [0, 0.5, 1], [-22, 0, 22]);
+  const sectionY = useTransform(scrollYProgress, [0, 0.5, 1], [42, 0, -42]);
+  const sectionOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.78, 1, 1, 0.9]);
+  const sectionScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.985, 1, 0.99]);
 
   useEffect(() => {
     const media = window.matchMedia("(min-width: 1024px)");
@@ -181,6 +184,7 @@ function ServicesSection({ data, className = "" }) {
       id="services"
       viewport={{ once: true, amount: 0.2 }}
       className={`animate-reveal mt-8 -mx-3 scroll-mt-28 bg-transparent px-3 py-12 [animation-delay:200ms] sm:-mx-6 sm:px-6 sm:py-16 lg:-mx-10 lg:px-10 lg:py-20 2xl:-mx-14 2xl:px-14 ${className}`}
+      style={reduceMotion ? undefined : { opacity: sectionOpacity, y: sectionY, scale: sectionScale }}
     >
       <div className="relative mx-auto w-full max-w-[1320px]">
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:gap-12">

@@ -42,8 +42,8 @@ export const siteContent = {
     eyebrow: "Expertise",
     title: "",
     subtitle: "Crafting thoughtful architecture and engineering solutions that stand the test of time.",
-    image: "/asset/churchil hotel.png",
-    imageAlt: "Modern architectural hotel and building concept",
+    image: "/asset/bg.png",
+    imageAlt: "Background architectural image",
     items: [
       {
         title: "Architectural Design",

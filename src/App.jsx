@@ -109,10 +109,10 @@ function App() {
         </div>
       ) : null}
 
-      <div className={`transition-all duration-700 ease-out ${showPreloader ? "translate-y-2 opacity-0" : "translate-y-0 opacity-100"}`}>
       <HeaderNav />
       <div className="pointer-events-none fixed inset-0 opacity-40 [background:radial-gradient(circle_at_100%_0%,rgba(190,154,90,0.20),transparent_35%),radial-gradient(circle_at_0%_10%,rgba(22,59,99,0.14),transparent_30%)]" />
 
+      <div className={`transition-all duration-700 ease-out ${showPreloader ? "translate-y-2 opacity-0" : "translate-y-0 opacity-100"}`}>
       <MobileShell className={useFlushTopLayout ? "pt-0" : "pt-[88px]"}>
         {isProjectsArchive ? (
           <ProjectsArchivePage data={siteContent.projects} />

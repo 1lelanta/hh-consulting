@@ -77,7 +77,7 @@ function HeaderNav() {
   }, [isMenuOpen]);
 
   useEffect(() => {
-    const threshold = 14;
+    const threshold = 8;
 
     function runScrollLogic() {
       isTickingRef.current = false;

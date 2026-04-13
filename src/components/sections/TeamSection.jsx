@@ -86,7 +86,7 @@ function TeamSection({
         </div>
 
         <div className="px-5 pb-5 pt-4 text-left sm:px-6">
-          <h3 className="m-0 text-[1.08rem] font-bold leading-tight tracking-[-0.01em] text-white sm:text-[1.15rem]">
+          <h3 className="m-0 text-[1.08rem] font-bold leading-tight tracking-normal text-white sm:text-[1.15rem]">
             {member.name}
           </h3>
           <p className="m-0 mt-2 text-[0.9rem] font-medium leading-6 text-white/68">
@@ -132,7 +132,7 @@ function TeamSection({
 
               <a
                 href="#team"
-                className="mt-10 inline-flex items-center justify-center rounded-[12px] border border-white/12 bg-white/[0.06] px-8 py-3.5 text-[0.88rem] font-semibold uppercase tracking-[0.12em] text-white shadow-[0_16px_34px_rgba(2,6,23,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#D5B223]/45 hover:bg-white/[0.1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D5B223] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050816]"
+                className="mt-10 inline-flex items-center justify-center rounded-[12px] border border-white/12 bg-white/[0.06] px-8 py-3.5 text-[0.88rem] font-semibold tracking-normal text-white shadow-[0_16px_34px_rgba(2,6,23,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#D5B223]/45 hover:bg-white/[0.1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D5B223] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050816]"
               >
                 Meet The Team
               </a>

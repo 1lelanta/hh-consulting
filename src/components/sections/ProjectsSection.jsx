@@ -44,7 +44,7 @@ function ProjectsSection({ data, className = "" }) {
 
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,14,0.02)_0%,rgba(8,10,14,0.62)_100%)]" />
           <div className="absolute inset-x-0 bottom-0 p-2.5 text-white sm:p-4">
-            <p className="m-0 text-[0.58rem] font-bold uppercase tracking-[0.16em] text-[#F5D77A] sm:text-[0.72rem]">
+            <p className="m-0 text-[0.58rem] font-bold tracking-wide text-[#F5D77A] sm:text-[0.72rem]">
               {project.category}
             </p>
             <h3 className="m-0 mt-1 text-[0.78rem] font-extrabold leading-snug tracking-[-0.01em] sm:mt-2 sm:text-[1.1rem]">
@@ -92,7 +92,7 @@ function ProjectsSection({ data, className = "" }) {
       <div className="mx-auto w-full max-w-[1320px]">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
           <div className="min-w-0 max-w-[840px]">
-            <h2 className="m-0 mb-12 text-[1.8rem] font-black uppercase leading-[1.08] tracking-[0.08em] text-white sm:text-[2.35rem] lg:text-[3.1rem]">
+            <h2 className="m-0 mb-12 text-[1.8rem] font-black leading-[1.08] tracking-tight text-white sm:text-[2.35rem] lg:text-[3.1rem]">
               Featured Projects
             </h2>
           </div>

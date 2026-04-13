@@ -249,7 +249,7 @@ function ServicesSection({ data, className = "" }) {
           whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-7 rounded-[24px] border border-white/12 bg-white/5 px-5 py-5 shadow-[0_18px_34px_rgba(2,6,23,0.24)] transition-all duration-300 hover:-translate-y-2 sm:mt-8 sm:px-6 sm:py-6"
+          className="mt-7 rounded-[24px] border border-white/12 bg-white/5 px-5 py-5 shadow-[0_18px_34px_rgba(2,6,23,0.24)] transition-all duration-300 sm:mt-8 sm:px-6 sm:py-6"
         >
           <div className="flex items-center gap-3">
             <span className="h-[2px] w-10 bg-[#D5B223]" />

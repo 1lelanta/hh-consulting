@@ -94,7 +94,7 @@ function ContactSection({ data, className = "" }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.17, 0.67, 0.83, 0.67] }}
       viewport={{ once: true, amount: 0.2 }}
-      className={`animate-reveal relative mt-8 -mx-3 scroll-mt-28 overflow-hidden px-3 py-20 [animation-delay:430ms] sm:-mx-6 sm:px-6 sm:py-24 lg:-mx-10 lg:px-10 lg:py-28 2xl:-mx-14 2xl:px-14 ${className}`}
+      className={`relative mt-8 -mx-3 scroll-mt-28 overflow-hidden px-3 py-20 sm:-mx-6 sm:px-6 sm:py-24 lg:-mx-10 lg:px-10 lg:py-28 2xl:-mx-14 2xl:px-14 ${className}`}
     >
       <div className="absolute inset-0 bg-[linear-gradient(138deg,#081223_0%,#111827_52%,#1f2937_100%)]" aria-hidden="true" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_90%_at_85%_12%,rgba(213,178,35,0.18)_0%,rgba(213,178,35,0)_65%),radial-gradient(70%_65%_at_8%_88%,rgba(56,88,138,0.28)_0%,rgba(56,88,138,0)_68%)]" aria-hidden="true" />

@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 function ContactSection({ data, className = "" }) {
+  const shouldReduceMotion = useReducedMotion();
   const officeAddressCard = Array.isArray(data?.contactCards)
     ? data.contactCards.find((card) => card.icon === "address")
     : null;
@@ -53,8 +54,8 @@ function ContactSection({ data, className = "" }) {
 
     return (
       <motion.article
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+        whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.35 }}
         transition={{ duration: 0.5, ease: [0.22, 0.61, 0.36, 1] }}
         whileHover={{ scale: 1.03, y: -3 }}
@@ -90,8 +91,8 @@ function ContactSection({ data, className = "" }) {
   return (
     <motion.section
       id="get-in-touch"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 50 }}
+      whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
       viewport={{ once: true, amount: 0.2 }}
       className={`relative mt-8 -mx-3 scroll-mt-28 overflow-hidden px-3 py-20 sm:-mx-6 sm:px-6 sm:py-24 lg:-mx-10 lg:px-10 lg:py-28 2xl:-mx-14 2xl:px-14 ${className}`}
@@ -112,8 +113,8 @@ function ContactSection({ data, className = "" }) {
         <div className="rounded-[28px] border border-white/15 bg-white/[0.04] p-5 shadow-[0_35px_70px_rgba(2,6,23,0.5)] backdrop-blur-md sm:p-7 lg:p-10">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.02fr_1.08fr] lg:gap-12">
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+              whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.35 }}
               transition={{ duration: 0.65, ease: [0.22, 0.61, 0.36, 1] }}
               className="self-start pt-1"
@@ -143,8 +144,8 @@ function ContactSection({ data, className = "" }) {
 
               {mapSrc ? (
                 <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+                  whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.25 }}
                   transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 0.61, 0.36, 1] }}
                   className="overflow-hidden rounded-[22px] border border-white/20 bg-white/[0.07] shadow-[0_24px_56px_rgba(2,6,23,0.42)] backdrop-blur-lg"
@@ -177,8 +178,8 @@ function ContactSection({ data, className = "" }) {
               ) : null}
 
               <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+                whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 0.61, 0.36, 1] }}
                 className="relative overflow-hidden rounded-[20px] border border-white/20 bg-white/[0.06] px-6 py-7 text-white shadow-[0_20px_46px_rgba(2,6,23,0.38)] backdrop-blur-lg sm:px-7"

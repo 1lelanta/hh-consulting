@@ -2,9 +2,8 @@ export const siteContent = {
   hero: {
     company: "HH CONSULTING ARCHITECTS & ENGINEERS PLC.",
     companyAmharic: "ኤች ኤች ኮንሰልቲንግ አርክቴክቶች እና መሀንዲሶች ሃ/የተ/የግል/ማህበር",
-    subtitle: "Engineering & Architecture Solutions",
     headline: "Designing the Future of Infrastructure",
-    description: "Trusted by clients for clear design, solid execution, and dependable project delivery.",
+    description: "",
     ctaLabel: "Get Consultation",
     ctaHref: "#get-in-touch",
     backgroundImages: [

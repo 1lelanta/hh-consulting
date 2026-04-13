@@ -149,45 +149,11 @@ function App() {
                 <ContactSection data={siteContent.contact} className="mt-0 lg:mt-0" />
               ) : (
                 <>
-                  <section>
-                    <HeroSection data={siteContent.hero} contact={siteContent.contact} />
-                  </section>
-                  <motion.div
-                    initial={{ opacity: 0, y: 28, scale: 0.99 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    viewport={{ once: false, amount: 0.18 }}
-                    transition={{ duration: 0.65, ease: [0.22, 0.61, 0.36, 1] }}
-                    className="will-change-transform"
-                  >
-                    <ServicesSection data={siteContent.services} />
-                  </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 34, scale: 0.985 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    viewport={{ once: false, amount: 0.18 }}
-                    transition={{ duration: 0.7, ease: [0.22, 0.61, 0.36, 1] }}
-                    className="will-change-transform"
-                  >
-                    <ProjectsSection data={siteContent.projects} />
-                  </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 34, scale: 0.985 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    viewport={{ once: false, amount: 0.18 }}
-                    transition={{ duration: 0.7, ease: [0.22, 0.61, 0.36, 1], delay: 0.05 }}
-                    className="will-change-transform"
-                  >
-                    <TeamSection data={siteContent.team} className="lg:mt-8" showList={false} />
-                  </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 34, scale: 0.99 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    viewport={{ once: false, amount: 0.16 }}
-                    transition={{ duration: 0.72, ease: [0.22, 0.61, 0.36, 1], delay: 0.04 }}
-                    className="will-change-transform"
-                  >
-                    <HomeCtaSection />
-                  </motion.div>
+                  <HeroSection data={siteContent.hero} contact={siteContent.contact} />
+                  <ServicesSection data={siteContent.services} />
+                  <ProjectsSection data={siteContent.projects} />
+                  <TeamSection data={siteContent.team} className="lg:mt-8" showList={false} />
+                  <HomeCtaSection />
                 </>
               )}
             </motion.div>

@@ -1,7 +1,8 @@
 import { animate, motion, useInView, useMotionValue, useMotionValueEvent } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import AnimatedSection, { staggerItemVariants } from "../ui/AnimatedSection";
 
-function StatCounter({ value, suffix, label }) {
+function StatCounter({ value, suffix, label, delay = 0 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.5 });
   const count = useMotionValue(0);
@@ -25,9 +26,14 @@ function StatCounter({ value, suffix, label }) {
   }, [count, isInView, value]);
 
   return (
-    <article
+    <motion.article
       ref={ref}
-      className="group h-full rounded-[14px] border border-[#D9E1EC] bg-white px-5 py-5 shadow-[0_10px_24px_rgba(13,40,74,0.08)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_30px_rgba(13,40,74,0.14)] sm:px-6"
+      initial="hidden"
+      whileInView="visible"
+      variants={staggerItemVariants}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.55, ease: [0.22, 0.61, 0.36, 1], delay }}
+      className="group h-full rounded-[14px] border border-[#D9E1EC] bg-white px-5 py-5 shadow-[0_10px_24px_rgba(13,40,74,0.08)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_16px_30px_rgba(13,40,74,0.14)] sm:px-6"
     >
       <p className="m-0 font-['JetBrains_Mono',monospace] text-[2.3rem] font-semibold leading-none tracking-[-0.02em] text-brand-navy900 sm:text-[2.8rem]">
         <span>{displayValue}</span>
@@ -36,22 +42,16 @@ function StatCounter({ value, suffix, label }) {
       <p className="m-0 mt-2 whitespace-normal break-words text-[0.84rem] font-extrabold uppercase leading-[1.35] tracking-[0.06em] text-brand-gray500 sm:text-[0.9rem]">
         {label}
       </p>
-    </article>
+    </motion.article>
   );
 }
 
 function AboutSection({ data, className = "" }) {
-  const sectionRef = useRef(null);
-
   return (
-    <motion.section
-      ref={sectionRef}
+    <AnimatedSection
       id="about"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: [0.17, 0.67, 0.83, 0.67] }}
-      viewport={{ once: true, amount: 0.2 }}
-      className={`animate-reveal relative mt-8 -mx-3 scroll-mt-28 overflow-hidden bg-transparent px-3 py-10 [animation-delay:120ms] sm:-mx-6 sm:px-6 sm:py-12 lg:-mx-10 lg:px-10 lg:py-20 2xl:-mx-14 2xl:px-14 ${className}`}
+      backgroundClassName="bg-gray-50"
+      className={`mt-8 overflow-hidden [animation-delay:120ms] ${className}`}
     >
       <div className="relative z-10 mx-auto w-full max-w-[1200px]">
         <div className="grid grid-cols-1 gap-8 px-1 sm:gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
@@ -68,7 +68,7 @@ function AboutSection({ data, className = "" }) {
           </div>
 
           <div className="order-2 flex flex-col gap-6 sm:gap-7 lg:gap-8">
-            <header className="space-y-4">
+            <header className="mb-12 space-y-4">
               <p className="section-eyebrow text-[#B18428]">{data.eyebrow}</p>
               <h2 className="m-0 max-w-[22ch] text-[1.7rem] font-black leading-[1.15] tracking-[-0.02em] text-brand-navy900 sm:text-[2.15rem] lg:text-[2.65rem]">
                 {data.title}
@@ -95,15 +95,15 @@ function AboutSection({ data, className = "" }) {
               </article>
             ) : null}
 
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-              <StatCounter value={10} suffix="+" label="Years Experience" />
-              <StatCounter value={50} suffix="+" label="Projects" />
-              <StatCounter value={100} suffix="%" label="Sustainability" />
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              <StatCounter value={10} suffix="+" label="Years Experience" delay={0} />
+              <StatCounter value={50} suffix="+" label="Projects" delay={0.08} />
+              <StatCounter value={100} suffix="%" label="Sustainability" delay={0.16} />
             </div>
           </div>
         </div>
       </div>
-    </motion.section>
+    </AnimatedSection>
   );
 }
 

@@ -90,7 +90,7 @@ function ProjectsSection({ data, className = "" }) {
       className={`animate-reveal -mx-3 scroll-mt-28 bg-[linear-gradient(180deg,#0A0A0F_0%,#111827_100%)] px-3 pt-0 pb-12 text-white [animation-delay:280ms] sm:-mx-6 sm:px-6 sm:pt-0 sm:pb-16 lg:-mx-10 lg:px-10 lg:pt-0 lg:pb-20 2xl:-mx-14 2xl:px-14 ${className}`}
     >
       <div className="mx-auto w-full max-w-[1320px]">
-        <div className="flex items-start justify-between gap-4 sm:items-end sm:gap-8">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
           <div className="min-w-0 max-w-[840px]">
             <h2 className="m-0 text-[1.8rem] font-black uppercase leading-[1.08] tracking-[0.08em] text-white sm:text-[2.35rem] lg:text-[3.1rem]">
               Featured Projects

@@ -46,7 +46,7 @@ function HeroSection({ data, contact }) {
                   </p>
                 ) : null}
 
-                <h1 className="m-0 max-w-[11ch] text-[2.55rem] font-black leading-[1.02] tracking-[-0.065em] text-white [text-shadow:0_16px_36px_rgba(2,6,23,0.55)] sm:max-w-[10ch] sm:text-[3.6rem] sm:leading-[1.0] lg:text-[5.3rem]">
+                <h1 className="m-0 max-w-[16ch] text-[2.55rem] font-black leading-[1.02] tracking-[-0.065em] text-white [text-shadow:0_16px_36px_rgba(2,6,23,0.55)] sm:max-w-[10ch] sm:text-[3.6rem] sm:leading-[1.0] lg:text-[5.3rem]">
                   {leadingHeadline}
                   {highlightedWord ? (
                     <>

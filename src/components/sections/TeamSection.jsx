@@ -139,12 +139,13 @@ function TeamSection({
             </div>
 
             <div className="justify-self-end lg:pr-2">
-              <figure className="m-0 overflow-hidden rounded-[24px] border border-white/10 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.14)] lg:w-[640px]">
+              <figure className="relative m-0 overflow-hidden rounded-[24px] border border-white/10 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.14)] lg:w-[640px]">
                 <img
                   src={heroImage}
                   alt={heroImageAlt}
                   className="aspect-[0.92/1] w-full object-cover object-center sm:aspect-[0.98/1] lg:aspect-[1/1.02]"
                 />
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.1)_0%,rgba(5,8,22,0.24)_56%,rgba(5,8,22,0.42)_100%)]" aria-hidden="true" />
               </figure>
             </div>
           </div>

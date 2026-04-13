@@ -125,7 +125,7 @@ function TeamSection({ data, className = "", showList = true, backgroundClassNam
             </div>
 
             <a
-              href="#team-list"
+              href="#team"
               className="mt-10 inline-flex items-center justify-center rounded-[12px] border border-white/12 bg-white/[0.06] px-8 py-3.5 text-[0.88rem] font-semibold uppercase tracking-[0.12em] text-white shadow-[0_16px_34px_rgba(2,6,23,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#D5B223]/45 hover:bg-white/[0.1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D5B223] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050816]"
             >
               Meet The Team

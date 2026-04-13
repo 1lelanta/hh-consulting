@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Button from "../ui/Button";
-import Card from "../ui/Card";
 
 function ProjectsSection({ data, className = "" }) {
   const [isMobile, setIsMobile] = useState(() => window.matchMedia("(max-width: 639px)").matches);
@@ -35,12 +34,12 @@ function ProjectsSection({ data, className = "" }) {
 
   const renderProjectItem = (project) => {
     const content = (
-      <Card className="flex h-full min-w-[42vw] max-w-[42vw] flex-col sm:min-w-0 sm:max-w-none">
+      <div className="group flex h-full min-w-[42vw] max-w-[42vw] flex-col overflow-hidden rounded-none border border-white/12 bg-white/[0.06] shadow-[0_16px_34px_rgba(2,6,23,0.24)] transition-all duration-300 hover:-translate-y-2 hover:border-[#D5B223]/35 hover:shadow-[0_22px_40px_rgba(2,6,23,0.3)] sm:min-w-0 sm:max-w-none">
         <div className="relative overflow-hidden">
           <img
             src={project.image}
             alt={project.imageAlt}
-            className="aspect-square w-full object-cover object-center transition-all duration-300 group-hover:scale-105 sm:aspect-[4/3]"
+            className="aspect-square w-full rounded-none object-cover object-center transition-all duration-300 group-hover:scale-105 sm:aspect-[4/3]"
           />
 
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,14,0.02)_0%,rgba(8,10,14,0.62)_100%)]" />
@@ -56,8 +55,7 @@ function ProjectsSection({ data, className = "" }) {
             </p>
           </div>
         </div>
-
-      </Card>
+      </div>
     );
 
     if (project.href && project.href !== "#") {

@@ -50,37 +50,27 @@ function AboutSection({ data, className = "" }) {
   return (
     <AnimatedSection
       id="about"
-      backgroundClassName="bg-[linear-gradient(180deg,#0A0A0F_0%,#111827_100%)]"
+      backgroundClassName="bg-[#0A1020]"
       className={`mt-8 overflow-hidden [animation-delay:120ms] ${className}`}
     >
-      <div className="relative z-10 mx-auto w-full max-w-[1200px]">
-        <div className="grid grid-cols-1 gap-8 px-1 sm:gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
-          <div className="order-1">
-            {data.image ? (
-              <figure className="m-0 overflow-hidden rounded-[20px] border border-white/10 bg-white shadow-[0_14px_30px_rgba(13,40,74,0.12)]">
-                <img
-                  src={data.image}
-                  alt={data.imageAlt || "About us image"}
-                  className="block h-auto w-full max-w-full object-cover"
-                />
-              </figure>
-            ) : null}
-          </div>
-
-          <div className="order-2 flex flex-col gap-6 sm:gap-7 lg:gap-8">
-            <header className="mb-12 space-y-4">
+      <div className="relative z-10 mx-auto w-full max-w-[1240px]">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16">
+          <div className="max-w-[660px]">
+            <div className="flex items-center gap-3">
+              <span className="h-[2px] w-14 bg-[#D5B223]" />
               <p className="section-eyebrow text-[#D5B223]">{data.eyebrow}</p>
-              <h2 className="m-0 max-w-[22ch] text-[1.7rem] font-black leading-[1.15] tracking-[-0.02em] text-white sm:text-[2.15rem] lg:text-[2.65rem]">
-                {data.title}
-              </h2>
-            </header>
+            </div>
 
-            <p className="m-0 max-w-[64ch] text-[1rem] leading-[1.65] text-white/72 sm:text-[1.05rem] lg:text-[1.1rem]">
+            <h2 className="m-0 mt-5 max-w-[16ch] text-[2.5rem] font-black leading-[1.02] tracking-[-0.04em] text-white sm:text-[3.35rem] lg:text-[4.2rem]">
+              {data.title}
+            </h2>
+
+            <p className="m-0 mt-7 max-w-[36rem] text-[1rem] leading-8 text-white/72 sm:text-[1.08rem]">
               {data.description}
             </p>
 
             {data.approachTitle || data.approachDescription ? (
-              <article className="rounded-[16px] border border-white/10 bg-white/[0.06] px-6 py-6 shadow-[0_12px_28px_rgba(2,6,23,0.18)] sm:px-7 sm:py-7">
+              <article className="mt-8 rounded-[20px] border border-white/10 bg-white/[0.05] px-6 py-6 shadow-[0_18px_38px_rgba(2,6,23,0.24)] sm:px-7 sm:py-7">
                 {data.approachTitle ? (
                   <h3 className="m-0 text-[1.2rem] font-extrabold leading-tight text-white sm:text-[1.35rem] lg:text-[1.5rem]">
                     {data.approachTitle}
@@ -88,18 +78,30 @@ function AboutSection({ data, className = "" }) {
                 ) : null}
 
                 {data.approachDescription ? (
-                  <p className="m-0 mt-3 max-w-[62ch] text-[0.98rem] leading-[1.65] text-white/70 sm:mt-4 sm:text-[1.04rem]">
+                  <p className="m-0 mt-3 max-w-[62ch] text-[0.98rem] leading-[1.7] text-white/70 sm:mt-4 sm:text-[1.04rem]">
                     {data.approachDescription}
                   </p>
                 ) : null}
               </article>
             ) : null}
 
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               <StatCounter value={10} suffix="+" label="Years Experience" delay={0} />
               <StatCounter value={50} suffix="+" label="Projects" delay={0.08} />
               <StatCounter value={100} suffix="%" label="Sustainability" delay={0.16} />
             </div>
+          </div>
+
+          <div className="justify-self-end lg:pr-2">
+            {data.image ? (
+              <figure className="m-0 overflow-hidden rounded-[24px] border border-white/10 bg-white/5 shadow-[0_26px_60px_rgba(2,6,23,0.38)] lg:w-[640px]">
+                <img
+                  src={data.image}
+                  alt={data.imageAlt || "About us image"}
+                  className="block h-auto w-full max-w-full object-cover"
+                />
+              </figure>
+            ) : null}
           </div>
         </div>
       </div>

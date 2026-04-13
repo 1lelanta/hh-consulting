@@ -7,7 +7,6 @@ import ServicesSection from "./components/sections/ServicesSection";
 import ProjectsSection from "./components/sections/ProjectsSection";
 import TrustedCertifiedSection from "./components/sections/TrustedCertifiedSection";
 import ProjectsArchivePage from "./components/sections/ProjectsArchivePage";
-import ClientsSection from "./components/sections/ClientsSection";
 import TeamSection from "./components/sections/TeamSection";
 import HomeCtaSection from "./components/sections/HomeCtaSection";
 import ContactSection from "./components/sections/ContactSection";
@@ -150,7 +149,6 @@ function App() {
                     }}
                     className="lg:mt-8"
                   />
-                  <ClientsSection data={siteContent.clients} className="lg:mt-8" />
                   <TrustedCertifiedSection className="lg:mt-8" />
                 </>
               ) : isTeamPage ? (

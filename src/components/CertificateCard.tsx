@@ -30,27 +30,10 @@ function CertificateCard({ certificate, index }: CertificateCardProps) {
         />
       </div>
 
-      <div className="flex h-full flex-col p-5 sm:p-6">
-        <p className="m-0 text-[0.75rem] font-bold uppercase tracking-[0.18em] text-[#B18428]">
-          {certificate.organization}
-        </p>
-        <h3 className="m-0 mt-3 text-[1.05rem] font-extrabold leading-snug text-brand-navy900 sm:text-[1.12rem]">
+      <div className="flex h-full flex-col p-5 sm:p-6 items-center justify-center">
+        <h3 className="m-0 text-[1.05rem] font-extrabold leading-snug text-brand-navy900 sm:text-[1.12rem] text-center">
           {certificate.title}
         </h3>
-        <p className="m-0 mt-3 text-[0.94rem] leading-7 text-brand-gray500">
-          {certificate.description}
-        </p>
-
-        <div className="mt-6">
-          <a
-            href={certificate.image}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center rounded-full bg-brand-navy900 px-5 py-2.5 text-[0.82rem] font-bold uppercase tracking-[0.12em] text-white transition duration-300 hover:bg-[#0F2746] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D5B223] focus-visible:ring-offset-2"
-          >
-            View Certificate
-          </a>
-        </div>
       </div>
     </motion.article>
   );

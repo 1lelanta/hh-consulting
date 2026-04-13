@@ -26,7 +26,7 @@ export const certificates = [
   {
     title: "Membership Certificate",
     organization: "Ethiopian Consulting Engineers & Architects Association",
-    description: "Official professional membership recognizing the firm’s engineering practice.",
+    description: "Professional membership recognition.",
     image: "/images/certificates/certificate4.jpg",
     alt: "Membership certificate from Ethiopian Consulting Engineers and Architects Association",
   },

@@ -1,8 +1,17 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Button from "../ui/Button";
 
-function MissionIcon({ type }) {
-  const common = "h-6 w-6 text-[#D5B223]";
+function IconBadge({ type }) {
+  const common = "h-6 w-6 text-[#FACC15]";
+
+  if (type === "approach") {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={common}>
+        <path d="M4 18V6a2 2 0 0 1 2-2h6l2 2h6a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z" />
+        <path d="M8 11h8M8 15h5" />
+      </svg>
+    );
+  }
 
   if (type === "vision") {
     return (
@@ -12,17 +21,6 @@ function MissionIcon({ type }) {
       </svg>
     );
   }
-
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={common}>
-      <path d="M12 2.5 4.5 6v5.2c0 4.6 3 8.8 7.5 10.3 4.5-1.5 7.5-5.7 7.5-10.3V6L12 2.5Z" />
-      <path d="M12 7v5l3 2" />
-    </svg>
-  );
-}
-
-function ValueIcon({ type }) {
-  const common = "h-6 w-6 text-[#D5B223]";
 
   if (type === "leaf") {
     return (
@@ -64,159 +62,205 @@ function ValueIcon({ type }) {
 function AboutSection({ data, valuesData, stats = {}, className = "" }) {
   const reduceMotion = useReducedMotion();
   const valueItems = Array.isArray(valuesData?.items) ? valuesData.items.slice(0, 6) : [];
+
   const statItems = [
-    { value: `${stats.projects ?? 8}+`, label: "Projects completed" },
-    { value: `${stats.years ?? 10}+`, label: "Years experience" },
-    { value: `${stats.clients ?? 8}+`, label: "Clients served" },
-    { value: `${stats.countries ?? 2}+`, label: "Countries" },
+    { value: `${stats.years ?? 10}+`, label: "Years Experience" },
+    { value: `${stats.projects ?? 50}+`, label: "Projects Completed" },
+    { value: "100%", label: "Client Satisfaction" },
+  ];
+
+  const paragraphs = [
+    "A multidisciplinary firm based in Ethiopia, dedicated to providing innovative, sustainable, and integrated solutions in architecture and engineering.",
+    "We combine visionary design with technical excellence to deliver impactful and resilient projects across Ethiopia and beyond.",
   ];
 
   return (
     <motion.section
       id="about-us"
-      initial={reduceMotion ? false : { opacity: 0, y: 32 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 28 }}
       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.7, ease: [0.22, 0.61, 0.36, 1] }}
-      className={`animate-reveal relative scroll-mt-28 overflow-hidden bg-[#F8FAFC] text-brand-navy950 ${className}`}
+      className={`animate-reveal relative scroll-mt-28 overflow-hidden bg-[#050816] text-white ${className}`}
     >
-      <div
-        className="absolute inset-x-0 top-0 h-[560px] bg-[linear-gradient(180deg,#081224_0%,#10192C_58%,rgba(16,25,44,0)_100%)]"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-[560px] opacity-60 [background:radial-gradient(circle_at_20%_20%,rgba(213,178,35,0.12),transparent_30%),radial-gradient(circle_at_80%_10%,rgba(92,119,160,0.16),transparent_34%)]"
-        aria-hidden="true"
-      />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(250,204,21,0.10),transparent_25%),radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.12),transparent_28%),linear-gradient(180deg,#050816_0%,#0B1220_55%,#050816_100%)]" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:34px_34px]" aria-hidden="true" />
 
-      <div className="relative z-10">
-        <section className="mx-auto w-full max-w-[1240px] px-3 py-20 sm:px-6 sm:py-24 lg:px-10 lg:py-28 2xl:px-14">
-          <div className="max-w-[980px] pt-6 sm:pt-10 lg:pt-14">
-            <p className="section-eyebrow text-[#F1D38A]">{data.eyebrow}</p>
-            <h1 className="m-0 mt-4 text-[clamp(3.4rem,8vw,6.6rem)] font-black leading-[0.92] tracking-[-0.06em] text-white">
+      <div className="relative z-10 mx-auto w-full max-w-[1240px] px-4 py-[60px] sm:px-6 sm:py-[72px] lg:px-10 2xl:px-14">
+        <section className="pt-[20px] pb-[60px] sm:pt-[32px]">
+          <div className="max-w-[960px]">
+            <p className="section-eyebrow text-[#FACC15]">{data.eyebrow.toUpperCase()}</p>
+            <h1 className="m-0 mt-4 text-[clamp(3rem,8vw,6.5rem)] font-black leading-[0.92] tracking-[-0.06em] text-white [text-shadow:0_14px_36px_rgba(0,0,0,0.45)]">
               About Us
             </h1>
-            <p className="m-0 mt-6 max-w-[850px] text-[1.06rem] leading-8 text-white/76 sm:text-[1.14rem]">
-              {data.title} is a multidisciplinary firm based in Ethiopia, dedicated to providing innovative, sustainable, and integrated solutions in architecture and engineering.
+            <p className="m-0 mt-5 max-w-[620px] text-[1rem] leading-7 text-white/76 sm:text-[1.08rem] sm:leading-8">
+              {data.title}
             </p>
-            <p className="m-0 mt-4 max-w-[820px] text-[0.98rem] leading-7 text-white/62 sm:text-[1.04rem]">
-              We combine visionary design with technical excellence to deliver impactful and resilient projects across Ethiopia and beyond.
-            </p>
+            <div className="mt-7 max-w-[620px] space-y-4 text-[0.98rem] leading-[1.7] text-white/72 sm:text-[1.05rem]">
+              <p className="m-0">{data.description}</p>
+            </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <span className="inline-flex items-center rounded-full border border-white/14 bg-white/10 px-4 py-2 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-white/90 backdrop-blur">
+              <span className="inline-flex items-center rounded-full border border-white/15 bg-white/8 px-4 py-2 text-[0.72rem] font-bold uppercase tracking-[0.18em] text-[#FACC15] backdrop-blur">
                 Architecture
               </span>
-              <span className="inline-flex items-center rounded-full border border-white/14 bg-white/10 px-4 py-2 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-white/90 backdrop-blur">
+              <span className="inline-flex items-center rounded-full border border-white/15 bg-white/8 px-4 py-2 text-[0.72rem] font-bold uppercase tracking-[0.18em] text-[#FACC15] backdrop-blur">
                 Engineering
               </span>
-              <span className="inline-flex items-center rounded-full border border-white/14 bg-white/10 px-4 py-2 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-white/90 backdrop-blur">
+              <span className="inline-flex items-center rounded-full border border-white/15 bg-white/8 px-4 py-2 text-[0.72rem] font-bold uppercase tracking-[0.18em] text-[#FACC15] backdrop-blur">
                 Supervision
               </span>
             </div>
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-[1240px] px-3 py-20 sm:px-6 sm:py-24 lg:px-10 2xl:px-14">
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+        <section className="py-[60px] sm:py-[72px]">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[0.96fr_1.04fr] lg:items-center lg:gap-14">
             <div className="order-2 lg:order-1">
               <div className="flex items-center gap-3">
-                <span className="h-[2px] w-14 bg-[#D5B223]" />
-                <p className="section-eyebrow text-[#B18428]">Our Story</p>
+                <span className="h-[2px] w-14 bg-[#FACC15]" />
+                <p className="section-eyebrow text-[#FACC15]">OUR STORY</p>
               </div>
 
-              <h2 className="m-0 mt-5 max-w-[16ch] text-[2.5rem] font-black leading-[1.02] tracking-[-0.04em] text-brand-navy950 sm:text-[3.25rem] lg:text-[4.1rem]">
-                Built on precision and guided by purpose.
+              <h2 className="m-0 mt-5 max-w-[16ch] text-[clamp(2.2rem,5vw,4.1rem)] font-black leading-[1.02] tracking-[-0.05em] text-white">
+                Built on precision and guided by purpose
               </h2>
 
-              <div className="mt-8 space-y-5 max-w-[42rem] text-[1.02rem] leading-8 text-brand-gray500 sm:text-[1.08rem]">
+              <div className="mt-6 max-w-[500px] space-y-4 text-[0.98rem] leading-[1.75] text-white/72 sm:text-[1.04rem]">
                 <p className="m-0">
-                  <strong className="font-semibold text-brand-navy950">A multidisciplinary firm based in Ethiopia,</strong> dedicated to providing <strong className="font-semibold text-brand-navy950">innovative, sustainable, and integrated solutions</strong> in architecture and engineering.
+                  <strong className="font-semibold text-white">A multidisciplinary firm based in Ethiopia,</strong> dedicated to providing <strong className="font-semibold text-white">innovative, sustainable, and integrated solutions</strong> in architecture and engineering.
                 </p>
                 <p className="m-0">
-                  We combine <strong className="font-semibold text-brand-navy950">visionary design</strong> with <strong className="font-semibold text-brand-navy950">technical excellence</strong> to deliver impactful and resilient projects across Ethiopia and beyond.
+                  We combine <strong className="font-semibold text-white">visionary design</strong> with <strong className="font-semibold text-white">technical excellence</strong> to deliver impactful and resilient projects across Ethiopia and beyond.
                 </p>
               </div>
 
-              {data.approachTitle || data.approachDescription ? (
-                <article className="mt-8 rounded-[20px] border border-[#D5DEE9] bg-white px-6 py-6 shadow-[0_18px_38px_rgba(13,40,74,0.08)] sm:px-7 sm:py-7">
-                  {data.approachTitle ? (
-                    <h3 className="m-0 text-[1.15rem] font-extrabold leading-tight text-brand-navy950 sm:text-[1.32rem] lg:text-[1.45rem]">
-                      {data.approachTitle}
-                    </h3>
-                  ) : null}
-
-                  {data.approachDescription ? (
-                    <p className="m-0 mt-3 max-w-[62ch] text-[0.98rem] leading-[1.75] text-brand-gray500 sm:mt-4 sm:text-[1.04rem]">
-                      {data.approachDescription}
+              <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                {statItems.map((item, index) => (
+                  <motion.article
+                    key={item.label}
+                    initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+                    whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.5, ease: [0.22, 0.61, 0.36, 1], delay: index * 0.05 }}
+                    whileHover={reduceMotion ? undefined : { y: -4, scale: 1.01 }}
+                    className="rounded-[18px] border border-white/10 bg-white/[0.06] px-4 py-5 text-center shadow-[0_16px_34px_rgba(0,0,0,0.22)] backdrop-blur-sm transition-all duration-300 hover:border-[#FACC15]/30 hover:shadow-[0_20px_40px_rgba(0,0,0,0.28)]"
+                  >
+                    <p className="m-0 text-[clamp(2rem,6vw,3.4rem)] font-black leading-none tracking-[-0.05em] text-white">
+                      {item.value}
                     </p>
-                  ) : null}
-                </article>
-              ) : null}
+                    <p className="m-0 mt-3 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-white/72">
+                      {item.label}
+                    </p>
+                  </motion.article>
+                ))}
+              </div>
             </div>
 
-            <div className="order-1 lg:order-2 lg:justify-self-end">
+            <div className="order-1 lg:order-2">
               {data.image ? (
-                <figure className="group relative m-0 overflow-hidden rounded-[28px] border border-white/10 bg-white shadow-[0_28px_70px_rgba(2,6,23,0.16)] lg:w-[620px]">
+                <motion.figure
+                  initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+                  whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.65, ease: [0.22, 0.61, 0.36, 1] }}
+                  whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+                  className="group relative m-0 overflow-hidden rounded-[20px] border border-[#FACC15]/20 shadow-[0_24px_60px_rgba(0,0,0,0.42)]"
+                >
                   <img
                     src={data.image}
                     alt={data.imageAlt || "About us image"}
                     className="block h-auto w-full max-w-full object-cover transition duration-500 group-hover:scale-[1.02]"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(8,18,36,0)_0%,rgba(8,18,36,0.16)_100%)]" aria-hidden="true" />
-                </figure>
+                  <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02)_0%,rgba(0,0,0,0.22)_100%)]" aria-hidden="true" />
+                  <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_0_1px_rgba(250,204,21,0.18),inset_0_0_0_10px_rgba(250,204,21,0.02)]" aria-hidden="true" />
+                </motion.figure>
               ) : null}
             </div>
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-[1240px] px-3 py-20 sm:px-6 sm:py-24 lg:px-10 2xl:px-14">
+        <section className="py-[60px] sm:py-[72px]">
+          <div className="max-w-[860px]">
+            <div className="flex items-center gap-3">
+              <span className="h-[2px] w-14 bg-[#FACC15]" />
+              <p className="section-eyebrow text-[#FACC15]">OUR APPROACH</p>
+            </div>
+          </div>
+
+          {data.approachTitle || data.approachDescription ? (
+            <motion.article
+              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.55, ease: [0.22, 0.61, 0.36, 1] }}
+              whileHover={reduceMotion ? undefined : { y: -4 }}
+              className="mt-6 rounded-[16px] border border-white/12 bg-white/[0.06] p-5 shadow-[0_18px_38px_rgba(0,0,0,0.24)] backdrop-blur-md sm:p-6"
+            >
+              <div className="flex items-start gap-4">
+                <div className="inline-grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-[#FACC15]/20 bg-[#FACC15]/10">
+                  <IconBadge type="approach" />
+                </div>
+
+                <div>
+                  {data.approachTitle ? (
+                    <h3 className="m-0 text-[1.15rem] font-extrabold leading-tight text-white sm:text-[1.35rem]">
+                      {data.approachTitle}
+                    </h3>
+                  ) : null}
+
+                  {data.approachDescription ? (
+                    <p className="m-0 mt-3 max-w-[62ch] text-[0.98rem] leading-[1.75] text-white/72 sm:text-[1.04rem]">
+                      {data.approachDescription}
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+            </motion.article>
+          ) : null}
+        </section>
+
+        <section className="py-[60px] sm:py-[72px]">
           <div className="max-w-[840px]">
             <div className="flex items-center gap-3">
-              <span className="h-[2px] w-14 bg-[#D5B223]" />
-              <p className="section-eyebrow text-[#B18428]">Mission &amp; Vision</p>
+              <span className="h-[2px] w-14 bg-[#FACC15]" />
+              <p className="section-eyebrow text-[#FACC15]">MISSION &amp; VISION</p>
             </div>
 
-            <h2 className="m-0 mt-5 text-[2rem] font-black leading-[1.06] tracking-[-0.04em] text-brand-navy950 sm:text-[2.75rem] lg:text-[3.4rem]">
-              What drives our work.
+            <h2 className="m-0 mt-5 text-[clamp(2rem,4vw,3.35rem)] font-black leading-[1.04] tracking-[-0.05em] text-white">
+              What drives our work
             </h2>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
+          <div className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-2">
             {[
-              {
-                type: "mission",
-                title: "Mission",
-                text: data.description,
-              },
-              {
-                type: "vision",
-                title: "Vision",
-                text: data.approachDescription,
-              },
-            ].map((item) => (
+              { title: "Mission", icon: "mission", text: data.description },
+              { title: "Vision", icon: "vision", text: data.approachDescription },
+            ].map((item, index) => (
               <motion.article
                 key={item.title}
-                initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
                 whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 0.55, ease: [0.22, 0.61, 0.36, 1] }}
-                whileHover={reduceMotion ? undefined : { y: -6, scale: 1.01 }}
-                className="group relative overflow-hidden rounded-[24px] border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(247,249,252,0.92)_100%)] p-6 shadow-[0_18px_38px_rgba(13,40,74,0.08)] transition-all duration-300 sm:p-7"
+                transition={{ duration: 0.55, ease: [0.22, 0.61, 0.36, 1], delay: index * 0.06 }}
+                whileHover={reduceMotion ? undefined : { y: -5, scale: 1.01 }}
+                className="group rounded-[20px] border border-white/10 bg-white/[0.06] p-5 shadow-[0_18px_36px_rgba(0,0,0,0.24)] backdrop-blur-md transition-all duration-300 hover:border-[#FACC15]/25 hover:shadow-[0_22px_42px_rgba(0,0,0,0.3)] sm:p-6"
               >
                 <div className="flex items-center gap-4">
-                  <div className="inline-grid h-12 w-12 place-items-center rounded-full border border-[#D5B223]/25 bg-[#F4EED8] shadow-[0_0_0_8px_rgba(213,178,35,0.06)]">
-                    <MissionIcon type={item.type} />
+                  <div className="inline-grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-[#FACC15]/20 bg-[#FACC15]/10">
+                    <IconBadge type={item.icon} />
                   </div>
                   <div>
-                    <p className="m-0 text-[0.74rem] font-bold uppercase tracking-[0.18em] text-[#B18428]">{item.title}</p>
-                    <h3 className="m-0 mt-1 text-[1.45rem] font-black leading-tight tracking-[-0.03em] text-brand-navy950 sm:text-[1.7rem]">
+                    <p className="m-0 text-[0.72rem] font-bold uppercase tracking-[0.18em] text-[#FACC15]">
+                      {item.title}
+                    </p>
+                    <h3 className="m-0 mt-1 text-[1.25rem] font-black leading-tight tracking-[-0.03em] text-white sm:text-[1.55rem]">
                       {item.title === "Mission" ? "Delivering enduring value." : "Setting the benchmark."}
                     </h3>
                   </div>
                 </div>
 
-                <p className="m-0 mt-5 max-w-[62ch] text-[1rem] leading-8 text-brand-gray500 sm:text-[1.05rem]">
+                <p className="m-0 mt-5 max-w-[62ch] text-[0.98rem] leading-[1.75] text-white/72 sm:text-[1.04rem]">
                   {item.text}
                 </p>
               </motion.article>
@@ -224,42 +268,42 @@ function AboutSection({ data, valuesData, stats = {}, className = "" }) {
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-[1240px] px-3 py-20 sm:px-6 sm:py-24 lg:px-10 2xl:px-14">
-          <div className="max-w-[840px]">
+        <section className="py-[60px] sm:py-[72px]">
+          <div className="max-w-[860px]">
             <div className="flex items-center gap-3">
-              <span className="h-[2px] w-14 bg-[#D5B223]" />
-              <p className="section-eyebrow text-[#B18428]">Core Values</p>
+              <span className="h-[2px] w-14 bg-[#FACC15]" />
+              <p className="section-eyebrow text-[#FACC15]">CORE VALUES</p>
             </div>
 
-            <h2 className="m-0 mt-5 text-[2rem] font-black leading-[1.06] tracking-[-0.04em] text-brand-navy950 sm:text-[2.75rem] lg:text-[3.4rem]">
+            <h2 className="m-0 mt-5 text-[clamp(2rem,4vw,3.35rem)] font-black leading-[1.04] tracking-[-0.05em] text-white">
               {valuesData?.title || "Why Choose Us"}
             </h2>
 
-            <p className="m-0 mt-4 max-w-[800px] text-[1rem] leading-8 text-brand-gray500 sm:text-[1.06rem]">
+            <p className="m-0 mt-4 max-w-[820px] text-[0.98rem] leading-[1.75] text-white/72 sm:text-[1.04rem]">
               {valuesData?.subtitle || "The principles behind every project we design, coordinate, and deliver."}
             </p>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {valueItems.map((item, index) => (
               <motion.article
                 key={item.title}
-                initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
                 whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.55, ease: [0.22, 0.61, 0.36, 1], delay: index * 0.06 }}
-                whileHover={reduceMotion ? undefined : { y: -6, scale: 1.01 }}
-                className="group relative overflow-hidden rounded-[22px] border border-[#D5DEE9] bg-white p-5 shadow-[0_16px_34px_rgba(13,40,74,0.08)] transition-all duration-300 hover:border-[#D5B223]/35 hover:shadow-[0_24px_44px_rgba(13,40,74,0.14)]"
+                transition={{ duration: 0.55, ease: [0.22, 0.61, 0.36, 1], delay: index * 0.05 }}
+                whileHover={reduceMotion ? undefined : { y: -5, scale: 1.01 }}
+                className="group rounded-[18px] border border-white/10 bg-white/[0.06] p-5 shadow-[0_16px_32px_rgba(0,0,0,0.22)] backdrop-blur-md transition-all duration-300 hover:border-[#FACC15]/25 hover:shadow-[0_22px_40px_rgba(0,0,0,0.28)]"
               >
-                <div className="inline-grid h-12 w-12 place-items-center rounded-2xl border border-[#D5B223]/20 bg-[#F4EED8] transition duration-300 group-hover:scale-105 group-hover:border-[#D5B223]/35">
-                  <ValueIcon type={item.icon} />
+                <div className="inline-grid h-12 w-12 place-items-center rounded-2xl border border-[#FACC15]/20 bg-[#FACC15]/10 transition duration-300 group-hover:scale-105">
+                  <IconBadge type={item.icon} />
                 </div>
 
-                <h3 className="m-0 mt-5 text-[1.1rem] font-extrabold leading-tight tracking-[-0.02em] text-brand-navy950">
+                <h3 className="m-0 mt-5 text-[1.05rem] font-extrabold leading-tight tracking-[-0.02em] text-white">
                   {item.title}
                 </h3>
 
-                <p className="m-0 mt-3 text-[0.95rem] leading-7 text-brand-gray500">
+                <p className="m-0 mt-3 text-[0.95rem] leading-[1.75] text-white/70">
                   {item.description}
                 </p>
               </motion.article>
@@ -267,31 +311,31 @@ function AboutSection({ data, valuesData, stats = {}, className = "" }) {
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-[1240px] px-3 py-20 sm:px-6 sm:py-24 lg:px-10 2xl:px-14">
-          <div className="rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,#0A1020_0%,#111827_55%,#0B1730_100%)] px-6 py-8 shadow-[0_28px_70px_rgba(2,6,23,0.36)] sm:px-8 sm:py-10 lg:px-10">
+        <section className="py-[60px] sm:py-[72px]">
+          <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(135deg,#0B1220_0%,#111827_55%,#0A1020_100%)] p-5 shadow-[0_24px_60px_rgba(0,0,0,0.35)] sm:p-7 lg:p-10">
             <div className="max-w-[760px]">
               <div className="flex items-center gap-3">
-                <span className="h-[2px] w-14 bg-[#D5B223]" />
-                <p className="section-eyebrow text-[#F1D38A]">At a glance</p>
+                <span className="h-[2px] w-14 bg-[#FACC15]" />
+                <p className="section-eyebrow text-[#FACC15]">AT A GLANCE</p>
               </div>
 
-              <h2 className="m-0 mt-5 text-[2rem] font-black leading-[1.06] tracking-[-0.04em] text-white sm:text-[2.75rem] lg:text-[3.4rem]">
+              <h2 className="m-0 mt-5 text-[clamp(2rem,4vw,3.35rem)] font-black leading-[1.04] tracking-[-0.05em] text-white">
                 Proven impact across projects, people, and places.
               </h2>
             </div>
 
-            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
               {statItems.map((item) => (
                 <motion.article
                   key={item.label}
-                  whileHover={reduceMotion ? undefined : { y: -4, scale: 1.02 }}
+                  whileHover={reduceMotion ? undefined : { y: -4, scale: 1.01 }}
                   transition={{ duration: 0.25, ease: [0.22, 0.61, 0.36, 1] }}
-                  className="rounded-[20px] border border-white/10 bg-white/[0.06] px-5 py-6 shadow-[0_16px_32px_rgba(2,6,23,0.22)] backdrop-blur-sm"
+                  className="rounded-[18px] border border-white/10 bg-white/[0.06] px-5 py-6 text-center shadow-[0_16px_34px_rgba(0,0,0,0.22)]"
                 >
-                  <p className="m-0 text-[clamp(2.4rem,4.2vw,3.8rem)] font-black leading-none tracking-[-0.05em] text-white">
+                  <p className="m-0 text-[clamp(2.2rem,7vw,3.6rem)] font-black leading-none tracking-[-0.05em] text-white">
                     {item.value}
                   </p>
-                  <p className="m-0 mt-3 text-[0.82rem] font-bold uppercase tracking-[0.16em] text-white/68">
+                  <p className="m-0 mt-3 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-white/70">
                     {item.label}
                   </p>
                 </motion.article>
@@ -300,19 +344,19 @@ function AboutSection({ data, valuesData, stats = {}, className = "" }) {
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-[1240px] px-3 py-20 sm:px-6 sm:py-24 lg:px-10 2xl:px-14">
+        <section className="py-[60px] sm:py-[72px]">
           <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
-            className="rounded-[28px] border border-[#D5DEE9] bg-white px-6 py-8 text-center shadow-[0_20px_42px_rgba(13,40,74,0.08)] sm:px-8 sm:py-10 lg:px-12"
+            className="rounded-[24px] border border-white/10 bg-white/[0.06] px-5 py-8 text-center shadow-[0_20px_44px_rgba(0,0,0,0.28)] backdrop-blur-md sm:px-8 lg:px-12"
           >
-            <p className="section-eyebrow text-[#B18428]">Let&apos;s talk</p>
-            <h2 className="m-0 mt-4 text-[2rem] font-black leading-[1.06] tracking-[-0.04em] text-brand-navy950 sm:text-[2.8rem] lg:text-[3.5rem]">
+            <p className="section-eyebrow text-[#FACC15]">LET&apos;S TALK</p>
+            <h2 className="m-0 mt-4 text-[clamp(2rem,4vw,3.35rem)] font-black leading-[1.04] tracking-[-0.05em] text-white">
               Let&apos;s build something great together
             </h2>
-            <p className="mx-auto m-0 mt-5 max-w-[720px] text-[1rem] leading-8 text-brand-gray500 sm:text-[1.06rem]">
+            <p className="mx-auto m-0 mt-5 max-w-[720px] text-[0.98rem] leading-[1.75] text-white/72 sm:text-[1.04rem]">
               Bring us your next architecture or engineering challenge, and we&apos;ll shape it into a clear, practical, and premium solution.
             </p>
 

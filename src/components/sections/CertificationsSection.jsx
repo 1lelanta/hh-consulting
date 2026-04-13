@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import CertificateCard from "../CertificateCard";
 
-const certificates = [
+export const certificates = [
   {
     title: "ISO Certification",
     organization: "International Organization for Standardization",

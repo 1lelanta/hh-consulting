@@ -5,7 +5,7 @@ import HeroSection from "./components/sections/HeroSection";
 import AboutSection from "./components/sections/AboutSection";
 import ServicesSection from "./components/sections/ServicesSection";
 import ProjectsSection from "./components/sections/ProjectsSection";
-import CertificationsSection from "./components/sections/CertificationsSection";
+import TrustedCertifiedSection from "./components/sections/TrustedCertifiedSection";
 import ProjectsArchivePage from "./components/sections/ProjectsArchivePage";
 import ClientsSection from "./components/sections/ClientsSection";
 import TeamSection from "./components/sections/TeamSection";
@@ -150,8 +150,8 @@ function App() {
                     }}
                     className="lg:mt-8"
                   />
-                  <CertificationsSection className="lg:mt-8" />
                   <ClientsSection data={siteContent.clients} className="lg:mt-8" />
+                  <TrustedCertifiedSection className="lg:mt-8" />
                 </>
               ) : isTeamPage ? (
                 <TeamSection data={siteContent.team} className="mt-8 lg:mt-8" />

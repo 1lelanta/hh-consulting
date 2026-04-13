@@ -92,7 +92,7 @@ function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-[linear-gradient(180deg,#F4F6FA_0%,#EEF2F8_100%)] px-0 pb-0 text-brand-navy950">
+    <div className="relative min-h-screen overflow-x-hidden bg-[#050816] px-0 pb-0 text-brand-navy950">
       {showPreloader ? (
         <div
           className={`preloader fixed inset-0 z-[120] flex items-center justify-center px-6 transition-opacity duration-500 ${isLoading ? "opacity-100" : "pointer-events-none opacity-0"}`}
@@ -144,7 +144,7 @@ function App() {
                   <ClientsSection data={siteContent.clients} className="lg:mt-8" />
                 </>
               ) : isTeamPage ? (
-                <TeamSection data={siteContent.team} className="lg:mt-8" />
+                <TeamSection data={siteContent.team} className="mt-8 lg:mt-8" />
               ) : isContactPage ? (
                 <ContactSection data={siteContent.contact} className="mt-0 lg:mt-0" />
               ) : (
@@ -152,7 +152,7 @@ function App() {
                   <HeroSection data={siteContent.hero} contact={siteContent.contact} />
                   <ServicesSection data={siteContent.services} />
                   <ProjectsSection data={siteContent.projects} />
-                  <TeamSection data={siteContent.team} className="lg:mt-8" showList={false} />
+                  <TeamSection data={siteContent.team} backgroundClassName="bg-[#050816]" showList={false} />
                   <HomeCtaSection />
                 </>
               )}

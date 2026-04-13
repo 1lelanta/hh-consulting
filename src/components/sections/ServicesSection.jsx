@@ -191,9 +191,9 @@ function ServicesSection({ data, className = "" }) {
   return (
     <motion.section
       id="services"
-      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 50 }}
       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
       viewport={{ once: true, amount: 0.2 }}
       className={`animate-reveal -mx-3 scroll-mt-28 bg-[linear-gradient(180deg,#0A0A0F_0%,#111827_100%)] px-3 py-12 text-white [animation-delay:200ms] sm:-mx-6 sm:px-6 sm:py-16 lg:-mx-10 lg:px-10 lg:py-24 2xl:-mx-14 2xl:px-14 ${className}`}
     >
@@ -204,7 +204,7 @@ function ServicesSection({ data, className = "" }) {
             <p className="section-eyebrow text-[#D5B223]">OUR SERVICES</p>
           </div>
 
-          <h2 className="m-0 mt-4 text-[1.8rem] font-black uppercase leading-[1.08] tracking-[0.08em] text-white sm:mt-5 sm:text-[2.4rem] lg:text-[3.1rem]">
+          <h2 className="m-0 mb-12 mt-4 text-[1.8rem] font-black uppercase leading-[1.08] tracking-[0.08em] text-white sm:mt-5 sm:text-[2.4rem] lg:text-[3.1rem]">
             {data.title || "Our Services"}
           </h2>
 
@@ -213,15 +213,21 @@ function ServicesSection({ data, className = "" }) {
           </p>
         </div>
 
-        <div className="no-scrollbar mt-8 flex gap-4 overflow-x-auto pb-2 sm:grid sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:overflow-visible">
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
+          className="no-scrollbar mt-8 flex gap-8 overflow-x-auto pb-2 sm:grid sm:grid-cols-2 lg:grid-cols-4 lg:overflow-visible"
+        >
           {serviceItems.map((service, index) => (
             <motion.article
               key={service.title}
-              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 24 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: index * 0.06 }}
+              transition={{ duration: 0.55, ease: [0.22, 0.61, 0.36, 1], delay: index * 0.06 }}
               viewport={{ once: true, amount: 0.35 }}
-              className="group min-w-[112px] max-w-[112px] flex-1 snap-start overflow-hidden rounded-[16px] border border-white/10 bg-white/6 shadow-[0_14px_30px_rgba(2,6,23,0.22)] transition duration-300 hover:-translate-y-1 hover:border-[#D5B223]/35 hover:bg-white/10 hover:shadow-[0_20px_34px_rgba(2,6,23,0.28)] sm:min-w-0 sm:max-w-none md:min-w-0 md:max-w-none lg:min-w-0"
+              className="group min-w-[112px] max-w-[112px] flex-1 snap-start overflow-hidden rounded-[16px] border border-white/10 bg-white/6 shadow-[0_14px_30px_rgba(2,6,23,0.22)] transition-all duration-300 hover:-translate-y-2 hover:border-[#D5B223]/35 hover:bg-white/10 hover:shadow-[0_20px_34px_rgba(2,6,23,0.28)] sm:min-w-0 sm:max-w-none md:min-w-0 md:max-w-none lg:min-w-0"
             >
               <div className="relative h-full">
                 <div className="relative aspect-[0.95/1] overflow-hidden bg-[#111827]">
@@ -236,14 +242,14 @@ function ServicesSection({ data, className = "" }) {
               </div>
             </motion.article>
           ))}
-        </div>
+        </motion.div>
 
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 20 }}
           whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-7 rounded-[24px] border border-white/10 bg-white/5 px-5 py-5 shadow-[0_18px_34px_rgba(2,6,23,0.24)] sm:mt-8 sm:px-6 sm:py-6"
+          className="mt-7 rounded-[24px] border border-white/10 bg-white/5 px-5 py-5 shadow-[0_18px_34px_rgba(2,6,23,0.24)] transition-all duration-300 hover:-translate-y-2 sm:mt-8 sm:px-6 sm:py-6"
         >
           <div className="flex items-center gap-3">
             <span className="h-[2px] w-10 bg-[#D5B223]" />
@@ -252,7 +258,7 @@ function ServicesSection({ data, className = "" }) {
             </p>
           </div>
 
-          <details className="group mt-4 rounded-[18px] border border-white/10 bg-[#111827] px-4 py-4" open>
+          <details className="group mt-4 rounded-[18px] border border-white/10 bg-[#111827] px-4 py-4 transition-all duration-300 hover:-translate-y-1" open>
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-[0.95rem] font-extrabold text-white sm:text-[1.02rem]">
               <span className="inline-flex items-center gap-3">
                 <span className="inline-grid h-10 w-10 place-items-center rounded-full border border-[#D5B223]/20 bg-[#D5B223]/12 text-[#F3D36B]">
@@ -261,7 +267,7 @@ function ServicesSection({ data, className = "" }) {
                 <span>Architectural &amp; Engineering</span>
               </span>
 
-              <span className="text-[#D5B223] transition duration-300 group-open:rotate-180">⌄</span>
+              <span className="text-[#D5B223] transition-all duration-300 group-open:rotate-180">⌄</span>
             </summary>
 
             <ul className="mt-4 space-y-3 pl-6 text-[0.92rem] leading-7 text-white/74 sm:text-[0.98rem]">

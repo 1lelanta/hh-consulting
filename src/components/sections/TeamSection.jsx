@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 
-function TeamSection({ data, className = "", showList = true }) {
+function TeamSection({ data, className = "", showList = true, backgroundClassName = "bg-white" }) {
   const members = [...(data.leadership || []), ...(data.departmentLeads || []), ...(data.supportTeam || [])];
 
   const avatarItems = members.slice(0, 3);
   const extraCount = Math.max(0, members.length - avatarItems.length);
-  const heroImage = data.image || "/asset/bg.png";
-  const heroImageAlt = data.imageAlt || "Our people and workspace";
+  const heroMember = data.leadership?.[0] || data.departmentLeads?.[0] || data.supportTeam?.[0] || null;
+  const heroImage = heroMember?.image || data.image || "/asset/bg.png";
+  const heroImageAlt = heroMember?.imageAlt || data.imageAlt || "Our people and workspace";
 
   function TeamAvatar({ member, index }) {
     return (
@@ -28,8 +29,8 @@ function TeamSection({ data, className = "", showList = true }) {
 
     return (
       <motion.article
-        className="group overflow-hidden rounded-[18px] border border-[#E5E7EB] bg-white shadow-[0_14px_32px_rgba(15,23,42,0.1)] transition duration-300 hover:-translate-y-1 hover:border-[#D5B223]/45 hover:shadow-[0_24px_42px_rgba(15,23,42,0.16)]"
-        initial={{ opacity: 0, y: 28 }}
+        className="group overflow-hidden rounded-[18px] border border-[#E5E7EB] bg-white shadow-[0_14px_32px_rgba(15,23,42,0.1)] transition-all duration-300 hover:-translate-y-2 hover:border-[#D5B223]/45 hover:shadow-[0_24px_42px_rgba(15,23,42,0.16)]"
+        initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.55, ease: [0.22, 0.61, 0.36, 1], delay: index * 0.07 }}
@@ -38,7 +39,7 @@ function TeamSection({ data, className = "", showList = true }) {
           <img
             src={member.image}
             alt={member.imageAlt}
-            className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+            className="h-full w-full object-cover transition-all duration-300 ease-out group-hover:scale-105"
           />
 
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1220]/72 via-[#0B1220]/28 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -93,14 +94,14 @@ function TeamSection({ data, className = "", showList = true }) {
       id="team"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: [0.17, 0.67, 0.83, 0.67] }}
+      transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
       viewport={{ once: true, amount: 0.2 }}
-      className={`animate-reveal mt-8 -mx-3 scroll-mt-28 bg-white px-3 py-16 [animation-delay:360ms] sm:-mx-6 sm:px-6 sm:py-20 lg:-mx-10 lg:px-10 lg:py-24 2xl:-mx-14 2xl:px-14 ${className}`}
+      className={`animate-reveal -mx-3 scroll-mt-28 px-3 py-16 [animation-delay:360ms] sm:-mx-6 sm:px-6 sm:py-20 lg:-mx-10 lg:px-10 lg:py-24 2xl:-mx-14 2xl:px-14 ${backgroundClassName} ${className}`}
     >
       <div className="mx-auto w-full max-w-[1240px]">
         <div className="grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
           <div className="max-w-[640px] justify-self-start text-left lg:pt-10">
-            <h2 className="m-0 text-[2.7rem] font-black leading-[1.02] tracking-[-0.04em] text-[#F4F7FB] sm:text-[3.6rem] lg:text-[4.4rem]">
+            <h2 className="m-0 mb-12 text-[2.7rem] font-black leading-[1.02] tracking-[-0.04em] text-[#F4F7FB] sm:text-[3.6rem] lg:text-[4.4rem]">
               Our People
             </h2>
 
@@ -122,7 +123,7 @@ function TeamSection({ data, className = "", showList = true }) {
 
             <a
               href="#team-list"
-              className="mt-10 inline-flex items-center justify-center bg-[#121A33] px-8 py-3.5 text-[0.88rem] font-medium text-white transition duration-300 hover:bg-[#0B1220] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#121A33] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+              className="mt-10 inline-flex items-center justify-center bg-[#121A33] px-8 py-3.5 text-[0.88rem] font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-[#0B1220] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#121A33] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
             >
               Meet The Team
             </a>
@@ -158,7 +159,7 @@ function TeamSection({ data, className = "", showList = true }) {
               </p>
             </div>
 
-            <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8">
+            <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {members.map((member, index) => (
                 <TeamCard key={member.name} member={member} index={index} />
               ))}

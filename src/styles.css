@@ -16,10 +16,17 @@ body,
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 7rem;
+  background: #050816;
 }
 
 body {
   font-family: "Inter", sans-serif;
+  background: #050816;
+  color: #e5e7eb;
+}
+
+#root {
+  background: #050816;
 }
 
 .preloader {

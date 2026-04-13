@@ -33,12 +33,12 @@ function ProjectsSection({ data, className = "" }) {
 
   const renderProjectItem = (project) => {
     const content = (
-      <div className="group flex h-full min-w-[42vw] max-w-[42vw] flex-col overflow-hidden rounded-[18px] border border-white/10 bg-white/6 shadow-[0_14px_30px_rgba(2,6,23,0.22)] transition duration-300 hover:-translate-y-1 hover:border-[#D5B223]/35 hover:shadow-[0_20px_34px_rgba(2,6,23,0.28)] sm:min-w-0 sm:max-w-none">
+      <div className="group flex h-full min-w-[42vw] max-w-[42vw] flex-col overflow-hidden rounded-[18px] border border-white/10 bg-white/6 shadow-[0_14px_30px_rgba(2,6,23,0.22)] transition-all duration-300 hover:-translate-y-2 hover:border-[#D5B223]/35 hover:shadow-[0_20px_34px_rgba(2,6,23,0.28)] sm:min-w-0 sm:max-w-none">
         <div className="relative overflow-hidden">
           <img
             src={project.image}
             alt={project.imageAlt}
-            className="aspect-square w-full object-cover object-center transition-transform duration-500 group-hover:scale-105 sm:aspect-[4/3]"
+            className="aspect-square w-full object-cover object-center transition-all duration-300 group-hover:scale-105 sm:aspect-[4/3]"
           />
 
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,14,0.02)_0%,rgba(8,10,14,0.62)_100%)]" />
@@ -85,21 +85,21 @@ function ProjectsSection({ data, className = "" }) {
       id="projects"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: [0.17, 0.67, 0.83, 0.67] }}
+      transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
       viewport={{ once: true, amount: 0.2 }}
       className={`animate-reveal -mx-3 scroll-mt-28 bg-[linear-gradient(180deg,#0A0A0F_0%,#111827_100%)] px-3 pt-0 pb-12 text-white [animation-delay:280ms] sm:-mx-6 sm:px-6 sm:pt-0 sm:pb-16 lg:-mx-10 lg:px-10 lg:pt-0 lg:pb-20 2xl:-mx-14 2xl:px-14 ${className}`}
     >
       <div className="mx-auto w-full max-w-[1320px]">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
           <div className="min-w-0 max-w-[840px]">
-            <h2 className="m-0 text-[1.8rem] font-black uppercase leading-[1.08] tracking-[0.08em] text-white sm:text-[2.35rem] lg:text-[3.1rem]">
+            <h2 className="m-0 mb-12 text-[1.8rem] font-black uppercase leading-[1.08] tracking-[0.08em] text-white sm:text-[2.35rem] lg:text-[3.1rem]">
               Featured Projects
             </h2>
           </div>
 
           <a
             href="#all-projects"
-            className="inline-flex shrink-0 items-center gap-3 self-start text-right text-[0.78rem] font-extrabold uppercase tracking-[0.12em] text-white transition duration-300 hover:text-[#F5D77A] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D5B223] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0F] sm:self-auto sm:pb-1"
+            className="inline-flex shrink-0 items-center gap-3 self-start text-right text-[0.78rem] font-extrabold uppercase tracking-[0.12em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:text-[#F5D77A] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D5B223] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0F] sm:self-auto sm:pb-1"
           >
             <span>View All Projects</span>
             <span aria-hidden="true" className="text-[1.15rem] leading-none">
@@ -108,8 +108,19 @@ function ProjectsSection({ data, className = "" }) {
           </a>
         </div>
 
-        <div className="mt-8 flex gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:overflow-visible">
-          {visibleProjects.map((project) => renderProjectItem(project))}
+        <div className="mt-8 flex gap-8 overflow-x-auto pb-2 sm:grid sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 lg:overflow-visible">
+          {visibleProjects.map((project, index) => (
+            <motion.div
+              key={project.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.55, ease: [0.22, 0.61, 0.36, 1], delay: index * 0.06 }}
+              className="min-w-[42vw] max-w-[42vw] sm:min-w-0 sm:max-w-none"
+            >
+              {renderProjectItem(project)}
+            </motion.div>
+          ))}
         </div>
 
         <div className="mt-10 flex flex-col items-center gap-4 text-center sm:mt-12 sm:flex-row sm:items-center sm:justify-between sm:text-left">
@@ -119,7 +130,7 @@ function ProjectsSection({ data, className = "" }) {
 
           <a
             href="#get-in-touch"
-            className="inline-flex items-center justify-center rounded-xl border border-[#D5B223]/45 bg-[#D5B223] px-6 py-3 text-[0.78rem] font-extrabold uppercase tracking-[0.12em] text-[#0B1730] shadow-[0_12px_24px_rgba(213,178,35,0.28)] transition duration-300 hover:bg-[#E5C64C] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D5B223] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0F]"
+            className="inline-flex items-center justify-center rounded-xl border border-[#D5B223]/45 bg-[#D5B223] px-6 py-3 text-[0.78rem] font-extrabold uppercase tracking-[0.12em] text-[#0B1730] shadow-[0_12px_24px_rgba(213,178,35,0.28)] transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:bg-[#E5C64C] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D5B223] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0F]"
           >
             Contact Us
           </a>

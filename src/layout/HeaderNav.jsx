@@ -111,7 +111,7 @@ function HeaderNav() {
               <a
                 key={item.label}
                 href={item.href}
-                className={`text-white text-sm tracking-wide hover:text-[#E5D39B] transition ${activeSection === item.href ? "border-b-2 border-[#D5B223] text-[#D5B223]" : ""}`}
+                className={`text-sm tracking-wide hover:text-[#E5D39B] transition ${item.href.includes(activeSection.replace('#','')) ? "text-[#D5B223]" : "text-white"}`}
               >
                 {item.label}
               </a>
@@ -153,7 +153,7 @@ function HeaderNav() {
                     key={item.label}
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`block text-white text-lg py-2 px-2 rounded transition ${activeSection === item.href ? "bg-[#D5B223]/20 text-[#D5B223] font-bold" : "hover:bg-white/10"}`}
+                    className={`block text-lg py-2 px-2 rounded transition ${item.href.includes(activeSection.replace('#','')) ? "bg-[#D5B223]/20 text-[#D5B223] font-bold" : "text-white hover:bg-white/10"}`}
                   >
                     {item.label}
                   </a>

@@ -17,42 +17,15 @@ function HeaderNav() {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
-  // ✅ FIXED Intersection Observer
-  useEffect(() => {
-    const sections = navItems
-      .map((item) => document.getElementById(item.href.replace("#", "")))
-      .filter(Boolean);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting);
-
-        if (visible.length > 0) {
-          // pick the section closest to top
-          const topMost = visible.reduce((a, b) =>
-            a.boundingClientRect.top < b.boundingClientRect.top ? a : b
-          );
-
-          setActiveSection(topMost.target.id);
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-
-    return () => observer.disconnect();
-  }, []);
-
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
 
-  const navSurfaceClass = "bg-[#090B12CC] backdrop-blur-[18px]";
-
+  // Prevent body scroll when menu open
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
   }, [isMenuOpen]);
 
+  // Scroll hide/show navbar
   useEffect(() => {
     const threshold = 12;
     const offset = 80;
@@ -82,105 +55,159 @@ function HeaderNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Active section tracking
+  useEffect(() => {
+    const sections = navItems
+      .map((item) => document.getElementById(item.href.replace("#", "")))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting);
+
+        if (visible.length > 0) {
+          const topMost = visible.reduce((a, b) =>
+            a.boundingClientRect.top < b.boundingClientRect.top ? a : b
+          );
+
+          setActiveSection(topMost.target.id);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-500
-      ${isNavVisible ? "translate-y-0" : "-translate-y-full"}`}
-    >
-      <nav
-        className={`mx-auto max-w-[1400px] border-b border-white/10 ${navSurfaceClass}
-        ${hasScrolled ? "shadow-xl" : ""}`}
+    <>
+      {/* HEADER */}
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-500
+        ${isNavVisible ? "translate-y-0" : "-translate-y-full"}`}
       >
-        <div className="flex items-center justify-between px-4 py-4">
-          {/* LOGO */}
-          <a href="#home" className="flex items-center gap-3">
-            <img src={logo} alt="logo" className="h-11 w-11" />
-            <div className="flex flex-col leading-tight">
-              <span className="text-white font-bold text-lg">
-                HH CONSULTING
-              </span>
-              <span className="text-[#D5B223] text-sm">
-                Engineering & Architecture
-              </span>
+        <nav
+          className={`mx-auto max-w-[1400px] border-b border-white/10
+          bg-[#090B12CC] backdrop-blur-[18px]
+          ${hasScrolled ? "shadow-xl" : ""}`}
+        >
+          <div className="flex items-center justify-between px-4 py-4">
+            {/* LOGO */}
+            <a href="#home" className="flex items-center gap-3">
+              <img src={logo} alt="logo" className="h-11 w-11" />
+              <div className="flex flex-col leading-tight">
+                <span className="text-white font-bold text-lg">
+                  HH CONSULTING
+                </span>
+                <span className="text-[#D5B223] text-sm">
+                  Engineering & Architecture
+                </span>
+              </div>
+            </a>
+
+            {/* DESKTOP NAV */}
+            <div className="hidden md:flex gap-8">
+              {navItems.map((item) => {
+                const isActive = item.href === `#${activeSection}`;
+
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className={`text-base font-medium transition ${
+                      isActive
+                        ? "text-[#D5B223]"
+                        : "text-white hover:text-[#E5D39B]"
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
             </div>
-          </a>
 
-          {/* DESKTOP NAV */}
-          <div className="hidden md:flex gap-8">
-            {navItems.map((item) => {
-              // ✅ FIXED ACTIVE LOGIC
-              const isActive = item.href === `#${activeSection}`;
-
-              return (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className={`text-base font-medium transition ${
-                    isActive
-                      ? "text-[#D5B223]"
-                      : "text-white hover:text-[#E5D39B]"
-                  }`}
-                >
-                  {item.label}
-                </a>
-              );
-            })}
+            {/* MOBILE BUTTON */}
+            <button
+              onClick={() => setIsMenuOpen(true)}
+              className="md:hidden text-white text-2xl z-[120]"
+            >
+              ☰
+            </button>
           </div>
+        </nav>
+      </header>
 
-          {/* MOBILE BUTTON */}
-          <button
-            onClick={() => setIsMenuOpen((prev) => !prev)}
-            className="md:hidden text-white text-2xl z-[120]"
-          >
-            {isMenuOpen ? "✕" : "☰"}
-          </button>
-        </div>
+      {/* MOBILE MENU (GLOBAL FIXED LAYER) */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            {/* OVERLAY */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black z-[999]"
+              onClick={() => setIsMenuOpen(false)}
+            />
 
-        {/* ✅ MOBILE MENU (DARKER FIXED) */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <>
-              {/* DARKER OVERLAY */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-black/80 backdrop-blur-md z-[100]"
+            {/* DRAWER */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="
+                fixed top-0 right-0
+                h-screen w-[280px]
+                bg-black
+                z-[1000]
+                flex flex-col
+                border-l border-white/10
+                px-6 pt-24
+              "
+            >
+              {/* CLOSE BUTTON (FIXED VISIBILITY) */}
+              <button
                 onClick={() => setIsMenuOpen(false)}
-              />
-
-              {/* SOLID DRAWER */}
-              <motion.div
-                initial={{ x: "100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "100%" }}
-                transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                className="fixed top-0 right-0 h-full w-[280px] bg-[#05070D] border-l border-white/10 shadow-2xl z-[110] px-6 pt-24 flex flex-col gap-3"
+                className="
+                  absolute top-5 right-5
+                  w-10 h-10
+                  flex items-center justify-center
+                  rounded-full
+                  bg-white/10 hover:bg-white/20
+                  text-white text-2xl
+                "
               >
-                {navItems.map((item) => {
-                  const isActive = item.href === `#${activeSection}`;
+                ✕
+              </button>
 
-                  return (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      onClick={() => setIsMenuOpen(false)}
-                      className={`text-xl font-medium px-3 py-2 rounded ${
+              {/* NAV ITEMS */}
+              {navItems.map((item) => {
+                const isActive = item.href === `#${activeSection}`;
+
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`text-lg font-medium px-3 py-3 rounded transition
+                      ${
                         isActive
-                          ? "bg-[#D5B223]/20 text-[#D5B223]"
+                          ? "bg-[#D5B223] text-black"
                           : "text-white hover:bg-white/10"
                       }`}
-                    >
-                      {item.label}
-                    </a>
-                  );
-                })}
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
-      </nav>
-    </header>
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 

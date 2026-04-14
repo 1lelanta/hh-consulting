@@ -199,10 +199,10 @@ function ServicesSection({ data, className = "" }) {
     >
       <div className="mx-auto w-full max-w-[1320px]">
         <div className="max-w-[840px]">
-          <div className="flex items-center gap-3">
+          {/* <div className="flex items-center gap-3">
             <span className="h-[2px] w-14 bg-[#D5B223]" />
             <p className="section-eyebrow text-[#D5B223]">OUR SERVICES</p>
-          </div>
+          </div> */}
 
           <h2 className="m-0 mb-10 mt-4 text-[1.8rem] font-black leading-[1.08] tracking-tight text-white sm:mt-5 sm:text-[2.4rem] lg:text-[3.1rem]">
             {data.title || "Our Services"}

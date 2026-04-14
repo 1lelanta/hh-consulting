@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Button from "../ui/Button";
-import heroBg from "../../assets/newpg.png";
+import heroBg from "../../assets/Pasted image.png";
 
 function HeroSection({ data }) {
   const reduceMotion = useReducedMotion();
@@ -24,8 +24,13 @@ function HeroSection({ data }) {
     >
       {/* BACKGROUND IMAGE */}
       <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${heroBg})` }}
+        className="absolute inset-0 bg-no-repeat bg-center"
+        style={{
+          backgroundImage: `url(${heroBg})`,
+          backgroundSize: '100%',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
       />
 
       {/* DARK OVERLAY (premium depth) */}

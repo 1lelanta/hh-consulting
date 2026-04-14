@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { certificates } from "./CertificationsSection.jsx";
+import Button from "../ui/Button";
 
 function TrustedCertifiedSection({ className = "" }) {
   const reduceMotion = useReducedMotion();
@@ -21,11 +22,11 @@ function TrustedCertifiedSection({ className = "" }) {
         </p>
 
         <h2 className="mt-4 text-3xl font-black">
-          Trusted by Industry Leaders
+          Trusted by Leading Institutions
         </h2>
 
         <p className="mt-4 text-white/70 max-w-xl mx-auto">
-          Our work is backed by recognized institutions and trusted organizations.
+          We collaborate with government, private, and industrial leaders to deliver impactful engineering solutions.
         </p>
 
         {/* LOGO STRIP (NOT CARDS) */}
@@ -45,6 +46,16 @@ function TrustedCertifiedSection({ className = "" }) {
               />
             </motion.div>
           ))}
+        </div>
+
+        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+          <p className="text-[1.1rem] font-bold sm:text-[1.25rem]">
+            Need a Professional Engineering Partner?
+          </p>
+
+          <Button as={motion.a} href="#get-in-touch">
+            Contact Us
+          </Button>
         </div>
 
       </div>

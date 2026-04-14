@@ -5,7 +5,7 @@ function TeamSection({
   data,
   className = "",
   showList = true,
-  backgroundClassName = "bg-[#050816]",
+  backgroundClassName = "bg-[linear-gradient(180deg,#0A0A0F_0%,#0B1220_100%)]",
   variant = "page",
 }) {
   const members = [...(data.leadership || []), ...(data.departmentLeads || []), ...(data.supportTeam || [])];

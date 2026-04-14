@@ -27,10 +27,9 @@ function ProjectsSection({ data, className = "" }) {
     (project) => project.title === "Tiya-Suten Heritage Park"
   );
 
+  // On mobile, allow horizontal scroller to contain all filtered projects
   const visibleProjects = isMobile
-    ? [filteredProjects[0], tiyaProject]
-        .filter(Boolean)
-        .slice(0, Math.min(maxVisibleProjects, totalProjects))
+    ? filteredProjects
     : filteredProjects.slice(0, Math.min(maxVisibleProjects, totalProjects));
 
   useEffect(() => {
@@ -134,7 +133,7 @@ function ProjectsSection({ data, className = "" }) {
           })}
         </div>
 
-        <div className="no-scrollbar flex gap-8 overflow-x-auto pb-2 sm:grid sm:grid-cols-2 lg:grid-cols-3">
+        <div className="no-scrollbar flex gap-8 overflow-x-auto pb-2 snap-x snap-mandatory touch-pan-x sm:grid sm:grid-cols-2 lg:grid-cols-3">
           {visibleProjects.map((project, index) => (
             <motion.div
               key={project.title}
@@ -142,7 +141,7 @@ function ProjectsSection({ data, className = "" }) {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
-              className="min-w-[42vw] max-w-[42vw] sm:min-w-0 sm:max-w-none"
+              className="min-w-[42vw] max-w-[42vw] sm:min-w-0 sm:max-w-none snap-start"
             >
               {renderProjectItem(project)}
             </motion.div>

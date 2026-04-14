@@ -7,14 +7,12 @@ function ProjectsSection({ data, className = "" }) {
     window.matchMedia("(max-width: 639px)").matches
   );
 
-  // ✅ Filter state
   const [activeFilter, setActiveFilter] = useState("All");
 
   const filters = ["All", "Buildings", "Infrastructure", "Airport"];
 
   const projects = data?.items || [];
 
-  // ✅ Apply filter
   const filteredProjects =
     activeFilter === "All"
       ? projects
@@ -38,16 +36,12 @@ function ProjectsSection({ data, className = "" }) {
   useEffect(() => {
     const media = window.matchMedia("(max-width: 639px)");
 
-    const apply = () => {
-      setIsMobile(media.matches);
-    };
+    const apply = () => setIsMobile(media.matches);
 
     apply();
     media.addEventListener("change", apply);
 
-    return () => {
-      media.removeEventListener("change", apply);
-    };
+    return () => media.removeEventListener("change", apply);
   }, []);
 
   const renderProjectItem = (project) => {
@@ -61,14 +55,15 @@ function ProjectsSection({ data, className = "" }) {
           />
 
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,14,0.02)_0%,rgba(8,10,14,0.62)_100%)]" />
+
           <div className="absolute inset-x-0 bottom-0 p-2.5 text-white sm:p-4">
             <p className="text-[0.58rem] font-bold tracking-wide text-[#F5D77A] sm:text-[0.72rem]">
               {project.category}
             </p>
-            <h3 className="mt-1 text-[0.78rem] font-extrabold leading-snug sm:mt-2 sm:text-[1.1rem]">
+            <h3 className="mt-1 text-[0.78rem] font-extrabold sm:text-[1.1rem]">
               {project.title}
             </h3>
-            <p className="mt-0.5 text-[0.66rem] text-white/80 sm:mt-1.5 sm:text-[0.84rem]">
+            <p className="mt-0.5 text-[0.66rem] text-white/80 sm:text-[0.84rem]">
               {project.location}
             </p>
           </div>
@@ -98,10 +93,11 @@ function ProjectsSection({ data, className = "" }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true, amount: 0.2 }}
-      className={`-mx-3 scroll-mt-28 bg-[linear-gradient(180deg,#0A0A0F_0%,#111827_100%)] px-3 pb-12 text-white sm:-mx-6 sm:px-6 sm:pb-16 lg:-mx-10 lg:px-10 lg:pb-20 ${className}`}
+
+      /* ✅ FIXED BG HERE */
+      className={`-mx-3 scroll-mt-28 bg-[linear-gradient(180deg,#0A0A0F_0%,#0B1220_100%)] px-3 pb-12 text-white sm:-mx-6 sm:px-6 sm:pb-16 lg:-mx-10 lg:px-10 lg:pb-20 ${className}`}
     >
       <div className="mx-auto max-w-[1320px]">
-        {/* HEADER */}
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <h2 className="mb-12 text-[1.8rem] font-black sm:text-[2.35rem] lg:text-[3.1rem]">
             Featured Projects
@@ -112,7 +108,6 @@ function ProjectsSection({ data, className = "" }) {
           </Button>
         </div>
 
-        {/* ✅ FILTER BAR (hidden on mobile) */}
         <div className="mb-8 hidden flex-wrap gap-3 sm:flex">
           {filters.map((filter) => {
             const isActive = activeFilter === filter;
@@ -131,7 +126,6 @@ function ProjectsSection({ data, className = "" }) {
                   <motion.div
                     layoutId="activeFilter"
                     className="absolute inset-0 rounded-full bg-[#D5B223]"
-                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
                   />
                 )}
                 <span className="relative z-10">{filter}</span>
@@ -140,7 +134,6 @@ function ProjectsSection({ data, className = "" }) {
           })}
         </div>
 
-        {/* PROJECTS GRID */}
         <div className="no-scrollbar flex gap-8 overflow-x-auto pb-2 sm:grid sm:grid-cols-2 lg:grid-cols-3">
           {visibleProjects.map((project, index) => (
             <motion.div
@@ -156,7 +149,6 @@ function ProjectsSection({ data, className = "" }) {
           ))}
         </div>
 
-        {/* CTA */}
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
           <p className="text-[1.1rem] font-bold sm:text-[1.25rem]">
             Need a Professional Engineering Partner?
@@ -167,7 +159,6 @@ function ProjectsSection({ data, className = "" }) {
           </Button>
         </div>
 
-        {/* EMPTY STATE */}
         {totalProjects === 0 && (
           <div className="mt-10 border border-dashed border-white/20 bg-white/5 px-6 py-10 text-center text-white/70">
             No projects available in this category.

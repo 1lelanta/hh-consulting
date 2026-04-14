@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 
 export const certificates = [
   {
-    title: "ISO Certification",
-    organization: "International Organization for Standardization",
+    title: "ETHIOPIAN AIRLINES",
+    organization: "Appreciation Certificate",
     description: "Certified for quality management systems in engineering services.",
     image: "/images/certificates/certificate1.jpg",
     alt: "ISO certification",

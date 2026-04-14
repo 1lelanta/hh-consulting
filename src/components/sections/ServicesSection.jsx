@@ -54,6 +54,27 @@ function ServiceIcon({ type }) {
     );
   }
 
+  if (type === "terminal-design") {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className={common}>
+        <path d="M3 20h18" />
+        <path d="M4 9h7v6H4z" />
+        <path d="M13 6l6 3v7" />
+        <path d="M14 11l5 3" />
+      </svg>
+    );
+  }
+
+  if (type === "road-works") {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className={common}>
+        <path d="M3 20h18" />
+        <path d="M12 3v17" strokeDasharray="3 3" />
+        <path d="M6 12h12" />
+      </svg>
+    );
+  }
+
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className={common}>
       <rect x="5" y="3" width="14" height="18" rx="2" />
@@ -158,6 +179,47 @@ function ServiceVisual({ type }) {
     );
   }
 
+  if (type === "terminal-design") {
+    return (
+      <svg viewBox="0 0 420 260" className="h-full w-full" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="terminalSky" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#17222B" />
+            <stop offset="55%" stopColor="#382F27" />
+            <stop offset="100%" stopColor="#0E1116" />
+          </linearGradient>
+        </defs>
+        <rect width="420" height="260" fill="url(#terminalSky)" />
+        <rect y="170" width="420" height="90" fill="#0F141A" />
+        <path d="M40 198H380" stroke="#E5C16B" strokeWidth="10" strokeLinecap="round" opacity="0.22" />
+        <path d="M80 178C120 140 160 128 210 126C260 124 300 132 340 156" fill="none" stroke="#F3D98A" strokeWidth="6" strokeLinecap="round" strokeDasharray="12 8" opacity="0.95" />
+        <rect x="56" y="116" width="70" height="60" fill="#2E2A27" opacity="0.95" />
+        <rect x="150" y="96" width="120" height="80" fill="#E3C06C" opacity="0.12" />
+        <rect x="290" y="104" width="50" height="66" fill="#B98A3D" opacity="0.9" />
+      </svg>
+    );
+  }
+
+  if (type === "road-works") {
+    return (
+      <svg viewBox="0 0 420 260" className="h-full w-full" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="roadSky" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#16202A" />
+            <stop offset="55%" stopColor="#2E352F" />
+            <stop offset="100%" stopColor="#0E1116" />
+          </linearGradient>
+        </defs>
+        <rect width="420" height="260" fill="url(#roadSky)" />
+        <rect y="170" width="420" height="90" fill="#0F141A" />
+        <path d="M42 176C92 132 150 118 206 116C262 114 320 128 374 170" fill="#2E2A27" opacity="0.96" />
+        <path d="M84 160C136 132 188 122 232 120C276 118 316 128 356 150" fill="none" stroke="#F3D98A" strokeWidth="6" strokeLinecap="round" strokeDasharray="10 8" opacity="0.95" />
+        <path d="M104 176H316" stroke="#E5C16B" strokeWidth="10" strokeLinecap="round" opacity="0.72" />
+        <path d="M208 120v56" stroke="#F6E0A0" strokeWidth="6" strokeLinecap="round" opacity="0.85" />
+      </svg>
+    );
+  }
+
   return (
     <svg viewBox="0 0 420 260" className="h-full w-full" preserveAspectRatio="none" aria-hidden="true">
       <defs>
@@ -179,7 +241,7 @@ function ServiceVisual({ type }) {
 
 function ServicesSection({ data, className = "" }) {
   const reduceMotion = useReducedMotion();
-  const serviceItems = Array.isArray(data.items) ? data.items.slice(0, 4) : [];
+  const serviceItems = Array.isArray(data.items) ? data.items : [];
   const expertiseItems = [
     { label: "Architectural and Engineering Design" },
     { label: "Infrastructure & Civil Engineering" },

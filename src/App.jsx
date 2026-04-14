@@ -50,7 +50,9 @@ function App() {
     ? "contact"
     : "home";
 
-  // preload
+  // ---------------------------
+  // PRELOADER LOGIC
+  // ---------------------------
   useEffect(() => {
     let done = false;
     const start = performance.now();
@@ -75,7 +77,7 @@ function App() {
 
   useEffect(() => {
     if (isLoading) return;
-    const t = setTimeout(() => setShowPreloader(false), 400);
+    const t = setTimeout(() => setShowPreloader(false), 500);
     return () => clearTimeout(t);
   }, [isLoading]);
 
@@ -95,12 +97,58 @@ function App() {
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-[#050816] text-white">
 
-      {/* PRELOADER */}
+      {/* =========================
+          PREMIUM PRELOADER
+      ========================= */}
       {showPreloader && (
-        <div className={`fixed inset-0 z-[120] flex items-center justify-center transition-opacity duration-500 ${isLoading ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-          <div className="text-white/70">Loading...</div>
-        </div>
+        <motion.div
+          initial={{ opacity: 1 }}
+          animate={{ opacity: isLoading ? 1 : 0 }}
+          transition={{ duration: 0.6 }}
+          className="fixed inset-0 z-[120] flex flex-col items-center justify-center bg-[#050816]"
+        >
+          {/* background glow */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(190,154,90,0.25),transparent_60%)]" />
+
+          {/* text */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-center z-10"
+          >
+            <h1 className="text-3xl md:text-5xl font-bold tracking-wider text-white">
+              HH CONSULTING
+            </h1>
+
+            <p className="mt-3 text-[#D5B223] text-sm md:text-base tracking-[3px] uppercase">
+              Engineering & Architecture
+            </p>
+
+            <p className="mt-2 text-white/60 text-sm">
+              Addis Ababa, Ethiopia
+            </p>
+          </motion.div>
+
+          {/* loading bar */}
+          <div className="absolute bottom-16 w-[180px] h-[2px] bg-white/10 overflow-hidden">
+            <motion.div
+              className="h-full bg-[#D5B223]"
+              initial={{ x: "-100%" }}
+              animate={{ x: "100%" }}
+              transition={{
+                repeat: Infinity,
+                duration: 1.2,
+                ease: "linear",
+              }}
+            />
+          </div>
+        </motion.div>
       )}
+
+      {/* =========================
+          MAIN CONTENT
+      ========================= */}
 
       <HeaderNav />
 
@@ -119,12 +167,10 @@ function App() {
               transition={{ duration: 0.3 }}
             >
 
-              {/* ARCHIVE */}
               {isProjectsArchive ? (
                 <ProjectsArchivePage data={siteContent.projects} />
               ) : isAboutPage ? (
                 <>
-                  {/* ABOUT PAGE */}
                   <AboutSection
                     data={siteContent.about}
                     valuesData={siteContent.whyChooseUs}
@@ -136,7 +182,6 @@ function App() {
                     }}
                   />
 
-                  {/* ✅ CERTIFICATES BACK HERE */}
                   <CertificationsSection />
                 </>
               ) : isTeamPage ? (
@@ -145,12 +190,9 @@ function App() {
                 <ContactSection data={siteContent.contact} />
               ) : (
                 <>
-                  {/* HOME PAGE */}
                   <HeroSection data={siteContent.hero} />
                   <ServicesSection data={siteContent.services} />
                   <ProjectsSection data={siteContent.projects} />
-
-                  {/* ✅ TRUST ONLY HERE */}
                   <ClientsSection data={siteContent.clients} />
 
                   <TeamSection

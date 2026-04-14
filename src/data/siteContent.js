@@ -68,6 +68,18 @@ export const siteContent = {
         description: "Reliable water systems designed for efficient delivery and sustainable use.",
         icon: "water-engineering",
       },
+      {
+        title: "Terminal Design",
+        description:
+          "Airport terminal and aviation facility design, including passenger flows, structural layouts, and MEP integration.",
+        icon: "terminal-design",
+      },
+      {
+        title: "Road Works",
+        description:
+          "Road construction, rehabilitation, and highway engineering services including pavement design and earthworks.",
+        icon: "road-works",
+      },
     ],
   },
   whyChooseUs: {

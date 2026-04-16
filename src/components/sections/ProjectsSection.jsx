@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../ui/Button";
 
 function ProjectsSection({ data, className = "" }) {
@@ -8,6 +8,8 @@ function ProjectsSection({ data, className = "" }) {
   );
 
   const [activeFilter, setActiveFilter] = useState("All");
+  const [activeMobileIndex, setActiveMobileIndex] = useState(0);
+  const projectsScrollerRef = useRef(null);
 
   const filters = ["All", "Buildings", "Infrastructure", "Airport"];
 
@@ -43,6 +45,35 @@ function ProjectsSection({ data, className = "" }) {
     return () => media.removeEventListener("change", apply);
   }, []);
 
+  useEffect(() => {
+    setActiveMobileIndex(0);
+
+    if (!isMobile && projectsScrollerRef.current) {
+      projectsScrollerRef.current.scrollTo({ left: 0, behavior: "auto" });
+    }
+  }, [activeFilter, isMobile]);
+
+  const handleProjectsScroll = () => {
+    if (!isMobile || !projectsScrollerRef.current) return;
+
+    const cards = Array.from(projectsScrollerRef.current.children);
+    if (!cards.length) return;
+
+    const scrollLeft = projectsScrollerRef.current.scrollLeft;
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+
+    cards.forEach((card, index) => {
+      const distance = Math.abs(card.offsetLeft - scrollLeft);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    setActiveMobileIndex(closestIndex);
+  };
+
   const renderProjectItem = (project) => {
     const content = (
       <div className="group flex h-full min-w-[42vw] max-w-[42vw] flex-col overflow-hidden border border-white/12 bg-white/[0.06] shadow-[0_16px_34px_rgba(2,6,23,0.24)] transition-all duration-300 hover:-translate-y-2 hover:border-[#D5B223]/35 hover:shadow-[0_22px_40px_rgba(2,6,23,0.3)] sm:min-w-0 sm:max-w-none">
@@ -76,6 +107,7 @@ function ProjectsSection({ data, className = "" }) {
           key={project.title}
           href={project.href}
           onClick={(e) => e.preventDefault()}
+          className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#D5B223]"
         >
           {content}
         </a>
@@ -133,13 +165,41 @@ function ProjectsSection({ data, className = "" }) {
           })}
         </div>
 
-        <div className="no-scrollbar flex gap-8 overflow-x-auto pb-2 snap-x snap-mandatory touch-pan-x sm:grid sm:grid-cols-2 lg:grid-cols-3">
+        {isMobile && visibleProjects.length > 1 ? (
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <p className="text-[0.72rem] font-bold uppercase tracking-[0.18em] text-white/55">
+              Swipe to explore
+            </p>
+            <div className="flex items-center gap-2">
+              {visibleProjects.map((project, index) => {
+                const isActive = index === activeMobileIndex;
+
+                return (
+                  <span
+                    key={`${project.title}-indicator`}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      isActive ? "w-6 bg-[#D5B223]" : "w-1.5 bg-white/30"
+                    }`}
+                    aria-hidden="true"
+                  />
+                );
+              })}
+            </div>
+          </div>
+        ) : null}
+
+        <div
+          ref={projectsScrollerRef}
+          onScroll={handleProjectsScroll}
+          className="no-scrollbar flex gap-8 overflow-x-auto pb-2 snap-x snap-mandatory touch-pan-x sm:grid sm:grid-cols-2 lg:grid-cols-3"
+        >
           {visibleProjects.map((project, index) => (
             <motion.div
               key={project.title}
               layout
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
+              whileTap={isMobile ? { scale: 0.985 } : undefined}
               transition={{ delay: index * 0.05 }}
               className="min-w-[42vw] max-w-[42vw] sm:min-w-0 sm:max-w-none snap-start"
             >

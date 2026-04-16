@@ -202,10 +202,7 @@ function HeaderNav() {
                   Menu
                 </p>
                 <p className="mt-3 max-w-[18ch] text-2xl font-black leading-[1.02] text-white">
-                  Navigate the studio
-                </p>
-                <p className="mt-3 text-sm leading-6 text-white/60">
-                  Explore our work, services, team, and contact options.
+                  Explore HH Consulting
                 </p>
               </div>
 

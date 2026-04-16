@@ -8,7 +8,7 @@ function HomeCtaSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
-      className="animate-reveal -mx-3 scroll-mt-28 overflow-hidden border-b border-white/10 bg-[linear-gradient(180deg,#10152A_0%,#0A0F1D_100%)] px-3 py-20 sm:-mx-6 sm:px-6 sm:py-24 lg:-mx-10 lg:px-10 lg:py-28 2xl:-mx-14 2xl:px-14 [animation-delay:460ms]"
+      className="animate-reveal -mx-3 scroll-mt-28 overflow-hidden border-b border-white/10 bg-[radial-gradient(circle_at_top,rgba(213,178,35,0.16),transparent_30%),linear-gradient(180deg,#121A2F_0%,#0B1221_55%,#060B15_100%)] px-3 py-20 sm:-mx-6 sm:px-6 sm:py-24 lg:-mx-10 lg:px-10 lg:py-28 2xl:-mx-14 2xl:px-14 [animation-delay:460ms]"
     >
       <div className="mx-auto flex w-full max-w-[1240px] items-center justify-center">
         <div className="w-full text-center">

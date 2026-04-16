@@ -257,7 +257,7 @@ function ServicesSection({ data, className = "" }) {
       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
       viewport={{ once: true, amount: 0.2 }}
-      className={`-mx-3 scroll-mt-32 bg-[linear-gradient(180deg,#0A0A0F_0%,#111827_100%)] px-3 py-20 text-white sm:-mx-6 sm:px-6 sm:py-24 lg:-mx-10 lg:px-10 lg:py-24 2xl:-mx-14 2xl:px-14 ${className}`}
+      className={`-mx-3 scroll-mt-32 bg-[radial-gradient(circle_at_top,rgba(213,178,35,0.1),transparent_34%),linear-gradient(180deg,#070A12_0%,#101827_52%,#0B1322_100%)] px-3 py-20 text-white sm:-mx-6 sm:px-6 sm:py-24 lg:-mx-10 lg:px-10 lg:py-24 2xl:-mx-14 2xl:px-14 ${className}`}
     >
       <div className="mx-auto w-full max-w-[1320px]">
         <div className="max-w-[840px]">

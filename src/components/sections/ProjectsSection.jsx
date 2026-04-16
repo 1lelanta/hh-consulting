@@ -126,7 +126,7 @@ function ProjectsSection({ data, className = "" }) {
       viewport={{ once: true, amount: 0.2 }}
 
       /* ✅ FIXED BG HERE */
-      className={`-mx-3 scroll-mt-28 bg-[linear-gradient(180deg,#0A0A0F_0%,#0B1220_100%)] px-3 pb-12 text-white sm:-mx-6 sm:px-6 sm:pb-16 lg:-mx-10 lg:px-10 lg:pb-20 ${className}`}
+      className={`-mx-3 scroll-mt-28 bg-[radial-gradient(circle_at_12%_18%,rgba(94,135,187,0.12),transparent_30%),linear-gradient(180deg,#09111D_0%,#0C1626_55%,#08111E_100%)] px-3 pb-12 text-white sm:-mx-6 sm:px-6 sm:pb-16 lg:-mx-10 lg:px-10 lg:pb-20 ${className}`}
     >
       <div className="mx-auto max-w-[1320px]">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">

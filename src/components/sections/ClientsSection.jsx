@@ -30,7 +30,7 @@ function ClientsSection({ data, className = "" }) {
       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.25 }}
       transition={{ duration: 0.7, ease: [0.22, 0.61, 0.36, 1] }}
-      className={`relative mt-10 scroll-mt-28 overflow-hidden bg-[linear-gradient(180deg,#0A0A0F_0%,#0B1220_100%)] px-5 py-20 sm:px-6 lg:px-10 lg:py-24 ${className}`}
+      className={`relative mt-10 scroll-mt-28 overflow-hidden bg-[radial-gradient(circle_at_85%_18%,rgba(213,178,35,0.08),transparent_28%),linear-gradient(180deg,#0A1321_0%,#0E1A2B_50%,#09111C_100%)] px-5 py-20 sm:px-6 lg:px-10 lg:py-24 ${className}`}
     >
       {/* subtle glow (dark premium layer) */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(213,178,35,0.10),transparent_45%)]" />
@@ -57,10 +57,10 @@ function ClientsSection({ data, className = "" }) {
         {/* MARQUEE */}
         <div className="relative mt-12 overflow-hidden">
           {/* left fade */}
-          <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-[#0B1220] to-transparent" />
+          <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-[#0A1422] to-transparent" />
 
           {/* right fade */}
-          <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-[#0B1220] to-transparent" />
+          <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-[#0A1422] to-transparent" />
 
           {/* track */}
           <div className="flex w-max items-center gap-6 sm:gap-8 lg:gap-10 animate-[marquee_32s_linear_infinite]">

@@ -197,7 +197,7 @@ function App() {
 
                   <TeamSection
                     data={siteContent.team}
-                    backgroundClassName="bg-[#050816]"
+                    backgroundClassName="bg-[radial-gradient(circle_at_18%_20%,rgba(88,138,197,0.12),transparent_30%),linear-gradient(180deg,#07101D_0%,#091423_52%,#050816_100%)]"
                     showList={false}
                     variant="home"
                   />
